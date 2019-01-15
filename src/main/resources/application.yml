@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: graindepot-bussiness
+
+server:
+    port: 8004 #启动端口
+
