@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link rel="stylesheet" th:href="@{/assets/css/comm/userinfo.css}"/>
+<body>
+<div class="infoDiv">
+    <div class="rightDiv">
+        <table border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoTitle">企业</td>
+                <td class="infoShow" th:text="${item.companyname}">企业</td>
+                <td class="infoTitle">库点</td>
+                <td class="infoShow" th:text="${item.graindepotname}">库点</td>
+            </tr>
+            <tr>
+                <td class="infoTitle">计划类型</td>
+                <td class="infoShow" th:text="${item.planTypeIDStr}">计划类型</td>
+                <td class="infoTitle">计划年度</td>
+                <td class="infoShow" th:text="${item.planYear}">计划年度</td>
+            </tr>
+            <tr>
+                <td class="infoTitle">计划文号</td>
+                <td class="infoShow" th:text="${item.planNo}">计划文号</td>
+                <td class="infoTitle">下达单位</td>
+                <td class="infoShow" th:text="${item.dispatchunit}">下达单位</td>
+            </tr>
+            <tr>
+                <td class="infoTitle">下达日期</td>
+                <td class="infoShow" th:text="${item.dispatchdateStr}">下达日期</td>
+                <td class="infoTitle">计划开始日期</td>
+                <td class="infoShow" th:text="${item.planBeginDateStr}">计划开始日期</td>
+            </tr>
+            <tr>
+                <td class="infoTitle">计划结束日期</td>
+                <td class="infoShow" th:text="${item.planEndDateStr}">无锡市梁溪区</td>
+                <td class="infoTitle">附件</td>
+                <td class="infoShow" th:text="${item.fileNameList}">附件</td>
+            </tr>
+            <tr>
+                <td class="infoTitle">创建人</td>
+                <td class="infoShow" th:text="${item.createusername}">创建人</td>
+                <td class="infoTitle">创建时间</td>
+                <td class="infoShow" th:text="${item.createtimeStr}">创建时间</td>
+            </tr>
+            <tr>
+                <td class="infoTitle">备注</td>
+                <td class="infoShow" th:text="${item.remark}" colspan="3">备注</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+
+
+    });
+
+
+</script>

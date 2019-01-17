@@ -5,12 +5,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.1.RELEASE</version>
+		<version>1.4.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>graindepot-bussiness</groupId>
 	<artifactId>graindepot-bussiness</artifactId>
 	<version>1.0.0</version>
+	<packaging>war</packaging>
 	<name>graindepot-bussiness</name>
 	<description>综合业务微服务</description>
 	<properties>

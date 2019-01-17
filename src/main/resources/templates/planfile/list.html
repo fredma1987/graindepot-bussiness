@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<body>
+<div th:replace="navbar::navbar"></div>
+<div class="main-container" id="main-container">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                首页
+            </li>
+            <li>
+                <i class="icon-user home-icon"></i>
+                计划文件
+            </li>
+        </ul>
+    </div>
+    <div class="row" style="margin-top: 4px;margin-bottom: 4px">
+        <div class="col-sm-3">
+            <button class="btn btn-sm btn-primary" onclick="toAdd()">
+                <i class="icon-plus align-top bigger-125"></i>
+                添加计划文件
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="doDel()">
+                <i class="icon-trash align-top bigger-125"></i>
+                删除计划文件
+            </button>
+        </div>
+        <div class="col-sm-9">
+
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">计划文号:</span>
+                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planNo">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-sm btn-success" onclick="javascript:searchTable()">
+                    <i class="icon-search align-top bigger-125"></i>
+                    查询
+                </button>
+                <button class="btn btn-sm btn-warning" onclick="javascript:rest()">
+                    <i class="icon-undo align-top bigger-125"></i>
+                    重置
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="table-responsive" style="width:100%">
+
+        <table id="myTable" style="width:100%" class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="center" style="width: 20px"></th>
+                <th class="center" style="width: 20px">
+                    <label>
+                        <input id="CK" type="checkbox" class="ace"/>
+                        <span class="lbl"></span>
+                    </label>
+                </th>
+                <th style="width: 100px">计划类型</th>
+                <th style="width: 100px">计划文号</th>
+                <!--   <th style="width: 100px">粮食品种</th>
+                   <th style="width: 100px">粮食性质</th>
+                   <th style="width: 100px">计划数量(吨)</th>-->
+                <th style="width: 100px">下达单位</th>
+                <th style="width: 100px">文件上传</th>
+                <th style="width: 100px">计划执行进度</th>
+                <th style="width: 100px">操作</th>
+
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    //var urlPrefix="/graindepot-bussiness";
+    var urlPrefix="";
+    var theTable;
+    function selectOnchang(o) {
+        //获取全部打钩的check的值
+        //$('#myTable th input:checkbox:checked')
+        console.log($('#myTable').bootstrapTable("getChecked"))
+    }
+    $(document).ready(function () {
+
+        query();
+
+    });
+
+
+    function query(param) {
+        theTable = $('#myTable').bootstrapTable({
+            //数据来源（包括处理分页，排序，过滤） ，即url，action，接口，等等
+            ajax: {
+                url: urlPrefix+"/planfile/list/page",
+                data: param,
+                type: "GET"
+            },
+            sScrollY: 510,//表格高度
+            columns: [
+                {data: "planTypeIDStr"},
+                {data: "planNo"},
+                {title: "下达单位", data: "dispatchunit"},
+                {
+                    title: "文件上传",
+                    data: "fileNameList",
+                    render: function (data, type, row) {
+                        if (data) {
+                            return "已上传"
+                        }else{
+                            return "未上传"
+                        }
+                    }
+                },
+                {title: "计划执行进度", data: "planfileid"},
+                {
+                    data: "planfileid",
+                    render: function (data, type, row) {
+                        return '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">' +
+                                '<a class="green" href="javascript:toEdit(' + data + ')"' +
+                                ' title="编辑" ' +
+                                '>' +
+                                '<i class="icon-pencil bigger-130"></i>' +
+                                '</a>' +
+                                '<a class="blue" href="javascript:toDetail(' + data + ')"' +
+                                'title="详情"' +
+                                '>' +
+                                '<i class="icon-eye-open bigger-130"></i>' +
+                                '</a>' +
+                                '</div>';
+
+                    }
+                }
+            ]
+        });
+    }
+
+    function searchTable() {
+        theTable.destroy();
+        query(getParam());
+    }
+    function getParam() {
+        var param = {};
+        param.planNo = $("#planNo").val();
+        return param
+    }
+
+    function rest() {
+        $("input").val("");
+        $("select").val("");
+        //触发change事件
+        $("select").trigger("change");
+        searchTable();
+        //$("#city").find("option[value = '"+"']").attr("selected","selected");//jq改变select的选中值
+
+    }
+
+
+    function doDel() {
+        console.log($('#myTable').bootstrapTable("getChecked"))
+        var checkedList = $('#myTable').bootstrapTable("getChecked");
+        if (checkedList.length == 0) {
+            $.bootstrapBox.alert.init({message: "请选择需要删除的行"})
+            return
+        }
+        $.bootstrapBox.confirm.init({
+            message: "确认删除？",
+            callback: function (result) {
+                if (result) {
+                    //删除用户
+                    debugger
+                    var ids = checkedList.map(function (curr) {
+                        return curr.planfileid
+                    });
+                    $.post(urlPrefix+"/planfile/del", {ids: ids.join(",")}, function (result) {
+                        $.bootstrapBox.alert.init({
+                            message: result.message
+                        });
+                        $("#myTable").bootstrapTable("reload");
+                    })
+
+                }
+
+            }
+        });
+
+    }
+
+    function toAdd() {
+        $.bootstrapBox.dialog.init({
+            title: "新增计划文件",
+            url: urlPrefix+"/page/planfile/edit",
+            width: '800px',
+            height: '600px'
+        })
+    }
+
+    function toEdit(id) {
+        $.bootstrapBox.dialog.init({
+            title: "修改计划文件",
+            url: urlPrefix+"/page/planfile/edit?id=" + id,
+            width: '800px',
+            height: '600px'
+        })
+    }
+
+
+    function toDetail(userid) {
+        $.bootstrapBox.dialog.init({
+            title: "计划文件详情",
+            url: urlPrefix+"/page/planfile/detail/" + userid,
+            width: '900px',
+            height: '630px'
+        })
+    }
+
+
+    function toSave(result) {
+        $.bootstrapBox.dialog.close();
+        $.bootstrapBox.alert.init({
+            message: result.message
+        });
+        $("#myTable").bootstrapTable("reload")
+    }
+
+</script>
