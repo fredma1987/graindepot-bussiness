@@ -25,6 +25,7 @@ public class CommonController extends BaseController {
     private CommonBiz commonBiz;
 
 
+
     @GetMapping("companyList")
     public List<Company> companyList(HttpServletRequest request) {
         Map param = new HashMap();
