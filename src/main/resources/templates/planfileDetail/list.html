@@ -15,12 +15,12 @@
                 首页
             </li>
             <li>
-                <i class="icon-user home-icon"></i>
+                <i class="icon-table home-icon"></i>
                 计划详情
             </li>
         </ul>
     </div>
-    <div class="row" style="margin-top: 4px;margin-bottom: 4px">
+    <div style="margin-top: 4px;margin-bottom: 4px">
         <div class="col-sm-3">
             <button class="btn btn-sm btn-primary" onclick="toAdd()">
                 <i class="icon-plus align-top bigger-125"></i>
@@ -118,7 +118,6 @@
                 data: param,
                 type: "GET"
             },
-            sScrollY: 510,//表格高度
             columns: [
                 {data: "planTypeStr"},
                 {data: "planNo"},
@@ -197,9 +196,9 @@
                     //删除用户
                     debugger
                     var ids = checkedList.map(function (curr) {
-                        return curr.planfileid
+                        return curr.plandetailid
                     });
-                    $.post(urlPrefix + "/planfile/del", {ids: ids.join(",")}, function (result) {
+                    $.post(urlPrefix + "/planfileDetail/del", {ids: ids.join(",")}, function (result) {
                         $.bootstrapBox.alert.init({
                             message: result.message
                         });
@@ -216,18 +215,18 @@
     function toAdd() {
         $.bootstrapBox.dialog.init({
             title: "新增计划详情",
-            url: urlPrefix + "/page/planfile/edit",
-            width: '800px',
-            height: '600px'
+            url: urlPrefix + "/page/planfileDetail/edit",
+            width: $(window).width()*0.6,
+            height: $(window).height()*0.8
         })
     }
 
     function toEdit(id) {
         $.bootstrapBox.dialog.init({
             title: "修改计划详情",
-            url: urlPrefix + "/page/planfile/edit?id=" + id,
-            width: '800px',
-            height: '600px'
+            url: urlPrefix + "/page/planfileDetail/edit?id=" + id,
+            width: $(window).width()*0.6,
+            height: $(window).height()*0.8
         })
     }
 
@@ -235,9 +234,9 @@
     function toDetail(userid) {
         $.bootstrapBox.dialog.init({
             title: "计划详情详情",
-            url: urlPrefix + "/page/planfile/detail/" + userid,
-            width: '900px',
-            height: '630px'
+            url: urlPrefix + "/page/planfileDetail/detail/" + userid,
+            width:  $(window).width()*0.8,
+            height: $(window).height()*0.8
         })
     }
 

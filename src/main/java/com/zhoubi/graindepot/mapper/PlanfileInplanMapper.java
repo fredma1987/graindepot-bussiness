@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.PlanfileInplan;import com.zhoubi.graindepot.base.BaseMapper;public interface PlanfileInplanMapper extends BaseMapper<PlanfileInplan> {}

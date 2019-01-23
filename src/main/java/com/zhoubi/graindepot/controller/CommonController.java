@@ -2,6 +2,7 @@ package com.zhoubi.graindepot.controller;
 
 import com.zhoubi.graindepot.bean.Company;
 import com.zhoubi.graindepot.bean.Grain;
+import com.zhoubi.graindepot.bean.Grainattr;
 import com.zhoubi.graindepot.bean.Graindepot;
 import com.zhoubi.graindepot.biz.CommonBiz;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,6 @@ public class CommonController extends BaseController {
 
     @Autowired
     private CommonBiz commonBiz;
-
-
 
     @GetMapping("companyList")
     public List<Company> companyList(HttpServletRequest request) {
@@ -48,6 +47,14 @@ public class CommonController extends BaseController {
     public List<Grain> grainList(HttpServletRequest request) {
         Map param = new HashMap();
         List<Grain> resultList = commonBiz.grainList(param);
+        return resultList;
+
+    }
+    //粮食性质下拉框
+    @GetMapping("grainattrList")
+    public List<Grainattr> grainattrList(HttpServletRequest request) {
+        Map param = new HashMap();
+        List<Grainattr> resultList = commonBiz.grainattrList(param);
         return resultList;
 
     }

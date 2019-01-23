@@ -29,15 +29,9 @@ public class PlanfileController extends BaseController {
     @Autowired
     private PlanfileBiz planfileBiz;
 
-    @GetMapping("/list")
-    public List<Planfile> userList() {
-        Map param = new HashMap();
-        List<Planfile> result = planfileBiz.selectList(param);
-        return result;
-    }
 
     @GetMapping("/list/page")
-    public PagerModel userPageList(int start, int length, String planNo) {
+    public PagerModel planfilePageList(int start, int length, String planNo) {
         PagerModel<Planfile> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
@@ -88,6 +82,14 @@ public class PlanfileController extends BaseController {
             planfileBiz.deleteMap(map);
         }
         return new JsonResult("删除成功", true);
+    }
+
+    //获取下拉框列表数据
+    @GetMapping("/selectorList")
+    public List<Planfile> selectorList() {
+        Map param = new HashMap();
+        List<Planfile> result = planfileBiz.selectorList(param);
+        return result;
     }
 
 

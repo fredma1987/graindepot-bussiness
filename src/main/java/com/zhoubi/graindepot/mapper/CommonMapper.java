@@ -2,6 +2,7 @@ package com.zhoubi.graindepot.mapper;
 
 import com.zhoubi.graindepot.bean.Company;
 import com.zhoubi.graindepot.bean.Grain;
+import com.zhoubi.graindepot.bean.Grainattr;
 import com.zhoubi.graindepot.bean.Graindepot;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface CommonMapper {
     List<Graindepot> graindepotList(Map map);
 
     List<Grain> grainList(Map param);
+
+    List<Grainattr> grainattrList(Map param);
 }

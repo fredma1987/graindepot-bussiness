@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <!-- 一行显示三列 -->
+        <table class="infoCheck-one" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">合同类型编号</td>
+                <td class="infoCheck-content" th:value="${contTypeCode}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">合同类型名称</td>
+                <td class="infoCheck-content" th:value="${contTypeName}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">购销标志</td>
+                <td class="infoCheck-content" th:value="${buySellFlagStr}">6666</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>

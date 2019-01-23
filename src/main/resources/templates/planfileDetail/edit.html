@@ -2,8 +2,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="head::head(${title})">
 </head>
-
-
 <link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
 <script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
 <script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
@@ -28,10 +26,12 @@
         <label class="col-sm-4 control-label no-padding-right" for="grainid"> 粮食品种: </label>
 
         <div class="col-sm-4">
-            <select id="grainid" name="grainid" class="form-control" th:value="${item.grainid}">
+            <select id="grainid" name="grainid" class="form-control"
+                    th:value="${item.grainid}">
             </select>
         </div>
     </div>
+
     <div class="form-group">
         <label class="col-sm-4 control-label no-padding-right" for="grainattrid"> 粮食性质: </label>
 
@@ -61,23 +61,13 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="qualityRequire"> 质量要求: </label>
-
-        <div class="col-sm-4">
-            <input size="16" type="text" name="qualityRequire" id="qualityRequire"
-                   th:value="${item.qualityRequire}"
-                   readonly class="form_year form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
         <label class="col-sm-4 control-label no-padding-right" for="qualityRequire">
-            <span class="red">质量要求:</span>
+            质量要求:
         </label>
 
         <div class="col-sm-4">
             <input type="text" name="qualityRequire" id="qualityRequire" class="form-control"
-                   data-bv-notempty th:value="${item.qualityRequire}"
+                   th:value="${item.qualityRequire}"
                    placeholder="质量要求"/>
         </div>
     </div>
@@ -141,15 +131,6 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="dispatchdateStr"> 下达日期: </label>
-
-        <div class="col-sm-4">
-            <input size="16" type="text" name="dispatchdateStr" id="dispatchdateStr"
-                   th:value="${item.dispatchdateStr}"
-                   readonly class="form_date form-control">
-        </div>
-    </div>
 
     <div class="form-group">
         <label class="col-sm-4 control-label no-padding-right" for="planBeginDateStr"> 计划开始时间: </label>
@@ -184,7 +165,7 @@
 
     <div class="form-group">
         <div class="col-md-6 center">
-            <button class="btn btn-info" type="button" onclick="toSave()">
+            <button class="btn btn-info" type="submit">
                 <i class="icon-ok bigger-110"></i>
                 保存
             </button>
@@ -207,7 +188,7 @@
     var g_item = [[${item}]];
     $(function () {
         //初始化form验证
-        $('#validation-form').bootstrapValidator();
+        initForm();
         //初始化日期时间框
         $(".form_year").bootstrapYear();
         //$(".form_datetime").bootstrapDatetime();
@@ -217,8 +198,12 @@
         initPlanfile();
         //2.初始化品种
         initGrain();
-        //2.初始化企业和库点;
+        //3.初始化企业和库点;
         initCopAndGd();
+        //4.初始化粮食性质
+        initGrainattr();
+        //5.初始化等级要求
+        initGrade();
 
         //初始化上传头像按钮
         $("#fileNameList").bootstrapUploadify({
@@ -229,8 +214,8 @@
     });
 
     function initPlanfile() {
-        $("#planTypeID").bootstrapSelect({
-            url: urlPrefix + '/planfile/list',
+        $("#planfileid").bootstrapSelect({
+            url: urlPrefix + '/planfile/selectorList',
             type: 'GET',
             valueField: 'planfileid',
             textField: 'planNo',
@@ -239,7 +224,7 @@
     }
     function initGrain() {
         $("#grainid").bootstrapSelect({
-            url: urlPrefix + '/common/grainList',
+            url: urlPrefix + '/selector/grainList',
             type: 'GET',
             valueField: 'grainid',
             textField: 'grainname',
@@ -247,16 +232,25 @@
         });
 
     }
+    function initGrainattr() {
+        $("#grainattrid").bootstrapSelect({
+            url: urlPrefix + '/selector/grainattrList',
+            type: 'GET',
+            valueField: 'grainattrid',
+            textField: 'grainattrname',
+            defaultValue: g_item.grainattrid
+        });
+    }
     function initCopAndGd() {
         $("#companyid").bootstrapSelect({
-            url: urlPrefix + '/common/companyList',
+            url: urlPrefix + '/selector/companyList',
             type: 'GET',
             valueField: 'companyid',
             textField: 'companyname',
             defaultValue: g_item.companyid,
             onSelect: function (value) {
                 $("#graindepotid").bootstrapSelect({
-                    url: urlPrefix + '/common/graindepotList',
+                    url: urlPrefix + '/selector/graindepotList',
                     type: 'GET',
                     param: {companyid: value},
                     valueField: 'graindepotid',
@@ -267,23 +261,35 @@
         });
     }
 
+    function initGrade() {
+        var data = [{value: 1, text: "一等"}, {value: 2, text: "二等"}, {value: 3, text: "三等"}
+            , {value: 4, text: "四等"},
+            {value: 5, text: "五等"}, {value: 6, text: "六等"}, {value: 99, text: "七等"}];
+        $("#grade").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.grade
+        });
+    }
+
     function toBack() {
         parent.$.bootstrapBox.dialog.close();
     }
 
-    function toSave() {
-        $("#validation-form").bootstrapValidator('validate');//提交验证
-        if ($("#validation-form").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
-            var param = turnArrayToJson($('form').serializeArray());
-            if (g_id) {
-                param.planfileid = g_id
-            }
-            $.post(urlPrefix + "/planfile/edit", param, function (result) {
-                parent.toSave(result)
-            })
-
-
-        }
+    function initForm() {
+        $('#validation-form').bootstrapValidator()
+                .on('success.form.bv', function (e) {
+                    // Prevent form submission
+                    e.preventDefault();
+                    var param = turnArrayToJson($('form').serializeArray());
+                    if (g_id) {
+                        param.plandetailid = g_id
+                    }
+                    $.post(urlPrefix + "/planfileDetail/edit", param, function (result) {
+                        parent.toSave(result)
+                    })
+                });
     }
 
 </script>

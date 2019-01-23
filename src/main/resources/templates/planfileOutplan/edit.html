@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="planNo">
+            计划文号:
+        </label>
+
+        <div class="col-sm-4">
+            <input type="text" name="planNo" id="planNo" class="form-control"
+                   th:value="${id!=null?item.planNo:pfd.planNo}" readonly
+                   placeholder="计划文号"/>
+        </div>
+        <div class="col-sm-4">
+            <a onclick="toPlanfileDetail()">详情</a>
+        </div>
+    </div>
+    <!--<div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="groupid">
+            集团ID:
+        </label>
+
+        <div class="col-sm-4">
+            <select id="groupid" name="groupid" class="form-control"
+                    th:value="${item.groupid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="companyid">
+            企业ID:
+        </label>
+
+        <div class="col-sm-4">
+            <select id="companyid" name="companyid" class="form-control"
+                    th:value="${item.companyid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="graindepotid">
+            粮库ID:
+        </label>
+
+        <div class="col-sm-4">
+            <select id="graindepotid" name="graindepotid" class="form-control"
+                    th:value="${item.graindepotid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="storageid">
+            仓房ID:
+        </label>
+
+        <div class="col-sm-4">
+            <select id="storageid" name="storageid" class="form-control"
+                    th:value="${item.storageid}">
+            </select>
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="producingYear">
+            收获年度:
+        </label>
+
+        <div class="col-sm-4">
+            <input size="16" type="text" name="producingYear" id="producingYear"
+                   th:value="${item.producingYear}"
+                   readonly class="form_year form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="grade">
+            等级要求:
+        </label>
+
+        <div class="col-sm-4">
+            <select id="grade" name="grade" class="form-control"
+                    th:value="${item.grade}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="tQty">
+            吨数量:
+        </label>
+
+        <div class="col-sm-4">
+            <input type="text" name="tQty" id="tQty" class="form-control"
+                   th:value="${item.tQty}"
+                   placeholder="吨数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="tPrice">
+            吨单价:
+        </label>
+
+        <div class="col-sm-4">
+            <input type="text" name="tPrice" id="tPrice" class="form-control"
+                   th:value="${item.tPrice}"
+                   placeholder="吨单价"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="amount">
+            金额:
+        </label>
+
+        <div class="col-sm-4">
+            <input type="text" name="amount" id="amount" class="form-control"
+                   th:value="${item.amount}"
+                   placeholder="金额"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="planBeginDateStr">
+            计划开始日期:
+        </label>
+
+        <div class="col-sm-4">
+            <input size="16" type="text" name="planBeginDateStr" id="planBeginDateStr"
+                   th:value="${item.planBeginDateStr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="planEndDateStr">
+            计划结束日期:
+        </label>
+
+        <div class="col-sm-4">
+            <input size="16" type="text" name="planEndDateStr" id="planEndDateStr"
+                   th:value="${item.planEndDateStr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <!--bootbox-close-button-->
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    //var urlPrefix="/graindepot-bussiness";
+    var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var g_pfd = [[${pfd}]];//计划详情信息
+    var g_plandetailid=g_id?g_item.plandetailid:g_pfd.plandetailid
+    $(function () {
+        //初始化时间框
+        $(".form_year").bootstrapYear();
+        $(".form_date").bootstrapDate();
+        //初始化form验证
+        initForm();
+        //初始化下拉框
+        //1.初始化等级
+        initGrade();
+    });
+
+
+    function initGrade() {
+        var data = [{value: 1, text: "一等"}, {value: 2, text: "二等"}, {value: 3, text: "三等"}
+            , {value: 4, text: "四等"},
+            {value: 5, text: "五等"}, {value: 6, text: "六等"}, {value: 99, text: "七等"}];
+        $("#grade").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.grade
+        });
+    }
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function toPlanfileDetail(){
+        parent.$.bootstrapBox.dialog.init({
+            title: "计划详情",
+            url: urlPrefix + "/page/planfile/detail/" + parseInt(g_plandetailid),
+            width:  $(parent.window).width()*0.5,
+            height: $(parent.window).height()*0.5
+        })
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.inplanid = g_id;
+                param.planfileid=g_item.planfileid;
+                param.plandetailid=g_item.plandetailid;
+            }else{
+                param.planfileid=g_pfd.planfileid;
+                param.plandetailid=g_pfd.plandetailid;
+            }
+            $.post(urlPrefix + "/planfileOutplan/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+
+</script>
