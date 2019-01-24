@@ -41,7 +41,7 @@ public class PageController extends BaseController {
     public String toPlanfile(Model model) {
         String title = "计划文件";
         model.addAttribute("title", title);
-        String path = "/planfile/list";
+        String path = "planfile/list";
         return path;
     }
 
@@ -56,7 +56,7 @@ public class PageController extends BaseController {
             item = planfileBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/planfile/edit";
+        String path = "planfile/edit";
         return path;
     }
 
@@ -67,7 +67,7 @@ public class PageController extends BaseController {
         Planfile item = planfileBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
-        String path = "/planfile/detail";
+        String path = "planfile/detail";
         return path;
     }
 
@@ -77,7 +77,7 @@ public class PageController extends BaseController {
     public String toPlanfileDetail(Model model) {
         String title = "计划详情";
         model.addAttribute("title", title);
-        String path = "/planfileDetail/list";
+        String path = "planfileDetail/list";
         return path;
     }
 
@@ -93,7 +93,7 @@ public class PageController extends BaseController {
             item = planfileDetailBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/planfileDetail/edit";
+        String path = "planfileDetail/edit";
         return path;
     }
 
@@ -104,7 +104,7 @@ public class PageController extends BaseController {
         PlanfileDetail item = planfileDetailBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
-        String path = "/planfileDetail/detail";
+        String path = "planfileDetail/detail";
         return path;
     }
 
@@ -114,7 +114,7 @@ public class PageController extends BaseController {
     public String toContracttype(Model model) {
         String title = "合同类型";
         model.addAttribute("title", title);
-        String path = "/contracttype/list";
+        String path = "contracttype/list";
         return path;
     }
 
@@ -129,7 +129,7 @@ public class PageController extends BaseController {
             item = contracttypeBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/contracttype/edit";
+        String path = "contracttype/edit";
         return path;
     }
 
@@ -140,7 +140,7 @@ public class PageController extends BaseController {
         Contracttype item = contracttypeBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
-        String path = "/contracttype/detail";
+        String path = "contracttype/detail";
         return path;
     }
 
@@ -149,7 +149,7 @@ public class PageController extends BaseController {
     public String left(Model model) {
         String title = "合同类型";
         model.addAttribute("title", title);
-        String path = "/navbar";
+        String path = "navbar";
         return path;
     }
 
@@ -159,7 +159,7 @@ public class PageController extends BaseController {
     public String to_trader(Model model) {
         String title = "合同类型";
         model.addAttribute("title", title);
-        String path = "/trader/list";
+        String path = "trader/list";
         return path;
     }
 
@@ -174,7 +174,7 @@ public class PageController extends BaseController {
             item = traderBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/trader/edit";
+        String path = "trader/edit";
         return path;
     }
 
@@ -185,7 +185,7 @@ public class PageController extends BaseController {
         Trader item = traderBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
-        String path = "/trader/detail";
+        String path = "trader/detail";
         return path;
     }
 
@@ -195,7 +195,7 @@ public class PageController extends BaseController {
     public String to_contract(Model model) {
         String title = "合同列表";
         model.addAttribute("title", title);
-        String path = "/contract/list";
+        String path = "contract/list";
         return path;
     }
 
@@ -210,7 +210,7 @@ public class PageController extends BaseController {
             item = contractBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/contract/edit";
+        String path = "contract/edit";
         return path;
     }
 
@@ -221,7 +221,7 @@ public class PageController extends BaseController {
     public String to_PlanfileInplan(Model model) {
         String title = "入库计划";
         model.addAttribute("title", title);
-        String path = "/planfileInplan/list";
+        String path = "planfileInplan/list";
         return path;
     }
 
@@ -241,7 +241,7 @@ public class PageController extends BaseController {
         }
         model.addAttribute("item", item);
         model.addAttribute("pfd", pfd);
-        String path = "/planfileInplan/edit";
+        String path = "planfileInplan/edit";
         return path;
     }
 
@@ -252,7 +252,7 @@ public class PageController extends BaseController {
         PlanfileInplan item = planfileInplanBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
-        String path = "/planfileInplan/detail";
+        String path = "planfileInplan/detail";
         return path;
     }
 
@@ -261,7 +261,7 @@ public class PageController extends BaseController {
     public String to_PlanfileInplan_planfileDetailList(Model model) {
         String title = "入库计划";
         model.addAttribute("title", title);
-        String path = "/planfileInplan/planfileDetailList";
+        String path = "planfileInplan/planfileDetailList";
         return path;
     }
 
@@ -271,7 +271,7 @@ public class PageController extends BaseController {
     public String to_PlanfileOutplan(Model model) {
         String title = "出库计划";
         model.addAttribute("title", title);
-        String path = "/planfileOutplan/list";
+        String path = "planfileOutplan/list";
         return path;
     }
 
@@ -291,7 +291,7 @@ public class PageController extends BaseController {
         }
         model.addAttribute("item", item);
         model.addAttribute("pfd", pfd);
-        String path = "/planfileOutplan/edit";
+        String path = "planfileOutplan/edit";
         return path;
     }
 
@@ -302,7 +302,7 @@ public class PageController extends BaseController {
         PlanfileOutplan item = planfileOutplanBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
-        String path = "/planfileOutplan/detail";
+        String path = "planfileOutplan/detail";
         return path;
     }
 
@@ -311,7 +311,7 @@ public class PageController extends BaseController {
     public String to_PlanfileOutplan_planfileDetailList(Model model) {
         String title = "出库计划";
         model.addAttribute("title", title);
-        String path = "/planfileOutplan/planfileDetailList";
+        String path = "planfileOutplan/planfileDetailList";
         return path;
     }
     //----------------------------------粮食性质---------------------------------------------
@@ -320,7 +320,7 @@ public class PageController extends BaseController {
     public String to_grainattr(Model model) {
         String title = "粮食性质";
         model.addAttribute("title", title);
-        String path = "/grainattr/list";
+        String path = "grainattr/list";
         return path;
     }
 
@@ -335,7 +335,7 @@ public class PageController extends BaseController {
             item = grainattrBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/grainattr/edit";
+        String path = "grainattr/edit";
         return path;
     }
 
@@ -346,7 +346,7 @@ public class PageController extends BaseController {
     public String to_grain(Model model) {
         String title = "粮食品种";
         model.addAttribute("title", title);
-        String path = "/grain/list";
+        String path = "grain/list";
         return path;
     }
 
@@ -361,7 +361,7 @@ public class PageController extends BaseController {
             item = grainBiz.selectById(id);
         }
         model.addAttribute("item", item);
-        String path = "/grain/edit";
+        String path = "grain/edit";
         return path;
     }
     
