@@ -133,26 +133,6 @@ public class PageController extends BaseController {
         return path;
     }
 
-    //合同类型详情页
-    @GetMapping("/contracttype/detail/{id}")
-    public String to_contracttype_detail(Model model, @PathVariable int id) {
-        String title = "合同类型详情";
-        Contracttype item = contracttypeBiz.selectById(id);
-        model.addAttribute("title", title);
-        model.addAttribute("item", item);
-        String path = "contracttype/detail";
-        return path;
-    }
-
-    //leftNavbar
-    @GetMapping("/left")
-    public String left(Model model) {
-        String title = "合同类型";
-        model.addAttribute("title", title);
-        String path = "navbar";
-        return path;
-    }
-
     //----------------------------------往来单位---------------------------------------------
     //往来单位主页
     @GetMapping("/trader")
@@ -211,6 +191,17 @@ public class PageController extends BaseController {
         }
         model.addAttribute("item", item);
         String path = "contract/edit";
+        return path;
+    }
+
+    //合同列表详情页
+    @GetMapping("/contract/detail/{id}")
+    public String to_contract_detail(Model model, @PathVariable int id) {
+        String title = "合同列表详情";
+        Contract item = contractBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "contract/detail";
         return path;
     }
 

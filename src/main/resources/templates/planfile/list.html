@@ -20,7 +20,7 @@
             </li>
         </ul>
     </div>
-    <div  style="margin-top: 4px;margin-bottom: 4px">
+    <div style="margin-top: 4px;margin-bottom: 4px">
         <div class="col-sm-3">
             <button class="btn btn-sm btn-primary" onclick="toAdd()">
                 <i class="icon-plus align-top bigger-125"></i>
@@ -95,13 +95,15 @@
 
 <script type="text/javascript">
     //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix="";
+    var urlPrefix = "";
     var theTable;
+
     function selectOnchang(o) {
         //获取全部打钩的check的值
         //$('#myTable th input:checkbox:checked')
         console.log($('#myTable').bootstrapTable("getChecked"))
     }
+
     $(document).ready(function () {
 
         query();
@@ -113,7 +115,7 @@
         theTable = $('#myTable').bootstrapTable({
             //数据来源（包括处理分页，排序，过滤） ，即url，action，接口，等等
             ajax: {
-                url: urlPrefix+"/planfile/list/page",
+                url: urlPrefix + "/planfile/list/page",
                 data: param,
                 type: "GET"
             },
@@ -128,7 +130,7 @@
                     render: function (data, type, row) {
                         if (data) {
                             return "已上传"
-                        }else{
+                        } else {
                             return "未上传"
                         }
                     }
@@ -138,17 +140,17 @@
                     data: "planfileid",
                     render: function (data, type, row) {
                         return '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">' +
-                                '<a class="green" href="javascript:toEdit(' + data + ')"' +
-                                ' title="编辑" ' +
-                                '>' +
-                                '<i class="icon-pencil bigger-130"></i>' +
-                                '</a>' +
-                                '<a class="blue" href="javascript:toDetail(' + data + ')"' +
-                                'title="详情"' +
-                                '>' +
-                                '<i class="icon-eye-open bigger-130"></i>' +
-                                '</a>' +
-                                '</div>';
+                            '<a class="green" href="javascript:toEdit(' + data + ')"' +
+                            ' title="编辑" ' +
+                            '>' +
+                            '<i class="icon-pencil bigger-130"></i>' +
+                            '</a>' +
+                            '<a class="blue" href="javascript:toDetail(' + data + ')"' +
+                            'title="详情"' +
+                            '>' +
+                            '<i class="icon-eye-open bigger-130"></i>' +
+                            '</a>' +
+                            '</div>';
 
                     }
                 }
@@ -160,6 +162,7 @@
         theTable.destroy();
         query(getParam());
     }
+
     function getParam() {
         var param = {};
         param.planNo = $("#planNo").val();
@@ -193,7 +196,7 @@
                     var ids = checkedList.map(function (curr) {
                         return curr.planfileid
                     });
-                    $.post(urlPrefix+"/planfile/del", {ids: ids.join(",")}, function (result) {
+                    $.post(urlPrefix + "/planfile/del", {ids: ids.join(",")}, function (result) {
                         $.bootstrapBox.alert.init({
                             message: result.message
                         });
@@ -210,28 +213,28 @@
     function toAdd() {
         $.bootstrapBox.dialog.init({
             title: "新增计划文件",
-            url: urlPrefix+"/page/planfile/edit",
-            width: $(window).width()*0.6,
-            height: $(window).height()*0.8
+            url: urlPrefix + "/page/planfile/edit",
+            width: $(window).width() * 0.6,
+            height: $(window).height() * 0.8
         })
     }
 
     function toEdit(id) {
         $.bootstrapBox.dialog.init({
             title: "修改计划文件",
-            url: urlPrefix+"/page/planfile/edit?id=" + id,
-            width: $(window).width()*0.6,
-            height: $(window).height()*0.8
+            url: urlPrefix + "/page/planfile/edit?id=" + id,
+            width: $(window).width() * 0.6,
+            height: $(window).height() * 0.8
         })
     }
 
 
-    function toDetail(userid) {
+    function toDetail(id) {
         $.bootstrapBox.dialog.init({
             title: "计划文件详情",
-            url: urlPrefix+"/page/planfile/detail/" + userid,
-            width: '900px',
-            height: '630px'
+            url: urlPrefix + "/page/planfile/detail/" + id,
+            width: $(window).width() * 0.7,
+            height: $(window).height() * 0.5
         })
     }
 

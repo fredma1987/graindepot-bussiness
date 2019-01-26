@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="head::head(${title})">
 </head>
 <link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
@@ -11,18 +11,110 @@
 <div class="infoCheckDiv">
     <div class="infoCheckBack">
         <!-- 一行显示三列 -->
-        <table class="infoCheck-one" border="" cellspacing="" cellpadding="">
-            <tr>
-                <td class="infoCheck-name">合同类型编号</td>
-                <td class="infoCheck-content" th:value="${contTypeCode}">6666</td>
-            </tr>
-            <tr>
-                <td class="infoCheck-name">合同类型名称</td>
-                <td class="infoCheck-content" th:value="${contTypeName}">6666</td>
-            </tr>
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
             <tr>
                 <td class="infoCheck-name">购销标志</td>
-                <td class="infoCheck-content" th:value="${buySellFlagStr}">6666</td>
+                <td class="infoCheck-content" th:text="${item.buySellFlagStr}">6666</td>
+                <td class="infoCheck-name">合同类型</td>
+                <td class="infoCheck-content" th:text="${item.contTypeName}">6666</td>
+                <td class="infoCheck-name">合同号</td>
+                <td class="infoCheck-content" th:text="${item.contractNo}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">粮食品种</td>
+                <td class="infoCheck-content" th:text="${item.grainname}">6666</td>
+                <td class="infoCheck-name">粮食性质</td>
+                <td class="infoCheck-content" th:text="${item.grainattrname}">6666</td>
+                <td class="infoCheck-name">收获年度</td>
+                <td class="infoCheck-content" th:text="${item.producingYear}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">往来单位</td>
+                <td class="infoCheck-content" th:text="${item.tradername}">6666</td>
+                <td class="infoCheck-name">本公司法人代表</td>
+                <td class="infoCheck-content" th:text="${item.corpArtiPerson}">6666</td>
+                <td class="infoCheck-name">往来单位法人代表</td>
+                <td class="infoCheck-content" th:text="${item.tradArtiPerson}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">吨数量</td>
+                <td class="infoCheck-content" th:text="${item.tQty}">6666</td>
+                <td class="infoCheck-name">吨单价</td>
+                <td class="infoCheck-content" th:text="${item.tPrice}">6666</td>
+                <td class="infoCheck-name">金额</td>
+                <td class="infoCheck-content" th:text="${item.amount}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">已执行数量</td>
+                <td class="infoCheck-content" th:text="${item.execQty}">6666</td>
+                <td class="infoCheck-name">每吨履约保证金</td>
+                <td class="infoCheck-content" th:text="${item.bailPerT}">6666</td>
+                <td class="infoCheck-name">履约保证金率</td>
+                <td class="infoCheck-content" th:text="${item.bailRate}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">履约保证金</td>
+                <td class="infoCheck-content" th:text="${item.bailAmt}">6666</td>
+                <td class="infoCheck-name">质量要求</td>
+                <td class="infoCheck-content" th:text="${item.gQRequire}">6666</td>
+                <td class="infoCheck-name">甲方委托代理人</td>
+                <td class="infoCheck-content" th:text="${item.partyAAgent}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">乙方委托代理人</td>
+                <td class="infoCheck-content" th:text="${item.partyBAgent}">6666</td>
+                <td class="infoCheck-name">甲方银行卡号</td>
+                <td class="infoCheck-content" th:text="${item.partyABankNum}">6666</td>
+                <td class="infoCheck-name">乙方银行卡号</td>
+                <td class="infoCheck-content" th:text="${item.partyBBankNum}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">中标号</td>
+                <td class="infoCheck-content" th:text="${item.bidNo}">6666</td>
+                <td class="infoCheck-name">每吨装卸费</td>
+                <td class="infoCheck-content" th:text="${item.handlingPerT}">6666</td>
+                <td class="infoCheck-name">装卸费</td>
+                <td class="infoCheck-content" th:text="${item.handlingAmt}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">签订日期</td>
+                <td class="infoCheck-content" th:text="${item.signDateStr}">6666</td>
+                <td class="infoCheck-name">实际执行日期</td>
+                <td class="infoCheck-content" th:text="${item.execDateStr}">6666</td>
+                <td class="infoCheck-name">执行完毕</td>
+                <td class="infoCheck-content" th:text="${item.completed==1?'执行完毕':'未执行完毕'}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">签订地点</td>
+                <td class="infoCheck-content" th:text="${item.signAddress}">6666</td>
+                <td class="infoCheck-name">履约地点</td>
+                <td class="infoCheck-content" th:text="${item.honourAddress}">6666</td>
+                <td class="infoCheck-name">履行状态</td>
+                <td class="infoCheck-content" th:text="${item.honourStateStr}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">履约开始时间</td>
+                <td class="infoCheck-content" th:text="${item.honourBeginDateStr}">6666</td>
+                <td class="infoCheck-name">履约结束时间</td>
+                <td class="infoCheck-content" th:text="${item.honourEndDate}">6666</td>
+                <td class="infoCheck-name">中止执行</td>
+                <td class="infoCheck-content" th:text="${item.stopFlag==1?'是':'否'}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">终止依据</td>
+                <td class="infoCheck-content" th:text="${item.stopFile}">6666</td>
+                <td class="infoCheck-name">创建时间</td>
+                <td class="infoCheck-content" th:text="${item.createtimeStr}">6666</td>
+                <td class="infoCheck-name">审批时间</td>
+                <td class="infoCheck-content" th:text="${item.sptimeStr}">6666</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">审批状态</td>
+                <td class="infoCheck-content" th:text="${item.spstatusStr}">6666</td>
+                <td class="infoCheck-name">审批意见</td>
+                <td class="infoCheck-content" th:text="${item.spremark}">6666</td>
+                <td class="infoCheck-name"></td>
+                <td class="infoCheck-content"></td>
             </tr>
         </table>
     </div>
@@ -32,7 +124,7 @@
 </html>
 
 
-<script type="text/javascript">
+<script th:inline="javascript">
     $(document).ready(function () {
 
 

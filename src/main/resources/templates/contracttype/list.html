@@ -71,6 +71,7 @@
                 </th>
                 <th style="width: 100px">购销标志</th>
                 <th style="width: 100px">合同类型</th>
+                <th style="width: 100px">合同类型编号</th>
                 <th style="width: 100px">操作</th>
 
             </tr>
@@ -123,6 +124,7 @@
             columns: [
                 {data: "buySellFlagStr"},
                 {data: "contTypeName"},
+                {data: "contTypeCode"},
                 {
                     data: "contTypeID",
                     render: function (data, type, row) {
@@ -131,11 +133,6 @@
                                 ' title="编辑" ' +
                                 '>' +
                                 '<i class="icon-pencil bigger-130"></i>' +
-                                '</a>' +
-                                '<a class="blue" href="javascript:toDetail(' + data + ')"' +
-                                'title="详情"' +
-                                '>' +
-                                '<i class="icon-eye-open bigger-130"></i>' +
                                 '</a>' +
                                 '</div>';
 
@@ -212,17 +209,6 @@
             height: $(window).height() * 0.4
         })
     }
-
-
-    function toDetail(userid) {
-        $.bootstrapBox.dialog.init({
-            title: "合同类型详情",
-            url: urlPrefix + "/page/contracttype/detail/" + userid,
-            width: $(window).width() * 0.5,
-            height: $(window).height() * 0.5
-        })
-    }
-
 
     function toSave(result) {
         $.bootstrapBox.dialog.close();
