@@ -36,15 +36,15 @@
             <div class="col-sm-2">
                 <div class="input-group">
                     <span class="input-group-addon">计划文号:</span>
-                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planNo">
+                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planno">
                 </div>
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-sm btn-success" onclick="javascript:searchTable()">
+                <button class="btn btn-sm btn-success" onclick="searchTable()">
                     <i class="icon-search align-top bigger-125"></i>
                     查询
                 </button>
-                <button class="btn btn-sm btn-warning" onclick="javascript:rest()">
+                <button class="btn btn-sm btn-warning" onclick="rest()">
                     <i class="icon-undo align-top bigger-125"></i>
                     重置
                 </button>
@@ -94,8 +94,8 @@
 
 
 <script type="text/javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var theTable;
 
     function selectOnchang(o) {
@@ -121,12 +121,12 @@
             },
             //sScrollY: 510,//表格高度
             columns: [
-                {data: "planTypeIDStr"},
-                {data: "planNo"},
+                {data: "plantypeidstr"},
+                {data: "planno"},
                 {title: "下达单位", data: "dispatchunit"},
                 {
                     title: "文件上传",
-                    data: "fileNameList",
+                    data: "filenamelist",
                     render: function (data, type, row) {
                         if (data) {
                             return "已上传"
@@ -165,7 +165,7 @@
 
     function getParam() {
         var param = {};
-        param.planNo = $("#planNo").val();
+        param.planno = $("#planno").val();
         return param
     }
 
@@ -181,10 +181,10 @@
 
 
     function doDel() {
-        console.log($('#myTable').bootstrapTable("getChecked"))
+        console.log($('#myTable').bootstrapTable("getChecked"));
         var checkedList = $('#myTable').bootstrapTable("getChecked");
         if (checkedList.length == 0) {
-            $.bootstrapBox.alert.init({message: "请选择需要删除的行"})
+            $.bootstrapBox.alert.init({message: "请选择需要删除的行"});
             return
         }
         $.bootstrapBox.confirm.init({
@@ -192,7 +192,6 @@
             callback: function (result) {
                 if (result) {
                     //删除用户
-                    debugger
                     var ids = checkedList.map(function (curr) {
                         return curr.planfileid
                     });

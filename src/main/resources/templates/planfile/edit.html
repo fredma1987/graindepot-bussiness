@@ -15,10 +15,10 @@
 <form class="form-horizontal" role="form" id="validation-form" method="get">
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planTypeID"> 计划类型: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="plantypeid"> 计划类型: </label>
 
         <div class="col-sm-4">
-            <select id="planTypeID" name="planTypeID" class="form-control" th:value="${item.planTypeID}">
+            <select id="plantypeid" name="plantypeid" class="form-control" th:value="${item.plantypeid}">
             </select>
         </div>
     </div>
@@ -42,24 +42,24 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planYear"> 计划年度: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="planyear"> 计划年度: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planYear" id="planYear"
-                   th:value="${item.planYear}"
+            <input size="16" type="text" name="planyear" id="planyear"
+                   th:value="${item.planyear}"
                    readonly class="form_year form-control">
         </div>
     </div>
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planNo">
+        <label class="col-sm-4 control-label no-padding-right" for="planno">
             <span class="red">*</span>计划文号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="planNo" id="planNo" class="form-control"
-                   data-bv-notempty th:value="${item.planNo}"
+            <input type="text" name="planno" id="planno" class="form-control"
+                   data-bv-notempty th:value="${item.planno}"
                    placeholder="计划文号"/>
         </div>
     </div>
@@ -77,41 +77,41 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="dispatchdateStr"> 下达日期: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="dispatchdatestr"> 下达日期: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="dispatchdateStr" id="dispatchdateStr"
-                   th:value="${item.dispatchdateStr}"
+            <input size="16" type="text" name="dispatchdatestr" id="dispatchdatestr"
+                   th:value="${item.dispatchdatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planBeginDateStr"> 计划开始时间: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="planbegindatestr"> 计划开始时间: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planBeginDateStr" id="planBeginDateStr"
-                   th:value="${item.planBeginDateStr}"
+            <input size="16" type="text" name="planbegindatestr" id="planbegindatestr"
+                   th:value="${item.planbegindatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planEndDateStr"> 计划结束日期: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="planenddatestr"> 计划结束日期: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planEndDateStr" id="planEndDateStr"
-                   th:value="${item.planEndDateStr}"
+            <input size="16" type="text" name="planenddatestr" id="planenddatestr"
+                   th:value="${item.planenddatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="fileNameList"> 附件: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="filenamelist"> 附件: </label>
 
         <div class="col-sm-4">
-            <input type="file" name="fileNameList" id="fileNameList" class="form-control"
-                   th:value="${item.fileNameList}" placeholder="附件"/>
+            <input type="file" name="filenamelist" id="filenamelist" class="form-control"
+                   th:value="${item.filenamelist}" placeholder="附件"/>
 
             <div id="showFileNameList"></div>
         </div>
@@ -146,7 +146,7 @@
 </body>
 </html>
 <script th:inline="javascript">
-    //var urlPrefix="/graindepot-bussiness";
+    var urlPrefix="/graindepot-bussiness";
     var urlPrefix = "";
     var g_id = [[${id}]];
     var g_item = [[${item}]];
@@ -173,26 +173,26 @@
 
     function initPlanTypeID() {
         var data = [{value: 1, text: "轮换计划"}, {value: 2, text: "轮出计划"}, {value: 3, text: "轮入计划"}];
-        $("#planTypeID").bootstrapSelect({
+        $("#plantypeid").bootstrapSelect({
             //url: '/tableListPost',
             // type: 'POST',
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.planTypeID
+            defaultValue: g_item.plantypeid
         });
     }
 
     function initCopAndGd() {
         $("#companyid").bootstrapSelect({
-            url: urlPrefix + '/selector/companyList',
+            url:  '/graindepot-base/selector/companyList',
             type: 'GET',
             valueField: 'companyid',
             textField: 'companyname',
             defaultValue: g_item.companyid,
             onSelect: function (value) {
                 $("#graindepotid").bootstrapSelect({
-                    url: urlPrefix + '/selector/graindepotList',
+                    url: '/graindepot-base/selector/graindepotList',
                     type: 'GET',
                     param: {companyid: value},
                     valueField: 'graindepotid',

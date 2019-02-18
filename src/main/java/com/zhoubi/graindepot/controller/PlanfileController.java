@@ -31,13 +31,13 @@ public class PlanfileController extends BaseController {
 
 
     @GetMapping("/list/page")
-    public PagerModel planfilePageList(int start, int length, String planNo) {
+    public PagerModel planfilePageList(int start, int length, String planno) {
         PagerModel<Planfile> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-        if (StringUtils.isNotEmpty(planNo)) {
-            e.putWhere("planNo", "%" + planNo + "%");
+        if (StringUtils.isNotEmpty(planno)) {
+            e.putWhere("planno", "%" + planno + "%");
         }
         PagerModel<Planfile> result = planfileBiz.selectListByPage(e);
         return result;
@@ -45,20 +45,20 @@ public class PlanfileController extends BaseController {
 
     @PostMapping("/edit")
     public JsonResult planfileEdit(Planfile item) throws ParseException {
-        String dispatchdateStr = item.getDispatchdateStr();
-        if (StringUtils.isNotEmpty(dispatchdateStr)) {
-            Date dispatchdate = DateUtils.parseDate(dispatchdateStr, "yyyy-MM-dd");
+        String dispatchdatestr = item.getDispatchdatestr();
+        if (StringUtils.isNotEmpty(dispatchdatestr)) {
+            Date dispatchdate = DateUtils.parseDate(dispatchdatestr, "yyyy-MM-dd");
             item.setDispatchdate(dispatchdate);
         }
-        String planBeginDateStr = item.getPlanBeginDateStr();
-        if (StringUtils.isNotEmpty(planBeginDateStr)) {
-            Date planBeginDate = DateUtils.parseDate(planBeginDateStr, "yyyy-MM-dd");
-            item.setPlanBeginDate(planBeginDate);
+        String planbegindatestr = item.getPlanbegindatestr();
+        if (StringUtils.isNotEmpty(planbegindatestr)) {
+            Date planBeginDate = DateUtils.parseDate(planbegindatestr, "yyyy-MM-dd");
+            item.setPlanbegindate(planBeginDate);
         }
-        String planEndDateStr = item.getPlanEndDateStr();
-        if (StringUtils.isNotEmpty(planEndDateStr)) {
-            Date planEndDate = DateUtils.parseDate(planEndDateStr, "yyyy-MM-dd");
-            item.setPlanEndDate(planEndDate);
+        String planenddatestr = item.getPlanenddatestr();
+        if (StringUtils.isNotEmpty(planenddatestr)) {
+            Date planEndDate = DateUtils.parseDate(planenddatestr, "yyyy-MM-dd");
+            item.setPlanenddate(planEndDate);
         }
 
         if (item.getPlanfileid() == 0) {

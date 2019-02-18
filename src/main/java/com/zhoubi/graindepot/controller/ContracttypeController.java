@@ -25,13 +25,13 @@ public class ContracttypeController extends BaseController {
     private ContracttypeBiz contracttypeBiz;
 
     @GetMapping("/list/page")
-    public PagerModel contracttypePageList(int start, int length, Integer buySellFlag) {
+    public PagerModel contracttypePageList(int start, int length, Integer buysellflag) {
         PagerModel<Contracttype> e = new PagerModel();
         e.addOrder("conttypeid desc");
         e.setStart(start);
         e.setLength(length);
-        if (buySellFlag != null) {
-            e.putWhere("buySellFlag", buySellFlag);
+        if (buysellflag != null) {
+            e.putWhere("buysellflag", buysellflag);
         }
         PagerModel<Contracttype> result = contracttypeBiz.selectListByPage(e);
         return result;
@@ -40,7 +40,7 @@ public class ContracttypeController extends BaseController {
     @PostMapping("/edit")
     public JsonResult contracttypeEdit(Contracttype item) throws ParseException {
 
-        if (item.getContTypeID() == null) {
+        if (item.getConttypeid() == null) {
             //新增
             contracttypeBiz.insert(item);
             return new JsonResult("添加成功", true);

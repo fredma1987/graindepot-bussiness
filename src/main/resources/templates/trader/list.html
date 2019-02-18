@@ -36,15 +36,15 @@
             <div class="col-sm-3">
                 <div class="input-group">
                     <span class="input-group-addon">往来单位名称:</span>
-                    <input id="traderName" type="text" class="form-control" placeholder="往来单位名称">
+                    <input id="tradername" type="text" class="form-control" placeholder="往来单位名称">
                 </div>
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-sm btn-success" onclick="javascript:searchTable()">
+                <button class="btn btn-sm btn-success" onclick="searchTable()">
                     <i class="icon-search align-top bigger-125"></i>
                     查询
                 </button>
-                <button class="btn btn-sm btn-warning" onclick="javascript:rest()">
+                <button class="btn btn-sm btn-warning" onclick="rest()">
                     <i class="icon-undo align-top bigger-125"></i>
                     重置
                 </button>
@@ -90,8 +90,8 @@
 
 
 <script type="text/javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var theTable;
     function selectOnchang(o) {
         //获取全部打钩的check的值
@@ -112,12 +112,12 @@
                 type: "GET"
             },
             columns: [
-                {data: "traderName"},
-                {data: "businessScope"},
+                {data: "tradername"},
+                {data: "businessscope"},
                 {data: "linkman"},
-                {data: "telNumber"},
+                {data: "telnumber"},
                 {
-                    data: "traderID",
+                    data: "traderid",
                     render: function (data, type, row) {
                         return '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">' +
                                 '<a class="green" href="javascript:toEdit(' + data + ')"' +
@@ -144,7 +144,7 @@
     }
     function getParam() {
         var param = {};
-        param.traderName = $("#traderName").bootstrapSelect("getValue");
+        param.traderName = $("#tradername").bootstrapSelect("getValue");
         return param
     }
 
@@ -160,10 +160,10 @@
 
 
     function doDel() {
-        console.log($('#myTable').bootstrapTable("getChecked"))
+        console.log($('#myTable').bootstrapTable("getChecked"));
         var checkedList = $('#myTable').bootstrapTable("getChecked");
         if (checkedList.length == 0) {
-            $.bootstrapBox.alert.init({message: "请选择需要删除的行"})
+            $.bootstrapBox.alert.init({message: "请选择需要删除的行"});
             return
         }
         $.bootstrapBox.confirm.init({
@@ -172,7 +172,7 @@
                 if (result) {
                     //删除合同
                     var ids = checkedList.map(function (curr) {
-                        return curr.contTypeID
+                        return curr.conttypeid
                     });
                     $.post(urlPrefix + "/trader/del", {ids: ids.join(",")}, function (result) {
                         $.bootstrapBox.alert.init({

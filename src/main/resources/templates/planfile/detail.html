@@ -20,33 +20,33 @@
             </tr>
             <tr>
                 <td class="infoCheck-name">计划类型</td>
-                <td class="infoCheck-content" th:text="${item.planTypeIDStr}">计划类型</td>
+                <td class="infoCheck-content" th:text="${item.plantypeidstr}">计划类型</td>
                 <td class="infoCheck-name">计划年度</td>
-                <td class="infoCheck-content" th:text="${item.planYear}">计划年度</td>
+                <td class="infoCheck-content" th:text="${item.planyear}">计划年度</td>
             </tr>
             <tr>
                 <td class="infoCheck-name">计划文号</td>
-                <td class="infoCheck-content" th:text="${item.planNo}">计划文号</td>
+                <td class="infoCheck-content" th:text="${item.planno}">计划文号</td>
                 <td class="infoCheck-name">下达单位</td>
                 <td class="infoCheck-content" th:text="${item.dispatchunit}">下达单位</td>
             </tr>
             <tr>
                 <td class="infoCheck-name">下达日期</td>
-                <td class="infoCheck-content" th:text="${item.dispatchdateStr}">下达日期</td>
+                <td class="infoCheck-content" th:text="${item.dispatchdatestr}">下达日期</td>
                 <td class="infoCheck-name">计划开始日期</td>
-                <td class="infoCheck-content" th:text="${item.planBeginDateStr}">计划开始日期</td>
+                <td class="infoCheck-content" th:text="${item.planbegindatestr}">计划开始日期</td>
             </tr>
             <tr>
                 <td class="infoCheck-name">计划结束日期</td>
-                <td class="infoCheck-content" th:text="${item.planEndDateStr}">无锡市梁溪区</td>
+                <td class="infoCheck-content" th:text="${item.planenddatestr}">无锡市梁溪区</td>
                 <td class="infoCheck-name">附件</td>
-                <td class="infoCheck-content" th:text="${item.fileNameList}">附件</td>
+                <td class="infoCheck-content" th:text="${item.filenamelist}">附件</td>
             </tr>
             <tr>
                 <td class="infoCheck-name">创建人</td>
                 <td class="infoCheck-content" th:text="${item.createusername}">创建人</td>
                 <td class="infoCheck-name">创建时间</td>
-                <td class="infoCheck-content" th:text="${item.createtimeStr}">创建时间</td>
+                <td class="infoCheck-content" th:text="${item.createtimestr}">创建时间</td>
             </tr>
             <tr>
                 <td class="infoCheck-name">备注</td>
@@ -60,8 +60,8 @@
 
 
 <script type="text/javascript">
-    debugger
-    var g_item=[[${item}]]
+    debugger;
+    var g_item=[[${item}]];
 
     $(document).ready(function () {
 

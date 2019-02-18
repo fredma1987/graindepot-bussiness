@@ -43,11 +43,11 @@
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="producingYear"> 收获年度: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="producingyear"> 收获年度: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="producingYear" id="producingYear"
-                   th:value="${item.producingYear}"
+            <input size="16" type="text" name="producingyear" id="producingyear"
+                   th:value="${item.producingyear}"
                    readonly class="form_year form-control">
         </div>
     </div>
@@ -61,93 +61,93 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="qualityRequire">
+        <label class="col-sm-4 control-label no-padding-right" for="qualityrequire">
             质量要求:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="qualityRequire" id="qualityRequire" class="form-control"
-                   th:value="${item.qualityRequire}"
+            <input type="text" name="qualityrequire" id="qualityrequire" class="form-control"
+                   th:value="${item.qualityrequire}"
                    placeholder="质量要求"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="tQty">
+        <label class="col-sm-4 control-label no-padding-right" for="tqty">
             <span class="red">*</span>要求数量(吨):
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="tQty" id="tQty" class="form-control"
-                   data-bv-notempty th:value="${item.tQty}"
+            <input type="text" name="tqty" id="tqty" class="form-control"
+                   data-bv-notempty th:value="${item.tqty}"
                    placeholder="要求数量(吨)"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="tPrice">
+        <label class="col-sm-4 control-label no-padding-right" for="tprice">
             <span class="red">*</span>单价(元/吨):
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="tPrice" id="tPrice" class="form-control"
-                   data-bv-notempty th:value="${item.tPrice}"
+            <input type="text" name="tprice" id="tprice" class="form-control"
+                   data-bv-notempty th:value="${item.tprice}"
                    placeholder="单价(元/吨)"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="calcAmt">
+        <label class="col-sm-4 control-label no-padding-right" for="calcamt">
             <span class="red">*</span>金额:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="calcAmt" id="calcAmt" class="form-control"
-                   data-bv-notempty th:value="${item.calcAmt}"
+            <input type="text" name="calcamt" id="calcamt" class="form-control"
+                   data-bv-notempty th:value="${item.calcamt}"
                    placeholder="金额"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="oSPlanTQty">
+        <label class="col-sm-4 control-label no-padding-right" for="osplantqty">
             <span class="red">*</span>计划出库数量(吨):
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="oSPlanTQty" id="oSPlanTQty" class="form-control"
-                   data-bv-notempty th:value="${item.oSPlanTQty}"
+            <input type="text" name="osplantqty" id="osplantqty" class="form-control"
+                   data-bv-notempty th:value="${item.osplantqty}"
                    placeholder="计划出库数量(吨)"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="iSPlanTQty">
+        <label class="col-sm-4 control-label no-padding-right" for="isplantqty">
             <span class="red">*</span>计划入库数量(吨):
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="iSPlanTQty" id="iSPlanTQty" class="form-control"
-                   data-bv-notempty th:value="${item.iSPlanTQty}"
+            <input type="text" name="isplantqty" id="isplantqty" class="form-control"
+                   data-bv-notempty th:value="${item.isplantqty}"
                    placeholder="计划入库数量(吨)"/>
         </div>
     </div>
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planBeginDateStr"> 计划开始时间: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="planbegindatestr"> 计划开始时间: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planBeginDateStr" id="planBeginDateStr"
-                   th:value="${item.planBeginDateStr}"
+            <input size="16" type="text" name="planbegindatestr" id="planbegindatestr"
+                   th:value="${item.planbegindatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planEndDateStr"> 计划结束日期: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="planenddatestr"> 计划结束日期: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planEndDateStr" id="planEndDateStr"
-                   th:value="${item.planEndDateStr}"
+            <input size="16" type="text" name="planenddatestr" id="planenddatestr"
+                   th:value="${item.planenddatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
@@ -206,7 +206,7 @@
         initGrade();
 
         //初始化上传头像按钮
-        $("#fileNameList").bootstrapUploadify({
+        $("#filenamelist").bootstrapUploadify({
             showId: "showFileNameList"//上传成功后在那边显示信息
             //fileType: "img"//需要上传的文件类型
         });
@@ -215,16 +215,16 @@
 
     function initPlanfile() {
         $("#planfileid").bootstrapSelect({
-            url: urlPrefix + '/planfile/selectorList',
+            url: '/graindepot-base/planfile/selectorList',
             type: 'GET',
             valueField: 'planfileid',
-            textField: 'planNo',
+            textField: 'planno',
             defaultValue: g_item.planfileid
         });
     }
     function initGrain() {
         $("#grainid").bootstrapSelect({
-            url: urlPrefix + '/selector/grainList',
+            url: '/graindepot-base/selector/grainList',
             type: 'GET',
             valueField: 'grainid',
             textField: 'grainname',
@@ -234,7 +234,7 @@
     }
     function initGrainattr() {
         $("#grainattrid").bootstrapSelect({
-            url: urlPrefix + '/selector/grainattrList',
+            url: '/graindepot-base/selector/grainattrList',
             type: 'GET',
             valueField: 'grainattrid',
             textField: 'grainattrname',
@@ -243,7 +243,7 @@
     }
     function initCopAndGd() {
         $("#companyid").bootstrapSelect({
-            url: urlPrefix + '/selector/companyList',
+            url: '/graindepot-base/selector/companyList',
             type: 'GET',
             valueField: 'companyid',
             textField: 'companyname',

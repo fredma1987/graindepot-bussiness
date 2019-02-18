@@ -137,7 +137,7 @@ public class PageController extends BaseController {
     //往来单位主页
     @GetMapping("/trader")
     public String to_trader(Model model) {
-        String title = "合同类型";
+        String title = "往来单位";
         model.addAttribute("title", title);
         String path = "trader/list";
         return path;

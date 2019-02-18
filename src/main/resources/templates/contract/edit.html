@@ -12,35 +12,35 @@
 <body style="overflow-x: hidden">
 <form class="form-horizontal" role="form" id="validation-form" method="get">
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="buySellFlag">
+        <label class="col-sm-4 control-label no-padding-right" for="buysellflag">
             <span class="red">*</span>购销标志: </label>
 
         <div class="col-sm-4">
-            <select id="buySellFlag" name="buySellFlag" class="form-control"
-                    data-bv-notempty th:value="${item.buySellFlag}">
+            <select id="buysellflag" name="buysellflag" class="form-control"
+                    data-bv-notempty th:value="${item.buysellflag}">
             </select>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="contTypeID">
+        <label class="col-sm-4 control-label no-padding-right" for="conttypeid">
             合同类型:
         </label>
 
         <div class="col-sm-4">
-            <select id="contTypeID" name="contTypeID" class="form-control"
-                    data-bv-notempty th:value="${item.contTypeID}">
+            <select id="conttypeid" name="conttypeid" class="form-control"
+                    data-bv-notempty th:value="${item.conttypeid}">
             </select>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="contractNo">
+        <label class="col-sm-4 control-label no-padding-right" for="contractno">
             <span class="red">*</span>合同号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="contractNo" id="contractNo" class="form-control"
-                   data-bv-notempty th:value="${item.contractNo}"
+            <input type="text" name="contractno" id="contractno" class="form-control"
+                   data-bv-notempty th:value="${item.contractno}"
                    placeholder="合同号"/>
         </div>
     </div>
@@ -69,13 +69,13 @@
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="contTypeID">
+        <label class="col-sm-4 control-label no-padding-right" for="producingyear">
             收获年度:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="producingYear" id="producingYear" class="form-control"
-                   th:value="${item.producingYear}"
+            <input type="text" name="producingyear" id="producingyear" class="form-control"
+                   th:value="${item.producingyear}"
                    placeholder="收获年度"/>
         </div>
     </div>
@@ -90,48 +90,48 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="traderID">
+        <label class="col-sm-4 control-label no-padding-right" for="traderid">
             <span class="red">*</span>往来单位: </label>
 
         <div class="col-sm-4">
-            <select id="traderID" name="traderID" class="form-control"
-                    data-bv-notempty th:value="${item.traderID}">
+            <select id="traderid" name="traderid" class="form-control"
+                    data-bv-notempty th:value="${item.traderid}">
             </select>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="corpArtiPerson">
+        <label class="col-sm-4 control-label no-padding-right" for="corpartiperson">
             本公司法人代表:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="corpArtiPerson" id="corpArtiPerson" class="form-control"
-                   th:value="${item.corpArtiPerson}"
+            <input type="text" name="corpartiperson" id="corpartiperson" class="form-control"
+                   th:value="${item.corpartiperson}"
                    placeholder="本公司法人代表"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="tQty">
+        <label class="col-sm-4 control-label no-padding-right" for="tqty">
             <span class="red">*</span>数量(吨):
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="tQty" id="tQty" class="form-control"
-                   data-bv-notempty th:value="${item.tQty}"
+            <input type="text" name="tqty" id="tqty" class="form-control"
+                   data-bv-notempty th:value="${item.tqty}"
                    placeholder="吨数量"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="tPrice">
+        <label class="col-sm-4 control-label no-padding-right" for="tprice">
             <span class="red">*</span>单价(元/吨):
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="tPrice" id="tPrice" class="form-control"
-                   data-bv-notempty th:value="${item.tPrice}"
+            <input type="text" name="tprice" id="tprice" class="form-control"
+                   data-bv-notempty th:value="${item.tprice}"
                    placeholder="单价(元/吨)"/>
         </div>
     </div>
@@ -153,137 +153,137 @@
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="bailPerT" id="bailPerT" class="form-control"
-                   th:value="${item.bailPerT}"
+            <input type="text" name="bailpert" id="bailpert" class="form-control"
+                   th:value="${item.bailpert}"
                    placeholder="每吨履约保证金"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="bailRate">
+        <label class="col-sm-4 control-label no-padding-right" for="bailrate">
             履约保证金率:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="bailRate" id="bailRate" class="form-control"
-                   th:value="${item.bailRate}"
+            <input type="text" name="bailrate" id="bailrate" class="form-control"
+                   th:value="${item.bailrate}"
                    placeholder="履约保证金率"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="bailAmt">
+        <label class="col-sm-4 control-label no-padding-right" for="bailamt">
             履约保证金:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="bailAmt" id="bailAmt" class="form-control"
-                   th:value="${item.bailAmt}"
+            <input type="text" name="bailamt" id="bailamt" class="form-control"
+                   th:value="${item.bailamt}"
                    placeholder="履约保证金率"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="gQRequire">
+        <label class="col-sm-4 control-label no-padding-right" for="gqrequire">
             质量要求:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="gQRequire" id="gQRequire" class="form-control"
-                   th:value="${item.gQRequire}"
+            <input type="text" name="gqrequire" id="gqrequire" class="form-control"
+                   th:value="${item.gqrequire}"
                    placeholder="质量要求"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="partyAAgent">
+        <label class="col-sm-4 control-label no-padding-right" for="partyaagent">
             甲方委托代理人:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="partyAAgent" id="partyAAgent" class="form-control"
-                   th:value="${item.partyAAgent}"
+            <input type="text" name="partyaagent" id="partyaagent" class="form-control"
+                   th:value="${item.partyaagent}"
                    placeholder="甲方委托代理人"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="partyBAgent">
+        <label class="col-sm-4 control-label no-padding-right" for="partybagent">
             乙方委托代理人:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="partyBAgent" id="partyBAgent" class="form-control"
-                   th:value="${item.partyBAgent}"
+            <input type="text" name="partybagent" id="partybagent" class="form-control"
+                   th:value="${item.partybagent}"
                    placeholder="乙方委托代理人"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="partyABankNum">
+        <label class="col-sm-4 control-label no-padding-right" for="partyabanknum">
             甲方银行卡号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="partyABankNum" id="partyABankNum" class="form-control"
-                   th:value="${item.partyABankNum}"
+            <input type="text" name="partyabanknum" id="partyabanknum" class="form-control"
+                   th:value="${item.partyabanknum}"
                    placeholder="甲方银行卡号"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="partyBBankNum">
+        <label class="col-sm-4 control-label no-padding-right" for="partybbanknum">
             乙方银行卡号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="partyBBankNum" id="partyBBankNum" class="form-control"
-                   th:value="${item.partyBBankNum}"
+            <input type="text" name="partybbanknum" id="partybbanknum" class="form-control"
+                   th:value="${item.partybbanknum}"
                    placeholder="乙方银行卡号"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="bidNo">
+        <label class="col-sm-4 control-label no-padding-right" for="bidno">
             中标号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="bidNo" id="bidNo" class="form-control"
-                   th:value="${item.bidNo}"
+            <input type="text" name="bidno" id="bidno" class="form-control"
+                   th:value="${item.bidno}"
                    placeholder="中标号"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="handlingPerT">
+        <label class="col-sm-4 control-label no-padding-right" for="handlingpert">
             每吨装卸费:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="handlingPerT" id="handlingPerT" class="form-control"
-                   th:value="${item.handlingPerT}"
+            <input type="text" name="handlingpert" id="handlingpert" class="form-control"
+                   th:value="${item.handlingpert}"
                    placeholder="每吨装卸费"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="HandlingAmt">
+        <label class="col-sm-4 control-label no-padding-right" for="handlingamt">
             装卸费:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="HandlingAmt" id="HandlingAmt" class="form-control"
-                   th:value="${item.HandlingAmt}"
+            <input type="text" name="handlingamt" id="handlingamt" class="form-control"
+                   th:value="${item.handlingamt}"
                    placeholder="装卸费"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="signDateStr"> 签订日期: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="signdatestr"> 签订日期: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="signDateStr" id="signDateStr"
-                   th:value="${item.signDateStr}"
+            <input size="16" type="text" name="signdatestr" id="signdatestr"
+                   th:value="${item.signdatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="execDateStr"> 实际执行日期: </label>
+        <label class="col-sm-4 control-label no-padding-right" for="execdatestr"> 实际执行日期: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="execDateStr" id="execDateStr"
-                   th:value="${item.execDateStr}"
+            <input size="16" type="text" name="execdatestr" id="execdatestr"
+                   th:value="${item.execdatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
@@ -299,67 +299,67 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="signAddress">
+        <label class="col-sm-4 control-label no-padding-right" for="signaddress">
             签订地点:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="signAddress" id="signAddress" class="form-control"
-                   th:value="${item.signAddress}"
+            <input type="text" name="signaddress" id="signaddress" class="form-control"
+                   th:value="${item.signaddress}"
                    placeholder="签订地点"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="honourAddress">
+        <label class="col-sm-4 control-label no-padding-right" for="honouraddress">
             签订地点:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="honourAddress" id="honourAddress" class="form-control"
-                   th:value="${item.honourAddress}"
+            <input type="text" name="honouraddress" id="honouraddress" class="form-control"
+                   th:value="${item.honouraddress}"
                    placeholder="签订地点"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="honourState">
+        <label class="col-sm-4 control-label no-padding-right" for="honourstate">
             履行状态: </label>
 
         <div class="col-sm-4">
-            <select id="honourState" name="honourState" class="form-control"
-                    th:value="${item.honourState}">
+            <select id="honourstate" name="honourstate" class="form-control"
+                    th:value="${item.honourstate}">
             </select>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="honourBeginDateStr">
+        <label class="col-sm-4 control-label no-padding-right" for="honourbegindatestr">
             履约开始时间: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="honourBeginDateStr" id="honourBeginDateStr"
-                   th:value="${item.honourBeginDateStr}"
+            <input size="16" type="text" name="honourbegindatestr" id="honourbegindatestr"
+                   th:value="${item.honourbegindatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="honourEndDateStr">
+        <label class="col-sm-4 control-label no-padding-right" for="honourenddatestr">
             履约结束时间: </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="honourEndDateStr" id="honourEndDateStr"
-                   th:value="${item.honourEndDateStr}"
+            <input size="16" type="text" name="honourenddatestr" id="honourenddatestr"
+                   th:value="${item.honourenddatestr}"
                    readonly class="form_date form-control">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="stopFlag">
+        <label class="col-sm-4 control-label no-padding-right" for="stopflag">
             中止执行: </label>
 
         <div class="col-sm-4">
-            <select id="stopFlag" name="stopFlag" class="form-control"
-                    th:value="${item.stopFlag}">
+            <select id="stopflag" name="stopflag" class="form-control"
+                    th:value="${item.stopflag}">
             </select>
         </div>
     </div>
@@ -388,6 +388,7 @@
     var urlPrefix = "";
     var g_id = [[${id}]];
     var g_item = [[${item}]];
+    var param={};
     $(function () {
         //初始化时间框
         $(".form_date").bootstrapDate();
@@ -395,7 +396,8 @@
         initForm();
         //初始化下拉框
         //1.初始购销标志
-        initBuySellFlag();
+        initBuysellflag();
+        initConttype(param);
         //2.初始化粮食品种
         initGrain();
         //3.初始化粮食性质
@@ -407,28 +409,32 @@
         //6.执行完毕
         inCompleted();
         //7.履行状态
-        initHonourState();
+        initHonourstate();
         //8.终止执行
-        initStopFlag();
+        initStopflag();
     });
 
+    function initConttype(param) {
+        $("#conttypeid").bootstrapSelect({
+            url: '/graindepot-base/selector/contracttypeList',
+            type: 'GET',
+            valueField: 'conttypeid',
+            textField: 'conttypename',
+            param:param
+        });
 
-    function initBuySellFlag() {
+    }
+    function initBuysellflag() {
         var data = [{value: 1, text: "采购"}, {value: -1, text: "销售"}];
-        $("#buySellFlag").bootstrapSelect({
+        $("#buysellflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.buySellFlag,
+            defaultValue: g_item.buysellflag,
             onSelect: function (value) {
-                $("#contTypeID").bootstrapSelect({
-                    url: urlPrefix + '/selector/contracttypeList',
-                    param:{buySellFlag:value},
-                    type: 'GET',
-                    valueField: 'contTypeID',
-                    textField: 'contTypeName',
-                    defaultValue: g_item.contTypeID
-                });
+                param.buysellflag=value;
+                initConttype(param) ;
+
             }
         });
     }
@@ -442,29 +448,29 @@
             defaultValue: g_item.completed
         });
     }
-    function initHonourState() {
+    function initHonourstate() {
         var data = [{value: 0, text: "未履行"}, {value: 1, text: "履行中"}, {value: 2, text: "履行终了"}];
-        $("#honourState").bootstrapSelect({
+        $("#honourstate").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.honourState
+            defaultValue: g_item.honourstate
         });
     }
-    function initStopFlag() {
+    function initStopflag() {
 
         var data = [{value: 1, text: "终止执行"}, {value: 0, text: "未终止执行"}];
-        $("#stopFlag").bootstrapSelect({
+        $("#stopflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.stopFlag
+            defaultValue: g_item.stopflag
         });
     }
 
     function initGrain() {
         $("#grainid").bootstrapSelect({
-            url: urlPrefix + '/selector/grainList',
+            url: '/graindepot-base/selector/grainList',
             type: 'GET',
             valueField: 'grainid',
             textField: 'grainname',
@@ -474,7 +480,7 @@
     }
     function initGrainattr() {
         $("#grainattrid").bootstrapSelect({
-            url: urlPrefix + '/selector/grainattrList',
+            url: '/graindepot-base/selector/grainattrList',
             type: 'GET',
             valueField: 'grainattrid',
             textField: 'grainattrname',
@@ -482,12 +488,12 @@
         });
     }
     function initTrader() {
-        $("#traderID").bootstrapSelect({
-            url: urlPrefix + '/selector/traderList',
+        $("#traderid").bootstrapSelect({
+            url: '/graindepot-base/selector/traderList',
             type: 'GET',
-            valueField: 'traderID',
-            textField: 'traderName',
-            defaultValue: g_item.traderID
+            valueField: 'traderid',
+            textField: 'tradername',
+            defaultValue: g_item.traderid
         });
     }
 

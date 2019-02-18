@@ -28,31 +28,31 @@ public class PlanfileDetailController extends BaseController {
     private PlanfileDetailBiz planfileDetailBiz;
 
     @GetMapping("/list/page")
-    public PagerModel userPageList(int start, int length,String planNo) {
+    public PagerModel userPageList(int start, int length,String planno) {
         PagerModel<PlanfileDetail> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-        if (StringUtils.isNotEmpty(planNo)) {
-            e.putWhere("planNo","%"+planNo+"%");
+        if (StringUtils.isNotEmpty(planno)) {
+            e.putWhere("planno","%"+planno+"%");
         }
         PagerModel<PlanfileDetail> result = planfileDetailBiz.selectListByPage(e);
         return result;
     }
     @PostMapping("/edit")
     public JsonResult planfileDetailEdit(PlanfileDetail item) throws ParseException {
-        String planBeginDateStr = item.getPlanBeginDateStr();
-        if (StringUtils.isNotEmpty(planBeginDateStr)) {
-            Date planBeginDate = DateUtils.parseDate(planBeginDateStr, "yyyy-MM-dd");
-            item.setPlanBeginDate(planBeginDate);
+        String planbegindatestr = item.getPlanbegindatestr();
+        if (StringUtils.isNotEmpty(planbegindatestr)) {
+            Date planBeginDate = DateUtils.parseDate(planbegindatestr, "yyyy-MM-dd");
+            item.setPlanbegindate(planBeginDate);
         }
-        String planEndDateStr = item.getPlanEndDateStr();
-        if (StringUtils.isNotEmpty(planEndDateStr)) {
-            Date planEndDate = DateUtils.parseDate(planEndDateStr, "yyyy-MM-dd");
-            item.setPlanEndDate(planEndDate);
+        String planenddatestr = item.getPlanenddatestr();
+        if (StringUtils.isNotEmpty(planenddatestr)) {
+            Date planEndDate = DateUtils.parseDate(planenddatestr, "yyyy-MM-dd");
+            item.setPlanenddate(planEndDate);
         }
-        item.setkGQty(item.gettQty()*1000);
-        item.setkGPrice(item.gettPrice()*1000);
+        item.setKgqty(item.getTqty() * 1000);
+        item.setKgprice(item.getTprice() * 1000);
 
         if (item.getPlandetailid() == null) {
             //新增

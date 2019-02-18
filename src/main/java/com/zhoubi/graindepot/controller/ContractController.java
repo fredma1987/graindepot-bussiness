@@ -28,13 +28,13 @@ public class ContractController extends BaseController {
     private ContractBiz contractBiz;
 
     @GetMapping("/list/page")
-    public PagerModel contractPageList(int start, int length, String contractName) {
+    public PagerModel contractPageList(int start, int length, String contractname) {
         PagerModel<Contract> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-        if (StringUtils.isNotEmpty(contractName)) {
-            e.putWhere("contractName", "%"+contractName+"%");
+        if (StringUtils.isNotEmpty(contractname)) {
+            e.putWhere("contractname", "%"+contractname+"%");
         }
         PagerModel<Contract> result = contractBiz.selectListByPage(e);
         return result;
@@ -43,29 +43,29 @@ public class ContractController extends BaseController {
     @PostMapping("/edit")
     public JsonResult contractEdit(Contract item) throws ParseException {
         BaseUser user=getCurrentUser();
-        Double tqty=item.gettQty();
+        Double tqty=item.getTqty();
         if (tqty!=null) {
-            item.setkGQty(tqty * 1000);
+            item.setKgqty(tqty * 1000);
         }
-        Double tprice=item.gettPrice();
+        Double tprice=item.getTprice();
         if (tprice!=null) {
-            item.settPrice(tprice * 1000);
+            item.setTprice(tprice * 1000);
         }
-        String signDateStr=item.getSignDateStr();
-        if (StringUtils.isNotEmpty(signDateStr)) {
-            item.setSignDate(DateUtils.parseDate(signDateStr, "yyyy-MM-dd"));
+        String signdatestr=item.getSigndatestr();
+        if (StringUtils.isNotEmpty(signdatestr)) {
+            item.setSigndate(DateUtils.parseDate(signdatestr, "yyyy-MM-dd"));
         }
-        String execDateStr=item.getExecDateStr();
-        if (StringUtils.isNotEmpty(execDateStr)) {
-            item.setExecDate(DateUtils.parseDate(execDateStr, "yyyy-MM-dd"));
+        String execdatestr=item.getExecdatestr();
+        if (StringUtils.isNotEmpty(execdatestr)) {
+            item.setExecdate(DateUtils.parseDate(execdatestr, "yyyy-MM-dd"));
         }
-        String honourBeginDateStr=item.getHonourBeginDateStr();
-        if (StringUtils.isNotEmpty(honourBeginDateStr)) {
-            item.setHonourBeginDate(DateUtils.parseDate(honourBeginDateStr, "yyyy-MM-dd"));
+        String honourbegindatestr=item.getHonourbegindatestr();
+        if (StringUtils.isNotEmpty(honourbegindatestr)) {
+            item.setHonourbegindate(DateUtils.parseDate(honourbegindatestr, "yyyy-MM-dd"));
         }
-        String honourEndDateStr=item.getHonourEndDateStr();
-        if (StringUtils.isNotEmpty(honourEndDateStr)) {
-            item.setHonourEndDate(DateUtils.parseDate(honourEndDateStr, "yyyy-MM-dd"));
+        String honourenddatestr=item.getHonourenddatestr();
+        if (StringUtils.isNotEmpty(honourenddatestr)) {
+            item.setHonourenddate(DateUtils.parseDate(honourenddatestr, "yyyy-MM-dd"));
         }
 
         if (item.getContractid() == null) {

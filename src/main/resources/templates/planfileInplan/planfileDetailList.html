@@ -12,15 +12,15 @@
             <div class="col-sm-2">
                 <div class="input-group">
                     <span class="input-group-addon">计划文号:</span>
-                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planNo">
+                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planno">
                 </div>
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-sm btn-success" onclick="javascript:searchTable()">
+                <button class="btn btn-sm btn-success" onclick="searchTable()">
                     <i class="icon-search align-top bigger-125"></i>
                     查询
                 </button>
-                <button class="btn btn-sm btn-warning" onclick="javascript:rest()">
+                <button class="btn btn-sm btn-warning" onclick="rest()">
                     <i class="icon-undo align-top bigger-125"></i>
                     重置
                 </button>
@@ -68,8 +68,8 @@
 
 
 <script type="text/javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var theTable;
     function selectOnchang(o) {
         //获取全部打钩的check的值
@@ -92,15 +92,15 @@
                 type: "GET"
             },
             columns: [
-                {data: "planTypeStr"},
-                {data: "planNo"},
+                {data: "plantypestr"},
+                {data: "planno"},
                 {data: "grainname"},
                 {data: "grainattrname"},
-                {data: "kGQty"},
-                {data: "oSPlanTQty"},
-                {data: "iSPlanTQty"},
-                {data: "planBeginDateStr"},
-                {data: "planEndDateStr"},
+                {data: "kgqty"},
+                {data: "osplantqty"},
+                {data: "isplantqty"},
+                {data: "planbegindatestr"},
+                {data: "planenddatestr"},
                 {
                     data: "plandetailid",
                     render: function (data, type, row) {
@@ -129,7 +129,7 @@
     }
     function getParam() {
         var param = {};
-        param.planNo = $("#planNo").val();
+        param.planno = $("#planno").val();
         return param
     }
 

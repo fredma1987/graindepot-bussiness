@@ -12,13 +12,13 @@
 <body style="overflow-x: hidden">
 <form class="form-horizontal" role="form" id="validation-form" method="get">
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planNo">
+        <label class="col-sm-4 control-label no-padding-right" for="planno">
             计划文号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="planNo" id="planNo" class="form-control"
-                   th:value="${id!=null?item.planNo:pfd.planNo}" readonly
+            <input type="text" name="planno" id="planno" class="form-control"
+                   th:value="${id!=null?item.planno:pfd.planno}" readonly
                    placeholder="计划文号"/>
         </div>
         <div class="col-sm-4">
@@ -75,8 +75,8 @@
         </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="producingYear" id="producingYear"
-                   th:value="${item.producingYear}"
+            <input size="16" type="text" name="producingYear" id="producingyear"
+                   th:value="${item.producingyear}"
                    readonly class="form_year form-control">
         </div>
     </div>
@@ -92,24 +92,24 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="tQty">
+        <label class="col-sm-4 control-label no-padding-right" for="tqty">
             吨数量:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="tQty" id="tQty" class="form-control"
-                   th:value="${item.tQty}"
+            <input type="text" name="tqty" id="tqty" class="form-control"
+                   th:value="${item.tqty}"
                    placeholder="吨数量"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="tPrice">
+        <label class="col-sm-4 control-label no-padding-right" for="tprice">
             吨单价:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="tPrice" id="tPrice" class="form-control"
-                   th:value="${item.tPrice}"
+            <input type="text" name="tprice" id="tprice" class="form-control"
+                   th:value="${item.tprice}"
                    placeholder="吨单价"/>
         </div>
     </div>
@@ -125,23 +125,23 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planBeginDateStr">
+        <label class="col-sm-4 control-label no-padding-right" for="planbegindatestr">
             计划开始日期:
         </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planBeginDateStr" id="planBeginDateStr"
-                   th:value="${item.planBeginDateStr}"
+            <input size="16" type="text" name="planbegindatestr" id="planbegindatestr"
+                   th:value="${item.planbegindatestr}"
                    readonly class="form_date form-control"></div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="planEndDateStr">
+        <label class="col-sm-4 control-label no-padding-right" for="planenddatestr">
             计划结束日期:
         </label>
 
         <div class="col-sm-4">
-            <input size="16" type="text" name="planEndDateStr" id="planEndDateStr"
-                   th:value="${item.planEndDateStr}"
+            <input size="16" type="text" name="planenddatestr" id="planenddatestr"
+                   th:value="${item.planenddatestr}"
                    readonly class="form_date form-control"></div>
     </div>
 
@@ -165,12 +165,12 @@
 </body>
 </html>
 <script th:inline="javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var g_id = [[${id}]];
     var g_item = [[${item}]];
     var g_pfd = [[${pfd}]];//计划详情信息
-    var g_plandetailid=g_id?g_item.plandetailid:g_pfd.plandetailid
+    var g_plandetailid=g_id?g_item.plandetailid:g_pfd.plandetailid;
     $(function () {
         //初始化时间框
         $(".form_year").bootstrapYear();

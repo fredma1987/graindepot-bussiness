@@ -26,13 +26,13 @@ public class TraderController extends BaseController {
     private TraderBiz traderBiz;
 
     @GetMapping("/list/page")
-    public PagerModel traderPageList(int start, int length, String traderName) {
+    public PagerModel traderPageList(int start, int length, String tradername) {
         PagerModel<Trader> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-        if (StringUtils.isNotEmpty(traderName)) {
-            e.putWhere("traderName", "%"+traderName+"%");
+        if (StringUtils.isNotEmpty(tradername)) {
+            e.putWhere("tradername", "%"+tradername+"%");
         }
         PagerModel<Trader> result = traderBiz.selectListByPage(e);
         return result;
@@ -41,7 +41,7 @@ public class TraderController extends BaseController {
     @PostMapping("/edit")
     public JsonResult contracttypeEdit(Trader item) throws ParseException {
 
-        if (item.getTraderID() == null) {
+        if (item.getTraderid() == null) {
             //新增
             item.setCreatetime(new Date());
             traderBiz.insert(item);
@@ -65,10 +65,10 @@ public class TraderController extends BaseController {
     }
 
     @PostMapping("/checkRepeat")
-    public String checkRepeat(String traderName, Integer traderID) {
+    public String checkRepeat(String tradername, Integer traderid) {
         Map map = new HashMap();
-        map.put("traderName", traderName);
-        map.put("traderID", traderID);
+        map.put("tradername", tradername);
+        map.put("traderid", traderid);
         int result = traderBiz.checkRepeat(map);
         if (result == 0) {
             return "{\"valid\":true}";

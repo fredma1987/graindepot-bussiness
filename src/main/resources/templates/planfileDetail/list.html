@@ -36,15 +36,15 @@
             <div class="col-sm-2">
                 <div class="input-group">
                     <span class="input-group-addon">计划文号:</span>
-                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planNo">
+                    <input id="planno" name="planno" type="text" class="form-control" placeholder="planno">
                 </div>
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-sm btn-success" onclick="javascript:searchTable()">
+                <button class="btn btn-sm btn-success" onclick="searchTable()">
                     <i class="icon-search align-top bigger-125"></i>
                     查询
                 </button>
-                <button class="btn btn-sm btn-warning" onclick="javascript:rest()">
+                <button class="btn btn-sm btn-warning" onclick="rest()">
                     <i class="icon-undo align-top bigger-125"></i>
                     重置
                 </button>
@@ -95,8 +95,8 @@
 
 
 <script type="text/javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var theTable;
     function selectOnchang(o) {
         //获取全部打钩的check的值
@@ -119,15 +119,15 @@
                 type: "GET"
             },
             columns: [
-                {data: "planTypeStr"},
-                {data: "planNo"},
+                {data: "plantypestr"},
+                {data: "planno"},
                 {data: "grainname"},
                 {data: "grainattrname"},
-                {data: "kGQty"},
-                {data: "oSPlanTQty"},
-                {data: "iSPlanTQty"},
-                {data: "planBeginDateStr"},
-                {data: "planEndDateStr"},
+                {data: "kgqty"},
+                {data: "osplantqty"},
+                {data: "isplantqty"},
+                {data: "planbegindatestr"},
+                {data: "planenddatestr"},
                 /*{
                     title: "文件上传",
                     data: "fileNameList",
@@ -167,7 +167,7 @@
     }
     function getParam() {
         var param = {};
-        param.planNo = $("#planNo").val();
+        param.planno = $("#planno").val();
         return param
     }
 
@@ -183,10 +183,10 @@
 
 
     function doDel() {
-        console.log($('#myTable').bootstrapTable("getChecked"))
+        console.log($('#myTable').bootstrapTable("getChecked"));
         var checkedList = $('#myTable').bootstrapTable("getChecked");
         if (checkedList.length == 0) {
-            $.bootstrapBox.alert.init({message: "请选择需要删除的行"})
+            $.bootstrapBox.alert.init({message: "请选择需要删除的行"});
             return
         }
         $.bootstrapBox.confirm.init({
@@ -194,7 +194,7 @@
             callback: function (result) {
                 if (result) {
                     //删除用户
-                    debugger
+                    debugger;
                     var ids = checkedList.map(function (curr) {
                         return curr.plandetailid
                     });
