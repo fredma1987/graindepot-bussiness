@@ -13,7 +13,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableEurekaClient
 @EnableFeignClients
 @MapperScan(value = "com.zhoubi.graindepot.mapper")
-@EnableRedisHttpSession(redisFlushMode = RedisFlushMode.IMMEDIATE)
+@EnableRedisHttpSession(redisFlushMode = RedisFlushMode.IMMEDIATE,maxInactiveIntervalInSeconds=4*60*60)
 public class GraindepotBussinessApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
