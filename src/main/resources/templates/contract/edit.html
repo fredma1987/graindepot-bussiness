@@ -384,8 +384,8 @@
 </body>
 </html>
 <script th:inline="javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var g_id = [[${id}]];
     var g_item = [[${item}]];
     var param={};
@@ -420,7 +420,8 @@
             type: 'GET',
             valueField: 'conttypeid',
             textField: 'conttypename',
-            param:param
+            param:param,
+            defaultValue:g_item.conttypeid
         });
 
     }

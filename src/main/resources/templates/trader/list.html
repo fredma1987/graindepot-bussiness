@@ -21,25 +21,15 @@
         </ul>
     </div>
     <div style="margin-top: 4px;margin-bottom: 4px">
-        <div class="col-sm-3">
-            <button class="btn btn-sm btn-primary" onclick="toAdd()">
-                <i class="icon-plus align-top bigger-125"></i>
-                添加往来单位
-            </button>
-            <button class="btn btn-sm btn-danger" onclick="doDel()">
-                <i class="icon-trash align-top bigger-125"></i>
-                删除往来单位
-            </button>
-        </div>
         <div class="col-sm-9">
 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon">往来单位名称:</span>
-                    <input id="tradername" type="text" class="form-control" placeholder="往来单位名称">
+                    <input id="tradername" name="tradername" type="text" class="form-control">
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
                 <button class="btn btn-sm btn-success" onclick="searchTable()">
                     <i class="icon-search align-top bigger-125"></i>
                     查询
@@ -54,7 +44,19 @@
 
 
     </div>
+    <div style="margin-top: 4px;margin-bottom: 4px">
+        <div class="col-sm-4">
+            <button class="btn btn-sm btn-primary" onclick="toAdd()">
+                <i class="icon-plus align-top bigger-125"></i>
+                添加往来单位
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="doDel()">
+                <i class="icon-trash align-top bigger-125"></i>
+                删除往来单位
+            </button>
+        </div>
 
+    </div>
 
     <div class="table-responsive" style="width:100%">
 
@@ -144,7 +146,7 @@
     }
     function getParam() {
         var param = {};
-        param.traderName = $("#tradername").bootstrapSelect("getValue");
+        param.tradername = $("#tradername").bootstrapSelect("getValue");
         return param
     }
 

@@ -13,36 +13,36 @@
 <form class="form-horizontal" role="form" id="validation-form" method="get">
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="contTypeCode">
+        <label class="col-sm-4 control-label no-padding-right" for="conttypecode">
             合同类型编号:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="contTypeCode" id="contTypeCode" class="form-control"
-                   th:value="${item.contTypeCode}"
+            <input type="text" name="conttypecode" id="conttypecode" class="form-control"
+                   th:value="${item.conttypecode}"
                    placeholder="合同类型编号"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="contTypeName">
+        <label class="col-sm-4 control-label no-padding-right" for="conttypename">
             <span class="red">*</span>合同类型名称:
         </label>
 
         <div class="col-sm-4">
-            <input type="text" name="contTypeName" id="contTypeName" class="form-control"
-                   data-bv-notempty th:value="${item.contTypeName}"
+            <input type="text" name="conttypename" id="conttypename" class="form-control"
+                   data-bv-notempty th:value="${item.conttypename}"
                    placeholder="合同类型名称"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label no-padding-right" for="buySellFlag">
+        <label class="col-sm-4 control-label no-padding-right" for="buysellflag">
             <span class="red">*</span>购销标志: </label>
 
         <div class="col-sm-4">
-            <select id="buySellFlag" name="buySellFlag" class="form-control"
-                    data-bv-notempty th:value="${item.buySellFlag}">
+            <select id="buysellflag" name="buysellflag" class="form-control"
+                    data-bv-notempty th:value="${item.buysellflag}">
             </select>
         </div>
     </div>
@@ -67,8 +67,8 @@
 </body>
 </html>
 <script th:inline="javascript">
-    //var urlPrefix="/graindepot-bussiness";
-    var urlPrefix = "";
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
     var g_id = [[${id}]];
     var g_item = [[${item}]];
     $(function () {
@@ -82,11 +82,11 @@
 
     function initBuySellFlag() {
         var data = [{value: 1, text: "采购"}, {value: -1, text: "销售"}];
-        $("#buySellFlag").bootstrapSelect({
+        $("#buysellflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.buySellFlag
+            defaultValue: g_item.buysellflag
         });
     }
 
@@ -106,8 +106,8 @@
                             type: 'POST',//请求方式
                             data: function (validator) {
                                 return {
-                                    contTypeName: $("#contTypeName").val(),
-                                    contTypeID: g_id
+                                    conttypename: $("#conttypename").val(),
+                                    conttypeid: g_id
                                 };
                             }
                         }
@@ -119,7 +119,7 @@
             e.preventDefault();
             var param = turnArrayToJson($('form').serializeArray());
             if (g_id) {
-                param.contTypeID = g_id
+                param.conttypeid = g_id
             }
             $.post(urlPrefix + "/contracttype/edit", param, function (result) {
                 parent.toSave(result)
