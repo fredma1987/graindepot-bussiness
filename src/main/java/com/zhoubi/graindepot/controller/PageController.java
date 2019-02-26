@@ -21,8 +21,6 @@ public class PageController extends BaseController {
     @Autowired
     private PlanfileDetailBiz planfileDetailBiz;
     @Autowired
-    private ContracttypeBiz contracttypeBiz;
-    @Autowired
     private TraderBiz traderBiz;
     @Autowired
     private ContractBiz contractBiz;
@@ -30,10 +28,6 @@ public class PageController extends BaseController {
     private PlanfileInplanBiz planfileInplanBiz;
     @Autowired
     private PlanfileOutplanBiz planfileOutplanBiz;
-    @Autowired
-    private GrainattrBiz grainattrBiz;
-    @Autowired
-    private GrainBiz grainBiz;
 
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
@@ -105,31 +99,6 @@ public class PageController extends BaseController {
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "planfileDetail/detail";
-        return path;
-    }
-
-    //----------------------------------合同类型---------------------------------------------
-    //合同类型主页
-    @GetMapping("/contracttype")
-    public String toContracttype(Model model) {
-        String title = "合同类型";
-        model.addAttribute("title", title);
-        String path = "contracttype/list";
-        return path;
-    }
-
-    //合同类型编辑
-    @GetMapping("/contracttype/edit")
-    public String to_contracttype_edit(Model model, Integer id) {
-        String title = "合同类型编辑";
-        model.addAttribute("title", title);
-        model.addAttribute("id", id);
-        Contracttype item = new Contracttype();
-        if (id != null) {
-            item = contracttypeBiz.selectById(id);
-        }
-        model.addAttribute("item", item);
-        String path = "contracttype/edit";
         return path;
     }
 
@@ -305,56 +274,5 @@ public class PageController extends BaseController {
         String path = "planfileOutplan/planfileDetailList";
         return path;
     }
-    //----------------------------------粮食性质---------------------------------------------
-    //粮食性质主页
-    @GetMapping("/grainattr")
-    public String to_grainattr(Model model) {
-        String title = "粮食性质";
-        model.addAttribute("title", title);
-        String path = "grainattr/list";
-        return path;
-    }
-
-    //粮食性质编辑
-    @GetMapping("/grainattr/edit")
-    public String to_grainattr_edit(Model model, Integer id) {
-        String title = "粮食性质编辑";
-        model.addAttribute("title", title);
-        model.addAttribute("id", id);
-        Grainattr item = new Grainattr();
-        if (id != null) {
-            item = grainattrBiz.selectById(id);
-        }
-        model.addAttribute("item", item);
-        String path = "grainattr/edit";
-        return path;
-    }
-
-
-    //----------------------------------粮食品种---------------------------------------------
-    //粮食品种主页
-    @GetMapping("/grain")
-    public String to_grain(Model model) {
-        String title = "粮食品种";
-        model.addAttribute("title", title);
-        String path = "grain/list";
-        return path;
-    }
-
-    //粮食品种编辑
-    @GetMapping("/grain/edit")
-    public String to_grain_edit(Model model, Integer id) {
-        String title = "粮食品种编辑";
-        model.addAttribute("title", title);
-        model.addAttribute("id", id);
-        Grain item = new Grain();
-        if (id != null) {
-            item = grainBiz.selectById(id);
-        }
-        model.addAttribute("item", item);
-        String path = "grain/edit";
-        return path;
-    }
-    
 
 }
