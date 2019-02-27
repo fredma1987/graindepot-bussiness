@@ -21,11 +21,21 @@
         </ul>
     </div>
     <div style="margin-top: 4px;margin-bottom: 4px">
-        <div class="col-sm-9">
-            <div class="col-sm-3">
+        <div class="col-sm-3">
+            <button class="btn btn-sm btn-primary" onclick="toAdd()">
+                <i class="icon-plus align-top bigger-125"></i>
+                添加入库计划
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="doDel()">
+                <i class="icon-trash align-top bigger-125"></i>
+                删除入库计划
+            </button>
+        </div>
+        <div class="col-sm-8">
+            <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon">计划文号:</span>
-                    <input id="planNo" name="planNo" type="text" class="form-control" placeholder="planno">
+                    <input id="planNo" name="planNo" type="text" class="form-control">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -39,18 +49,6 @@
                 </button>
             </div>
 
-        </div>
-    </div>
-    <div style="margin-top: 4px;margin-bottom: 4px">
-        <div class="col-sm-4">
-            <button class="btn btn-sm btn-primary" onclick="toAdd()">
-                <i class="icon-plus align-top bigger-125"></i>
-                添加入库计划
-            </button>
-            <button class="btn btn-sm btn-danger" onclick="doDel()">
-                <i class="icon-trash align-top bigger-125"></i>
-                删除入库计划
-            </button>
         </div>
     </div>
 
