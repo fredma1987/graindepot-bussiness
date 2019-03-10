@@ -28,6 +28,8 @@ public class PageController extends BaseController {
     private PlanfileInplanBiz planfileInplanBiz;
     @Autowired
     private PlanfileOutplanBiz planfileOutplanBiz;
+    @Autowired
+    private GqinspectBiz gqinspectBiz;
 
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
@@ -272,6 +274,42 @@ public class PageController extends BaseController {
         String title = "出库计划";
         model.addAttribute("title", title);
         String path = "planfileOutplan/planfileDetailList";
+        return path;
+    }
+
+    //----------------------------------质量检测---------------------------------------------
+    //质量检测主页
+    @GetMapping("/gqinspect")
+    public String to_gqinspect(Model model) {
+        String title = "质量检测";
+        model.addAttribute("title", title);
+        String path = "gqinspect/list";
+        return path;
+    }
+
+    //质量检测编辑
+    @GetMapping("/gqinspect/edit")
+    public String to_gqinspect_edit(Model model, Integer id) {
+        String title = "质量检测";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Gqinspect item = new Gqinspect();
+        if (id != null) {
+            item = gqinspectBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "gqinspect/edit";
+        return path;
+    }
+
+    //合同列表详情页
+    @GetMapping("/gqinspect/detail/{id}")
+    public String to_gqinspect_detail(Model model, @PathVariable int id) {
+        String title = "质量检测详情";
+        Gqinspect item = gqinspectBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "gqinspect/detail";
         return path;
     }
 

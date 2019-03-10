@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="storageid">
+                <span class="red">*</span>仓房:
+            </label>
+            <div class="col-sm-6">
+                <select id="storageid" name="storageid" class="form-control"
+                        data-bv-notempty th:value="${item.storageid}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="storpos">
+                检测仓房方位:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="storpos" id="storpos" class="form-control"
+                       th:value="${item.storpos}"
+                       placeholder="检测仓房方位"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="grainid">
+                <span class="red">*</span>粮食品种:
+            </label>
+            <div class="col-sm-6">
+                <select id="grainid" name="grainid" class="form-control"
+                        data-bv-notempty th:value="${item.grainid}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="grainattrid">
+                粮食性质:
+            </label>
+            <div class="col-sm-6">
+                <select id="grainattrid" name="grainattrid" class="form-control"
+                        th:value="${item.grainattrid}">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="grade">
+                粮食等级:
+            </label>
+            <div class="col-sm-6">
+                <select id="grade" name="grade" class="form-control"
+                        th:value="${item.grade}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="producingyear">
+                收获年度:
+            </label>
+            <div class="col-sm-6">
+                <input size="16" type="text" name="producingyear" id="producingyear"
+                       th:value="${item.producingyear}"
+                       readonly class="form_year form-control">
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="instoreyear">
+                入库年度:
+            </label>
+            <div class="col-sm-6">
+                <input size="16" type="text" name="instoreyear" id="instoreyear"
+                       th:value="${item.instoreyear}"
+                       readonly class="form_year form-control">
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="reportstate">
+                报告状态:
+            </label>
+            <div class="col-sm-6">
+                <input size="16" type="text" name="reportstate" id="reportstate"
+                       th:value="${item.reportstate}" placeholder="报告状态"
+                       class="form-control">
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="reportdatestr">
+                报告日期:
+            </label>
+            <div class="col-sm-6">
+                <input size="16" type="text" name="reportdatestr" id="reportdatestr"
+                       th:value="${item.reportdatestr}"
+                       readonly class="form_date form-control"></div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="reportcode">
+                报告编号:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="reportcode" id="reportcode" class="form-control"
+                       th:value="${item.reportcode}"
+                       placeholder="报告编号"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="insptype">
+                检验类别:
+            </label>
+            <div class="col-sm-6">
+                <select id="insptype" name="insptype" class="form-control"
+                        th:value="${item.insptype}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="inspattr">
+                检验性质:
+            </label>
+            <div class="col-sm-6">
+                <select id="inspattr" name="inspattr" class="form-control"
+                        th:value="${item.inspattr}">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="sampingname">
+                扦样人姓名:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="sampingname" id="sampingname" class="form-control"
+                       th:value="${item.sampingname}"
+                       placeholder="扦样人姓名"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="samplingdatestr">
+                扦样日期:
+            </label>
+            <div class="col-sm-6">
+                <input size="16" type="text" name="samplingdatestr" id="samplingdatestr"
+                       th:value="${item.samplingdatestr}"
+                       readonly class="form_date form-control"></div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="samplingpos">
+                扦样地点:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="samplingpos" id="samplingpos" class="form-control"
+                       th:value="${item.samplingpos}"
+                       placeholder="扦样地点"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="inspectunit">
+                检验单位:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="inspectunit" id="inspectunit" class="form-control"
+                       th:value="${item.inspectunit}"
+                       placeholder="检验单位"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="inspectname">
+                检验员姓名:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="inspectname" id="inspectname" class="form-control"
+                       th:value="${item.inspectname}"
+                       placeholder="检验员姓名"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="inspectdatestr">
+                检验日期:
+            </label>
+            <div class="col-sm-6">
+                <input size="16" type="text" name="inspectdatestr" id="inspectdatestr"
+                       th:value="${item.inspectdatestr}"
+                       readonly class="form_date form-control"></div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="inspectstandard">
+                检验依据:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="inspectstandard" id="inspectstandard" class="form-control"
+                       th:value="${item.inspectstandard}"
+                       placeholder="检验依据"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="inspconclusion">
+                检验结论:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="inspconclusion" id="inspconclusion" class="form-control"
+                       th:value="${item.inspconclusion}"
+                       placeholder="检验结论"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="zhpdhgflag">
+                是否综合判断合格:
+            </label>
+            <div class="col-sm-6">
+                <select id="zhpdhgflag" name="zhpdhgflag" class="form-control"
+                        th:value="${item.zhpdhgflag}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="qxmhgflag">
+                是否全项目合格:
+            </label>
+            <div class="col-sm-6">
+                <select id="qxmhgflag" name="qxmhgflag" class="form-control"
+                        th:value="${item.qxmhgflag}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="dxmyzcbflag">
+                是否单项严重超标:
+            </label>
+            <div class="col-sm-6">
+                <select id="dxmyzcbflag" name="dxmyzcbflag" class="form-control"
+                        th:value="${item.dxmyzcbflag}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="wszbhgflag">
+                是否卫生指标合格:
+            </label>
+            <div class="col-sm-6">
+                <select id="wszbhgflag" name="wszbhgflag" class="form-control"
+                        th:value="${item.wszbhgflag}">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="pzhgflag">
+                是否品质合格:
+            </label>
+            <div class="col-sm-6">
+                <select id="pzhgflag" name="pzhgflag" class="form-control"
+                        th:value="${item.pzhgflag}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="djhgflag">
+                是否等级合格:
+            </label>
+            <div class="col-sm-6">
+                <select id="djhgflag" name="djhgflag" class="form-control"
+                        th:value="${item.djhgflag}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="managerunit">
+                主管单位:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="managerunit" id="managerunit" class="form-control"
+                       th:value="${item.managerunit}"
+                       placeholder="主管单位"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="stacktype">
+                堆放形式:
+            </label>
+            <div class="col-sm-6">
+                <select id="stacktype" name="stacktype" class="form-control"
+                        th:value="${item.stacktype}">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="representqty">
+                代表数量:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="representqty" id="representqty" class="form-control"
+                       th:value="${item.representqty}"
+                       placeholder="代表数量"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="col-sm-6 control-label no-padding-right" for="remark">
+                备注:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="remark" id="remark" class="form-control"
+                       th:value="${item.remark}"
+                       placeholder="备注"/>
+            </div>
+        </div>
+    </div>
+    <div id="inspect">
+        请选择粮食品种生成检验标准
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12 center">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    保存
+                </button>
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="button" onclick="toBack()">
+                    <i class="icon-arrow-left bigger-110"></i>
+                    返回
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix = "/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var param = {};
+    $(function () {
+        //初始化时间框
+        $(".form_date").bootstrapDate();
+        $(".form_year").bootstrapYear();
+        //初始化form验证
+        initForm();
+        //仓房
+        initStorage();
+        //粮食品种
+        initGrain();
+        //粮食性质
+        comm_initGrainattr();
+        //粮食等级
+        comm_initGrade();
+        //检验类别
+        initInsptype();
+        //检验性质
+        initInspattr();
+        //合格标志
+        initHgFlag();
+        //堆放形式
+        initStacktype();
+        //设置升扣规则默认值
+        setInspect();
+
+    });
+
+    function initStorage() {
+        $("#storageid").bootstrapSelect({
+            url: '/graindepot-base/selector/storageList',
+            type: 'GET',
+            valueField: 'storageid',
+            textField: 'storagename',
+            defaultValue: g_item.storageid,
+            onSelect: function (storageid, row) {
+                if (storageid) {
+                    $("#grainid").bootstrapSelect("setValue", row.defgrainid)
+                }
+            }
+        })
+    }
+
+    function initGrain() {
+        $("#grainid").bootstrapSelect({
+            url: '/graindepot-base/selector/grainList',
+            type: 'GET',
+            valueField: 'grainid',
+            textField: 'grainname',
+            defaultValue: g_item.grainid,
+            onSelect: function (grainid) {
+                if (grainid) {
+                    autoInspect(grainid)
+                }
+            }
+        });
+    }
+
+    function initInsptype() {
+        var data = [{value: 1, text: "入库检验(满仓鉴定)"}
+            , {value: 2, text: "出库检验"}, {value: 3, text: "品质检验"}
+            , {value: 4, text: "日常检验"}];
+        $("#insptype").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.insptype
+        });
+    }
+
+    function initInspattr() {
+        var data = [{value: 1, text: "自检"}, {value: 2, text: "监督检验(局检)"}];
+        $("#inspattr").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.inspattr
+        });
+    }
+
+    function initStacktype() {
+        var data = [{value: 0, text: "散装"}, {value: 1, text: "包装"}];
+        $("#stacktype").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.stacktype
+        });
+    }
+
+    function initHgFlag() {
+        var data = [{value: -1, text: "暂不判断"}, {value: 0, text: "不合格"}
+            , {value: 1, text: "合格"}];
+        $("#zhpdhgflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.zhpdhgflag
+        });
+        $("#qxmhgflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.qxmhgflag
+        });
+        $("#dxmyzcbflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.dxmyzcbflag
+        });
+        $("#wszbhgflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.wszbhgflag
+        });
+        $("#pzhgflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.pzhgflag
+        });
+        $("#djhgflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.djhgflag
+        });
+
+    }
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.gqinspectid = g_id
+            }
+            $.post(urlPrefix + "/gqinspect/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+    //根据粮食品种动态生成质检标准
+    function autoInspect(grainid) {
+        var result = dataJson("GET", "/graindepot-inout/inspect/grainInspectItem/byGrainid", {grainid: grainid});
+        var formGroup = ' <div class="row">';
+        var label = '<div class="form-group col-sm-3"> ' +
+            '<label class="col-sm-6 control-label no-padding-right" for="';
+        var o = '">';
+        var _label = "</label>";
+        var divStyle = '<div class="col-sm-6">';
+        var _div = "</div></div>";
+        var r = ":";
+        var inspectHtml = "";
+        if (result.data.length > 0) {
+            //配置粮质信息
+            result.data.forEach(function (curr, index) {
+                var inspectitem = curr.inspectitem;
+                if (index % 4 == 0) {
+                    inspectHtml += formGroup;
+                }
+                inspectHtml += label;
+                inspectHtml += inspectitem.itemfield + o + inspectitem.itemname + r + _label;
+                inspectHtml += divStyle;
+                inspectHtml += '<input type="text" id="' + inspectitem.itemfield + '" name="'
+                    + inspectitem.itemfield + '" class="form-control" placeholder="" ';
+                inspectHtml += 'onChange="setInspectDeduByInspectItem(' + curr.keyid + ')"';
+                inspectHtml += '/>' + _div;
+                if (index % 3 == 0 && index > 0) {
+                    inspectHtml += _div;
+                }
+            });
+        } else {
+            inspectHtml = "暂未配置该品种的质检标准"
+        }
+        $("#inspect").html(inspectHtml);
+    }
+
+    function setInspect() {
+        $("#inspect").find("input").each(function (index, curr) {
+            $(this).val(g_item[$(this).attr("name")])
+        });
+    }
+
+</script>
