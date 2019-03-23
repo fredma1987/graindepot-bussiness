@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Equiptype;import com.zhoubi.graindepot.base.BaseMapper;public interface EquiptypeMapper extends BaseMapper<Equiptype> {}

@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Individual;import com.zhoubi.graindepot.base.BaseMapper;public interface IndividualMapper extends BaseMapper<Individual> {}

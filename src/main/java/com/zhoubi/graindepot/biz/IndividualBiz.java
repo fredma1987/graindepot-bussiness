@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.Individual;import com.zhoubi.graindepot.mapper.IndividualMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class IndividualBiz extends BaseService<Individual>  {	@Autowired	private IndividualMapper IndividualMapper;	@Override
+	protected BaseMapper<Individual> getMapper() {		return IndividualMapper;	}}

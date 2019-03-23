@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.Equip;import com.zhoubi.graindepot.mapper.EquipMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class EquipBiz extends BaseService<Equip>  {	@Autowired	private EquipMapper EquipMapper;	@Override
+	protected BaseMapper<Equip> getMapper() {		return EquipMapper;	}}

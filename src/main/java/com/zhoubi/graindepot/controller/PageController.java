@@ -30,6 +30,18 @@ public class PageController extends BaseController {
     private PlanfileOutplanBiz planfileOutplanBiz;
     @Autowired
     private GqinspectBiz gqinspectBiz;
+    @Autowired
+    private ReserveScaleBiz reserveScaleBiz;
+    @Autowired
+    private IndividualBiz individualBiz;
+    @Autowired
+    private SampleBiz sampleBiz;
+    @Autowired
+    private InstorelossBiz instorelossBiz;
+    @Autowired
+    private EquiptypeBiz equiptypeBiz;
+    @Autowired
+    private EquipBiz equipBiz;
 
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
@@ -310,6 +322,225 @@ public class PageController extends BaseController {
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "gqinspect/detail";
+        return path;
+    }
+
+    //----------------------------------储备规模---------------------------------------------
+    //储备规模主页
+    @GetMapping("/reserveScale")
+    public String to_reserveScale(Model model) {
+        String title = "储备规模";
+        model.addAttribute("title", title);
+        String path = "reserveScale/list";
+        return path;
+    }
+
+    //储备规模编辑
+    @GetMapping("/reserveScale/edit")
+    public String to_reserveScale_edit(Model model, Integer id) {
+        String title = "质量检测";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        ReserveScale item = new ReserveScale();
+        if (id != null) {
+            item = reserveScaleBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "reserveScale/edit";
+        return path;
+    }
+
+    //储备规模详情页
+    @GetMapping("/reserveScale/detail/{id}")
+    public String to_reserveScale_detail(Model model, @PathVariable int id) {
+        String title = "储备规模详情";
+        ReserveScale item = reserveScaleBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "reserveScale/detail";
+        return path;
+    }
+
+
+
+    //----------------------------------涉粮人员---------------------------------------------
+    //涉粮人员主页
+    @GetMapping("/individual")
+    public String to_individual(Model model) {
+        String title = "涉粮人员";
+        model.addAttribute("title", title);
+        String path = "individual/list";
+        return path;
+    }
+
+    //涉粮人员编辑
+    @GetMapping("/individual/edit")
+    public String to_individual_edit(Model model, Integer id) {
+        String title = "涉粮人员";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Individual item = new Individual();
+        if (id != null) {
+            item = individualBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "individual/edit";
+        return path;
+    }
+
+    //涉粮人员详情页
+    @GetMapping("/individual/detail/{id}")
+    public String to_individual_detail(Model model, @PathVariable int id) {
+        String title = "涉粮人员详情";
+        Individual item = individualBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "individual/detail";
+        return path;
+    }
+
+    //----------------------------------样品管理---------------------------------------------
+    //样品管理主页
+    @GetMapping("/sample")
+    public String to_sample(Model model) {
+        String title = "样品管理";
+        model.addAttribute("title", title);
+        String path = "sample/list";
+        return path;
+    }
+
+    //样品管理编辑
+    @GetMapping("/sample/edit")
+    public String to_sample_edit(Model model, Integer id) {
+        String title = "样品管理";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Sample item = new Sample();
+        if (id != null) {
+            item = sampleBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "sample/edit";
+        return path;
+    }
+
+    //样品管理详情页
+    @GetMapping("/sample/detail/{id}")
+    public String to_sample_detail(Model model, @PathVariable int id) {
+        String title = "样品管理详情";
+        Sample item = sampleBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "sample/detail";
+        return path;
+    }
+
+    //----------------------------------入库整理耗---------------------------------------------
+    //入库整理耗主页
+    @GetMapping("/instoreloss")
+    public String to_instoreloss(Model model) {
+        String title = "入库整理耗";
+        model.addAttribute("title", title);
+        String path = "instoreloss/list";
+        return path;
+    }
+
+    //入库整理耗编辑
+    @GetMapping("/instoreloss/edit")
+    public String to_instoreloss_edit(Model model, Integer id) {
+        String title = "入库整理耗";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Instoreloss item = new Instoreloss();
+        if (id != null) {
+            item = instorelossBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "instoreloss/edit";
+        return path;
+    }
+
+    //入库整理耗详情页
+    @GetMapping("/instoreloss/detail/{id}")
+    public String to_instoreloss_detail(Model model, @PathVariable int id) {
+        String title = "入库整理耗详情";
+        Instoreloss item = instorelossBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "instoreloss/detail";
+        return path;
+    }
+
+    //----------------------------------设备类型---------------------------------------------
+    //设备类型主页
+    @GetMapping("/equiptype")
+    public String to_equiptype(Model model) {
+        String title = "设备类型";
+        model.addAttribute("title", title);
+        String path = "equiptype/list";
+        return path;
+    }
+
+    //设备类型编辑
+    @GetMapping("/equiptype/edit")
+    public String to_equiptype_edit(Model model, Integer id) {
+        String title = "设备类型";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Equiptype item = new Equiptype();
+        if (id != null) {
+            item = equiptypeBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "equiptype/edit";
+        return path;
+    }
+
+    //设备类型详情页
+    @GetMapping("/equiptype/detail/{id}")
+    public String to_equiptype_detail(Model model, @PathVariable int id) {
+        String title = "设备类型详情";
+        Equiptype item = equiptypeBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "equiptype/detail";
+        return path;
+    }
+
+
+    //----------------------------------设备---------------------------------------------
+    //设备主页
+    @GetMapping("/equip")
+    public String to_equip(Model model) {
+        String title = "设备";
+        model.addAttribute("title", title);
+        String path = "equip/list";
+        return path;
+    }
+
+    //设备编辑
+    @GetMapping("/equip/edit")
+    public String to_equip_edit(Model model, Integer id) {
+        String title = "设备";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Equip item = new Equip();
+        if (id != null) {
+            item = equipBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "equip/edit";
+        return path;
+    }
+
+    //设备详情页
+    @GetMapping("/equip/detail/{id}")
+    public String to_equip_detail(Model model, @PathVariable int id) {
+        String title = "设备详情";
+        Equip item = equipBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "equip/detail";
         return path;
     }
 

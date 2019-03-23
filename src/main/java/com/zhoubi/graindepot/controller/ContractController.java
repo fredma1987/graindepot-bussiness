@@ -4,6 +4,7 @@ import com.zhoubi.graindepot.base.JsonResult;
 import com.zhoubi.graindepot.base.PagerModel;
 import com.zhoubi.graindepot.bean.BaseUser;
 import com.zhoubi.graindepot.bean.Contract;
+import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.ContractBiz;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -29,6 +30,7 @@ public class ContractController extends BaseController {
 
     @GetMapping("/list/page")
     public PagerModel contractPageList(int start, int length, String contractname) {
+        UserAddress ua=getUserAddress();
         PagerModel<Contract> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
@@ -36,6 +38,7 @@ public class ContractController extends BaseController {
         if (StringUtils.isNotEmpty(contractname)) {
             e.putWhere("contractname", "%"+contractname+"%");
         }
+        e.putWhere("graindepotid",ua.getGraindepotid());
         PagerModel<Contract> result = contractBiz.selectListByPage(e);
         return result;
     }
@@ -43,6 +46,7 @@ public class ContractController extends BaseController {
     @PostMapping("/edit")
     public JsonResult contractEdit(Contract item) throws ParseException {
         BaseUser user=getCurrentUser();
+        UserAddress ua=getUserAddress();
         Double tqty=item.getTqty();
         if (tqty!=null) {
             item.setKgqty(tqty * 1000);
@@ -73,6 +77,9 @@ public class ContractController extends BaseController {
             if (user!=null) {
                 item.setCreateuserid(user.getUserid());
             }
+            item.setGroupid(ua.getGroupid());
+            item.setCompanyid(ua.getCompanyid());
+            item.setGraindepotid(ua.getGraindepotid());
             item.setCreatetime(new Date());
             contractBiz.insert(item);
             return new JsonResult("添加成功", true);

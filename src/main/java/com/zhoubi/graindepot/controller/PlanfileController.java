@@ -4,6 +4,7 @@ import com.zhoubi.graindepot.base.JsonResult;
 import com.zhoubi.graindepot.base.PagerModel;
 import com.zhoubi.graindepot.bean.BaseUser;
 import com.zhoubi.graindepot.bean.Planfile;
+import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.PlanfileBiz;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -32,6 +33,7 @@ public class PlanfileController extends BaseController {
 
     @GetMapping("/list/page")
     public PagerModel planfilePageList(int start, int length, String planno) {
+        UserAddress ua=getUserAddress();
         PagerModel<Planfile> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
@@ -39,12 +41,14 @@ public class PlanfileController extends BaseController {
         if (StringUtils.isNotEmpty(planno)) {
             e.putWhere("planno", "%" + planno + "%");
         }
+        e.putWhere("graindepotid",ua.getGraindepotid());
         PagerModel<Planfile> result = planfileBiz.selectListByPage(e);
         return result;
     }
 
     @PostMapping("/edit")
     public JsonResult planfileEdit(Planfile item) throws ParseException {
+        UserAddress ua=getUserAddress();
         String dispatchdatestr = item.getDispatchdatestr();
         if (StringUtils.isNotEmpty(dispatchdatestr)) {
             Date dispatchdate = DateUtils.parseDate(dispatchdatestr, "yyyy-MM-dd");
@@ -61,8 +65,11 @@ public class PlanfileController extends BaseController {
             item.setPlanenddate(planEndDate);
         }
 
-        if (item.getPlanfileid() == 0) {
+        if (item.getPlanfileid() == null) {
             //新增
+            item.setGroupid(ua.getGroupid());
+            item.setGraindepotid(ua.getGraindepotid());
+            item.setCompanyid(ua.getCompanyid());
             item.setCreatetime(new Date());
             planfileBiz.insert(item);
             return new JsonResult("添加成功", true);
@@ -87,7 +94,9 @@ public class PlanfileController extends BaseController {
     //获取下拉框列表数据
     @GetMapping("/selectorList")
     public List<Planfile> selectorList() {
+        UserAddress ua=getUserAddress();
         Map param = new HashMap();
+        param.put("graindepotid",ua.getGraindepotid());
         List<Planfile> result = planfileBiz.selectorList(param);
         return result;
     }

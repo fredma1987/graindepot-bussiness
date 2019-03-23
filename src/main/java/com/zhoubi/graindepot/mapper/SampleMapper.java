@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Sample;import com.zhoubi.graindepot.base.BaseMapper;public interface SampleMapper extends BaseMapper<Sample> {}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">集团</td>
+                <td class="infoCheck-content" th:text="${item.groupname}"></td>
+                <td class="infoCheck-name">公司</td>
+                <td class="infoCheck-content" th:text="${item.companyname}"></td>
+                <td class="infoCheck-name">粮库</td>
+                <td class="infoCheck-content" th:text="${item.graindepotname}"></td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">涉粮个人编号</td>
+                <td class="infoCheck-content" th:text="${item.individualcode}">涉粮个人编号</td>
+                <td class="infoCheck-name">姓名</td>
+                <td class="infoCheck-content" th:text="${item.name}">姓名</td>
+                <td class="infoCheck-name">身份证号码</td>
+                <td class="infoCheck-content" th:text="${item.idcard}">身份证号码</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">性别</td>
+                <td class="infoCheck-content" th:text="${item.genderstr}">性别：1：男 2：女 3：未指定</td>
+                <td class="infoCheck-name">名族</td>
+                <td class="infoCheck-content" th:text="${item.nation}">名族</td>
+                <td class="infoCheck-name">出生日期</td>
+                <td class="infoCheck-content" th:text="${item.bornday}">出生日期</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">签发单位</td>
+                <td class="infoCheck-content" th:text="${item.certorg}">签发单位</td>
+                <!--<td class="infoCheck-name">身份证图片地址</td>
+                <td class="infoCheck-content" th:text="${item.icon}">身份证图片地址</td>-->
+                <!--<td class="infoCheck-name">开始期限</td>
+                <td class="infoCheck-content" th:text="${item.effdate}">开始期限</td>
+                <td class="infoCheck-name">结束期限</td>
+                <td class="infoCheck-content" th:text="${item.expdate}">结束期限</td>-->
+                <td class="infoCheck-name">联系地址</td>
+                <td class="infoCheck-content" th:text="${item.address}">联系地址</td>
+                <td class="infoCheck-name">联系电话</td>
+                <td class="infoCheck-content" th:text="${item.phone}">联系电话</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">运输类型</td>
+                <td class="infoCheck-content" th:text="${item.trucktype}">运输类型：1：车辆 2：船舶 3：火车 99：其他</td>
+                <td class="infoCheck-name">车船号</td>
+                <td class="infoCheck-content" th:text="${item.trucknum}">车船号</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>

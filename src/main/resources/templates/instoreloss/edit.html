@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="billcode">
+            单号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="billcode" id="billcode" class="form-control"
+                   th:value="${item.billcode}" readonly
+                   placeholder="单号"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="storageid">
+            <span class="red">*</span>仓房:
+        </label>
+        <div class="col-sm-4">
+            <select id="storageid" name="storageid" class="form-control"
+                    data-bv-notempty th:value="${item.storageid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="grainid">
+            <span class="red">*</span>粮食品种:
+        </label>
+        <div class="col-sm-4">
+            <select id="grainid" name="grainid" class="form-control"
+                    data-bv-notempty th:value="${item.grainid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="grainattrid">
+            粮食性质:
+        </label>
+        <div class="col-sm-4">
+            <select id="grainattrid" name="grainattrid" class="form-control"
+                    th:value="${item.grainattrid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="producingyear">
+            收获年度:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="producingyear" id="producingyear"
+                   class="form_year form-control"
+                   th:value="${item.producingyear}"
+                   placeholder="收获年度"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="instordatestr">
+            入仓日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="instordatestr" id="instordatestr"
+                   th:value="${item.instordatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="btrimqty">
+            整理前数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="btrimqty" id="btrimqty" class="form-control"
+                   th:value="${item.btrimqty}"
+                   placeholder="整理前数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="btwaterrate">
+            整理前水分率:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="btwaterrate" id="btwaterrate" class="form-control"
+                   th:value="${item.btwaterrate}"
+                   placeholder="整理前水分率"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="atwaterrate">
+            整理后水分率:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="atwaterrate" id="atwaterrate" class="form-control"
+                   th:value="${item.atwaterrate}"
+                   placeholder="整理后水分率"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="waterlossqty">
+            水份减量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="waterlossqty" id="waterlossqty" class="form-control"
+                   th:value="${item.waterlossqty}"
+                   placeholder="水份减量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="btimpurate">
+            整理前杂质率:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="btimpurate" id="btimpurate" class="form-control"
+                   th:value="${item.btimpurate}"
+                   placeholder="整理前杂质率"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="atimpurate">
+            整理后杂质率:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="atimpurate" id="atimpurate" class="form-control"
+                   th:value="${item.atimpurate}"
+                   placeholder="整理后杂质率"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="impulossqty">
+            杂质减量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="impulossqty" id="impulossqty" class="form-control"
+                   th:value="${item.impulossqty}"
+                   placeholder="杂质减量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="lossqty">
+            损耗数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="lossqty" id="lossqty" class="form-control"
+                   th:value="${item.lossqty}"
+                   placeholder="损耗数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="atrimqty">
+            整理后数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="atrimqty" id="atrimqty" class="form-control"
+                   th:value="${item.atrimqty}"
+                   placeholder="整理后数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="remark">
+            备注:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="remark" id="remark" class="form-control"
+                   th:value="${item.remark}"
+                   placeholder="备注"/>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-6 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var param={};
+    $(function () {
+        //初始化时间框
+        $(".form_date").bootstrapDate();
+        //初始化form验证
+        initForm();
+        //初始化下拉框
+        initStorage();
+        initGrain();
+        initGrainattr();
+    });
+
+    function initStorage() {
+        $("#storageid").bootstrapSelect({
+            url: '/graindepot-base/selector/storageList',
+            type: 'GET',
+            valueField: 'storageid',
+            textField: 'storagename',
+            defaultValue: g_item.storageid
+        })
+    }
+
+    function initGrain() {
+        $("#grainid").bootstrapSelect({
+            url: '/graindepot-base/selector/grainList',
+            type: 'GET',
+            valueField: 'grainid',
+            textField: 'grainname',
+            defaultValue: g_item.grainid
+        });
+    }
+    function initGrainattr() {
+        $("#grainattrid").bootstrapSelect({
+            url: '/graindepot-base/selector/grainattrList',
+            type: 'GET',
+            valueField: 'grainattrid',
+            textField: 'grainattrname',
+            defaultValue: g_item.grainattrid
+        });
+    }
+
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.billid = g_id
+            }
+            $.post(urlPrefix + "/instoreloss/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+
+</script>

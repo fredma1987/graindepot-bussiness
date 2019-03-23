@@ -4,6 +4,7 @@ import com.zhoubi.graindepot.base.JsonResult;
 import com.zhoubi.graindepot.base.PagerModel;
 import com.zhoubi.graindepot.bean.BaseUser;
 import com.zhoubi.graindepot.bean.PlanfileOutplan;
+import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.PlanfileOutplanBiz;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -29,6 +30,7 @@ public class PlanfileOutplanController extends BaseController {
 
     @GetMapping("/list/page")
     public PagerModel planfileOutplanPageList(int start, int length, String planno) {
+        UserAddress ua=getUserAddress();
         PagerModel<PlanfileOutplan> e = new PagerModel();
         e.addOrder("t.createtime desc");
         e.setStart(start);
@@ -36,6 +38,7 @@ public class PlanfileOutplanController extends BaseController {
         if (StringUtils.isNotEmpty(planno)) {
             e.putWhere("planno", "%" + planno + "%");
         }
+        e.putWhere("graindepotid",ua.getGraindepotid());
         PagerModel<PlanfileOutplan> result = planfileOutplanBiz.selectListByPage(e);
         return result;
     }
@@ -43,6 +46,7 @@ public class PlanfileOutplanController extends BaseController {
     @PostMapping("/edit")
     public JsonResult planfileOutplanEdit(PlanfileOutplan item) throws ParseException {
         BaseUser user = getCurrentUser();
+        UserAddress ua=getUserAddress();
         Double tqty = item.getTqty();
         if (tqty != null) {
             item.setKgqty(tqty * 1000);
@@ -64,6 +68,9 @@ public class PlanfileOutplanController extends BaseController {
             if (user != null) {
                 item.setCreateuserid(user.getUserid());
             }
+            item.setGroupid(ua.getGroupid());
+            item.setGraindepotid(ua.getGraindepotid());
+            item.setCompanyid(ua.getCompanyid());
             item.setCreatetime(new Date());
             planfileOutplanBiz.insert(item);
             return new JsonResult("添加成功", true);

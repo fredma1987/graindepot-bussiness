@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="sampcode">
+            样品编号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="sampcode" id="sampcode" class="form-control"
+                   th:value="${item.sampcode}"
+                   placeholder="样品编号"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="storageid">
+            <span class="red">*</span>仓房:
+        </label>
+        <div class="col-sm-4">
+            <select id="storageid" name="storageid" class="form-control"
+                    data-bv-notempty th:value="${item.storageid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="grainid">
+            <span class="red">*</span>粮食品种:
+        </label>
+        <div class="col-sm-4">
+            <select id="grainid" name="grainid" class="form-control"
+                    data-bv-notempty th:value="${item.grainid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="grainattrid">
+            粮食性质:
+        </label>
+        <div class="col-sm-4">
+            <select id="grainattrid" name="grainattrid" class="form-control"
+                    th:value="${item.grainattrid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="producingyear">
+            收获年度:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="producingyear" id="producingyear"
+                   th:value="${item.producingyear}"
+                   readonly class="form_year form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="sampdatestr">
+            扦样日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="sampdatestr" id="sampdatestr"
+                   th:value="${item.sampdatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="sampname">
+            扦样人:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="sampname" id="sampname" class="form-control"
+                   th:value="${item.sampname}"
+                   placeholder="扦样人"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="sampqty">
+            样品数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="sampqty" id="sampqty" class="form-control"
+                   th:value="${item.sampqty}"
+                   placeholder="样品数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="standardqty">
+            代表数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="standardqty" id="standardqty" class="form-control"
+                   th:value="${item.standardqty}"
+                   placeholder="代表数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="sampfrom">
+            样品来源单位:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="sampfrom" id="sampfrom" class="form-control"
+                   th:value="${item.sampfrom}"
+                   placeholder="样品来源单位"/>
+        </div>
+    </div>
+    <!--<div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="iccardnum">
+            IC卡内码:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="iccardnum" id="iccardnum" class="form-control"
+                   th:value="${item.iccardnum}"
+                   placeholder="IC卡内码"/>
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="validdatestr">
+            有效期限:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="validdatestr" id="validdatestr"
+                   th:value="${item.validdatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="baoguanuse">
+            样品保管员:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="baoguanuse" id="baoguanuse" class="form-control"
+                   th:value="${item.baoguanuse}"
+                   placeholder="样品保管员"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="baoguanpos">
+            样品保管位置:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="baoguanpos" id="baoguanpos" class="form-control"
+                   th:value="${item.baoguanpos}"
+                   placeholder="样品保管位置"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="clearflag">
+            清理标志:
+        </label>
+        <div class="col-sm-4">
+            <select id="clearflag" name="clearflag" class="form-control"
+                    th:value="${item.clearflag}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="cleardatestr">
+            清理日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="cleardatestr" id="cleardatestr"
+                   th:value="${item.cleardatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="clearuser">
+            清理操作员:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="clearuser" id="clearuser" class="form-control"
+                   th:value="${item.clearuser}"
+                   placeholder="清理操作员"/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-6 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix = "/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var param = {};
+    $(function () {
+        //初始化时间框
+        $(".form_date").bootstrapDate();
+        $(".form_year").bootstrapYear();
+        //初始化form验证
+        initForm();
+        //初始化下拉框
+        inClearflag();
+        comm_initStorage();
+        comm_initGrain();
+        comm_initGrainattr();
+    });
+
+
+    function inClearflag() {
+        var data = [{value: 1, text: "清理"}, {value: 0, text: "未清理"}];
+        $("#clearflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.completed
+        });
+    }
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.sampid = g_id
+            }
+            $.post(urlPrefix + "/sample/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+
+</script>

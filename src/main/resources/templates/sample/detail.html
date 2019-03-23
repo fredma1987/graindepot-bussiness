@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">样品编号</td>
+                <td class="infoCheck-content" th:text="${item.sampcode}">样品编号</td>
+                <td class="infoCheck-name">集团</td>
+                <td class="infoCheck-content" th:text="${item.groupname}">集团</td>
+                <td class="infoCheck-name">企业</td>
+                <td class="infoCheck-content" th:text="${item.companyname}">企业</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">粮库</td>
+                <td class="infoCheck-content" th:text="${item.graindepotname}">粮库</td>
+                <td class="infoCheck-name">仓房</td>
+                <td class="infoCheck-content" th:text="${item.storagename}">仓房</td>
+                <td class="infoCheck-name">粮食品种</td>
+                <td class="infoCheck-content" th:text="${item.grainname}">粮食品种</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">粮食性质</td>
+                <td class="infoCheck-content" th:text="${item.grainattrname}">粮食性质</td>
+                <td class="infoCheck-name">收获年度</td>
+                <td class="infoCheck-content" th:text="${item.producingyear}">收获年度</td>
+                <td class="infoCheck-name">扦样日期</td>
+                <td class="infoCheck-content" th:text="${item.sampdatestr}">扦样日期</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">扦样人</td>
+                <td class="infoCheck-content" th:text="${item.sampname}">扦样人</td>
+                <td class="infoCheck-name">样品数量</td>
+                <td class="infoCheck-content" th:text="${item.sampqty}">样品数量</td>
+                <td class="infoCheck-name">代表数量</td>
+                <td class="infoCheck-content" th:text="${item.standardqty}">代表数量</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">样品来源单位</td>
+                <td class="infoCheck-content" th:text="${item.sampfrom}">样品来源单位</td>
+                <!--<td class="infoCheck-name">IC卡内码</td>
+                <td class="infoCheck-content" th:text="${item.iccardnum}">IC卡内码</td>-->
+                <td class="infoCheck-name">有效期限</td>
+                <td class="infoCheck-content" th:text="${item.validdatestr}">有效期限</td>
+                <td class="infoCheck-name">清理标志</td>
+                <td class="infoCheck-content" th:text="${item.clearflagstr}">清理标志（1：清理）</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">样品保管员</td>
+                <td class="infoCheck-content" th:text="${item.baoguanuse}">样品保管员</td>
+                <td class="infoCheck-name">样品保管位置</td>
+                <td class="infoCheck-content" th:text="${item.baoguanpos}">样品保管位置</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">清理日期</td>
+                <td class="infoCheck-content" th:text="${item.cleardatestr}">清理日期</td>
+                <td class="infoCheck-name">清理操作员</td>
+                <td class="infoCheck-content" th:text="${item.clearuser}">清理操作员</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>

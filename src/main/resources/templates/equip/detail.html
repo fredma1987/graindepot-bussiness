@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">集团</td>
+                <td class="infoCheck-content" th:text="${item.groupname}">集团</td>
+                <td class="infoCheck-name">企业</td>
+                <td class="infoCheck-content" th:text="${item.companyname}">企业</td>
+                <td class="infoCheck-name">粮库</td>
+                <td class="infoCheck-content" th:text="${item.graindepotname}">粮库</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">仓房</td>
+                <td class="infoCheck-content" th:text="${item.storagename}">仓房</td>
+                <td class="infoCheck-name">设备类型</td>
+                <td class="infoCheck-content" th:text="${item.equiptypename}">设备类型</td>
+                <td class="infoCheck-name">设备编号</td>
+                <td class="infoCheck-content" th:text="${item.equipcode}">设备编号</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">设备名称</td>
+                <td class="infoCheck-content" th:text="${item.equipname}">设备名称</td>
+                <td class="infoCheck-name">设备规格</td>
+                <td class="infoCheck-content" th:text="${item.equipspec}">设备规格</td>
+                <td class="infoCheck-name">引进日期</td>
+                <td class="infoCheck-content" th:text="${item.indatestr}">引进日期</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">启用状态</td>
+                <td class="infoCheck-content" th:text="${item.usestatestr}">启用状态（1：启用 0：未启用）</td>
+                <td class="infoCheck-name">启用日期</td>
+                <td class="infoCheck-content" th:text="${item.usedatestr}">启用日期</td>
+                <td class="infoCheck-name">设备原值</td>
+                <td class="infoCheck-content" th:text="${item.orgivalue}">设备原值</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">计量单位</td>
+                <td class="infoCheck-content" th:text="${item.measunit}">计量单位</td>
+                <td class="infoCheck-name">电机数量</td>
+                <td class="infoCheck-content" th:text="${item.motorcount}">电机数量</td>
+                <td class="infoCheck-name">电机总功率</td>
+                <td class="infoCheck-content" th:text="${item.motorpower}">电机总功率</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">存放地点</td>
+                <td class="infoCheck-content" th:text="${item.location}">存放地点</td>
+                <td class="infoCheck-name">设备制造厂商</td>
+                <td class="infoCheck-content" th:text="${item.factory}">设备制造厂商</td>
+                <td class="infoCheck-name">设备制造厂商地址</td>
+                <td class="infoCheck-content" th:text="${item.facaddr}">设备制造厂商地址</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">设备制造厂商邮编</td>
+                <td class="infoCheck-content" th:text="${item.faczip}">设备制造厂商邮编</td>
+                <td class="infoCheck-name">设备制造厂商联系电话</td>
+                <td class="infoCheck-content" th:text="${item.factel}">设备制造厂商联系电话</td>
+                <td class="infoCheck-name">设备制造厂商联系人</td>
+                <td class="infoCheck-content" th:text="${item.faclinkman}">设备制造厂商联系人</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">出厂编号</td>
+                <td class="infoCheck-content" th:text="${item.outfaccode}">出厂编号</td>
+                <td class="infoCheck-name">生产日期</td>
+                <td class="infoCheck-content" th:text="${item.producingdatestr}">生产日期</td>
+                <td class="infoCheck-name">出厂日期</td>
+                <td class="infoCheck-content" th:text="${item.outfacdatestr}">出厂日期</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">保修期限</td>
+                <td class="infoCheck-content" th:text="${item.expdatestr}">保修期限</td>
+                <td class="infoCheck-name">设备品牌</td>
+                <td class="infoCheck-content" th:text="${item.equipbrand}">设备品牌</td>
+                <td class="infoCheck-name">设备描述</td>
+                <td class="infoCheck-content" th:text="${item.description}">设备描述</td>
+            </tr>
+            <tr>
+                <!--<td class="infoCheck-name">设备图片</td>
+                <td class="infoCheck-content" th:text="${item.picpath}">设备图片</td>-->
+                <td class="infoCheck-name">报废状态（1：已报废 2：未报废）</td>
+                <td class="infoCheck-content" th:text="${item.gaveupstatestr}">报废状态（1：已报废 2：未报废）</td>
+                <td class="infoCheck-name">报废日期</td>
+                <td class="infoCheck-content" th:text="${item.gaveupdatestr}">报废日期</td>
+                <td class="infoCheck-name">备注</td>
+                <td class="infoCheck-content" th:text="${item.remark}">备注</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">排序号</td>
+                <td class="infoCheck-content" th:text="${item.sequno}">排序号</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>

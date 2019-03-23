@@ -4,6 +4,7 @@ import com.zhoubi.graindepot.base.JsonResult;
 import com.zhoubi.graindepot.base.PagerModel;
 import com.zhoubi.graindepot.bean.Planfile;
 import com.zhoubi.graindepot.bean.PlanfileDetail;
+import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.PlanfileDetailBiz;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -30,12 +31,14 @@ public class PlanfileDetailController extends BaseController {
     @GetMapping("/list/page")
     public PagerModel userPageList(int start, int length,String planno) {
         PagerModel<PlanfileDetail> e = new PagerModel();
+        UserAddress ua=getUserAddress();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
         if (StringUtils.isNotEmpty(planno)) {
             e.putWhere("planno","%"+planno+"%");
         }
+        e.putWhere("graindepotid",ua.getGraindepotid());
         PagerModel<PlanfileDetail> result = planfileDetailBiz.selectListByPage(e);
         return result;
     }

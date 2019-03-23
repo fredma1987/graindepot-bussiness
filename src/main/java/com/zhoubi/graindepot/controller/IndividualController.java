@@ -2,9 +2,10 @@ package com.zhoubi.graindepot.controller;
 
 import com.zhoubi.graindepot.base.JsonResult;
 import com.zhoubi.graindepot.base.PagerModel;
-import com.zhoubi.graindepot.bean.Trader;
+import com.zhoubi.graindepot.bean.BaseUser;
+import com.zhoubi.graindepot.bean.Individual;
 import com.zhoubi.graindepot.bean.UserAddress;
-import com.zhoubi.graindepot.biz.TraderBiz;
+import com.zhoubi.graindepot.biz.IndividualBiz;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,68 +22,69 @@ import java.util.Map;
  * Created by 1A12 on 2019/1/19/0019.
  */
 @RestController
-@RequestMapping("trader")
-public class TraderController extends BaseController {
+@RequestMapping("individual")
+public class IndividualController extends BaseController {
     @Autowired
-    private TraderBiz traderBiz;
+    private IndividualBiz individualBiz;
 
     @GetMapping("/list/page")
-    public PagerModel traderPageList(int start, int length, String tradername) {
+    public PagerModel individualPageList(int start, int length) {
         UserAddress ua=getUserAddress();
-        PagerModel<Trader> e = new PagerModel();
+        PagerModel<Individual> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-        if (StringUtils.isNotEmpty(tradername)) {
-            e.putWhere("tradername", "%"+tradername+"%");
-        }
         e.putWhere("graindepotid",ua.getGraindepotid());
-        PagerModel<Trader> result = traderBiz.selectListByPage(e);
+        PagerModel<Individual> result = individualBiz.selectListByPage(e);
         return result;
     }
 
     @PostMapping("/edit")
-    public JsonResult contracttypeEdit(Trader item) throws ParseException {
+    public JsonResult individualEdit(Individual item) throws ParseException {
+        BaseUser user=getCurrentUser();
         UserAddress ua=getUserAddress();
-        if (item.getTraderid() == null) {
+        if (item.getIndividualid() == null) {
             //新增
-            item.setCreatetime(new Date());
+            if (user!=null) {
+                item.setCreateuserid(user.getUserid());
+            }
             item.setGroupid(ua.getGroupid());
-            item.setGraindepotid(ua.getGraindepotid());
             item.setCompanyid(ua.getCompanyid());
-            traderBiz.insert(item);
+            item.setGraindepotid(ua.getGraindepotid());
+            item.setCreatetime(new Date());
+            individualBiz.insert(item);
             return new JsonResult("添加成功", true);
         } else {
             //修改
-            traderBiz.update(item);
+            individualBiz.update(item);
             return new JsonResult("修改成功", true);
         }
 
     }
 
     @PostMapping("/del")
-    public JsonResult contracttypeDel(String ids) {
+    public JsonResult individualDel(String ids) {
         if (StringUtils.isNotEmpty(ids)) {
             Map map = new HashMap();
             map.put("Where_IdsStr", ids);
-            traderBiz.deleteMap(map);
+            individualBiz.deleteMap(map);
         }
         return new JsonResult("删除成功", true);
     }
 
-    @PostMapping("/checkRepeat")
-    public String checkRepeat(String tradername, Integer traderid) {
+   /* @PostMapping("/checkRepeat")
+    public String checkRepeat(String individualName, Integer individualID) {
         Map map = new HashMap();
-        map.put("tradername", tradername);
-        map.put("traderid", traderid);
-        int result = traderBiz.checkRepeat(map);
+        map.put("individualName", individualName);
+        map.put("individualID", individualID);
+        int result = individualBiz.checkRepeat(map);
         if (result == 0) {
             return "{\"valid\":true}";
         } else {
             return "{\"valid\":false}";
         }
 
-    }
+    }*/
 
 
 }

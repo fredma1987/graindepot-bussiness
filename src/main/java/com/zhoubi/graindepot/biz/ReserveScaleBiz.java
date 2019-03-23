@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.ReserveScale;import com.zhoubi.graindepot.mapper.ReserveScaleMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class ReserveScaleBiz extends BaseService<ReserveScale>  {	@Autowired	private ReserveScaleMapper ReserveScaleMapper;	@Override
+	protected BaseMapper<ReserveScale> getMapper() {		return ReserveScaleMapper;	}}

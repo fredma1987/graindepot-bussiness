@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="storageid">
+            <span class="red">*</span>仓房:
+        </label>
+        <div class="col-sm-4">
+            <select id="storageid" name="storageid" class="form-control"
+                    data-bv-notempty th:value="${item.storageid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="equiptypeid">
+            设备类型:
+        </label>
+        <div class="col-sm-4">
+            <select id="equiptypeid" name="equiptypeid" class="form-control"
+                    th:value="${item.equiptypeid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="equipcode">
+            设备编号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="equipcode" id="equipcode" class="form-control"
+                   th:value="${item.equipcode}"
+                   placeholder="设备编号"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="equipname">
+            设备名称:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="equipname" id="equipname" class="form-control"
+                   th:value="${item.equipname}"
+                   placeholder="设备名称"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="equipspec">
+            设备规格:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="equipspec" id="equipspec" class="form-control"
+                   th:value="${item.equipspec}"
+                   placeholder="设备规格"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="indatestr">
+            引进日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="indatestr" id="indatestr"
+                   th:value="${item.indatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="usestate">
+            启用状态:
+        </label>
+        <div class="col-sm-4">
+            <select id="usestate" name="usestate" class="form-control"
+                    th:value="${item.usestate}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="usedatestr">
+            启用日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="usedatestr" id="usedatestr"
+                   th:value="${item.usedatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="orgivalue">
+            设备原值:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="orgivalue" id="orgivalue" class="form-control"
+                   th:value="${item.orgivalue}"
+                   placeholder="设备原值"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="measunit">
+            计量单位:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="measunit" id="measunit" class="form-control"
+                   th:value="${item.measunit}"
+                   placeholder="计量单位"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="motorcount">
+            电机数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="motorcount" id="motorcount" class="form-control"
+                   th:value="${item.motorcount}"
+                   placeholder="电机数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="motorpower">
+            电机总功率:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="motorpower" id="motorpower" class="form-control"
+                   th:value="${item.motorpower}"
+                   placeholder="电机总功率"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="location">
+            存放地点:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="location" id="location" class="form-control"
+                   th:value="${item.location}"
+                   placeholder="存放地点"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="factory">
+            设备制造厂商:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="factory" id="factory" class="form-control"
+                   th:value="${item.factory}"
+                   placeholder="设备制造厂商"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="facaddr">
+            设备制造厂商地址:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="facaddr" id="facaddr" class="form-control"
+                   th:value="${item.facaddr}"
+                   placeholder="设备制造厂商地址"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="faczip">
+            设备制造厂商邮编:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="faczip" id="faczip" class="form-control"
+                   th:value="${item.faczip}"
+                   placeholder="设备制造厂商邮编"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="factel">
+            设备制造厂商联系电话:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="factel" id="factel" class="form-control"
+                   th:value="${item.factel}"
+                   placeholder="设备制造厂商联系电话"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="faclinkman">
+            设备制造厂商联系人:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="faclinkman" id="faclinkman" class="form-control"
+                   th:value="${item.faclinkman}"
+                   placeholder="设备制造厂商联系人"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="outfaccode">
+            出厂编号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="outfaccode" id="outfaccode" class="form-control"
+                   th:value="${item.outfaccode}"
+                   placeholder="出厂编号"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="producingdatestr">
+            生产日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="producingdatestr" id="producingdatestr"
+                   th:value="${item.producingdatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="outfacdatestr">
+            出厂日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="outfacdatestr" id="outfacdatestr"
+                   th:value="${item.outfacdatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="expdatestr">
+            保修期限:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="expdatestr" id="expdatestr"
+                   th:value="${item.expdatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="equipbrand">
+            设备品牌:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="equipbrand" id="equipbrand" class="form-control"
+                   th:value="${item.equipbrand}"
+                   placeholder="设备品牌"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="description">
+            设备描述:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="description" id="description" class="form-control"
+                   th:value="${item.description}"
+                   placeholder="设备描述"/>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+         <label class="col-sm-4 control-label no-padding-right" for="picpath">
+             设备图片:
+         </label>
+         <div class="col-sm-4">
+             <input type="text" name="picpath" id="picpath" class="form-control"
+                    th:value="${item.picpath}"
+                    placeholder="设备图片"/>
+         </div>
+     </div>-->
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="gaveupstate">
+            报废状态:
+        </label>
+        <div class="col-sm-4">
+            <select id="gaveupstate" name="gaveupstate" class="form-control"
+                    th:value="${item.gaveupstate}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="gaveupdatestr">
+            报废日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="gaveupdatestr" id="gaveupdatestr"
+                   th:value="${item.gaveupdatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="remark">
+            备注:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="remark" id="remark" class="form-control"
+                   th:value="${item.remark}"
+                   placeholder="备注"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="sequno">
+            排序号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="sequno" id="sequno" class="form-control"
+                   th:value="${item.sequno}"
+                   placeholder="排序号"/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-6 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix = "/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var param = {};
+    $(function () {
+        //初始化时间框
+        $(".form_date").bootstrapDate();
+        //初始化form验证
+        initForm();
+        initStorage();
+        initEquiptype();
+        initUsestate();
+        initGaveupstate();
+    });
+
+
+    function initStorage() {
+        $("#storageid").bootstrapSelect({
+            url: '/graindepot-base/selector/storageList',
+            type: 'GET',
+            valueField: 'storageid',
+            textField: 'storagename',
+            defaultValue: g_item.storageid
+        })
+    }
+
+    function initEquiptype() {
+        $("#equiptypeid").bootstrapSelect({
+            url: '/graindepot-base/selector/equiptypeList',
+            type: 'GET',
+            valueField: 'equiptypeid',
+            textField: 'equiptypename',
+            defaultValue: g_item.equipid
+        })
+    }
+
+    function initUsestate() {
+        var data = [{value: 1, text: "启动"}, {value: 0, text: "未启用"}];
+        $("#usestate").bootstrapSelect({
+            data: data,
+            type: 'GET',
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.usestate
+        })
+    }
+    function initGaveupstate() {
+        var data = [{value: 1, text: "已报废"}, {value: 2, text: "未报废"}];
+        $("#gaveupstate").bootstrapSelect({
+            data: data,
+            type: 'GET',
+            valueField: 'value',
+            textField: 'text',
+            defaultValue: g_item.gaveupstate
+        })
+    }
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.equipid = g_id
+            }
+            $.post(urlPrefix + "/equip/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+
+</script>

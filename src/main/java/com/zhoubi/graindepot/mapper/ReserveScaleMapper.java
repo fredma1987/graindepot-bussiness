@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.ReserveScale;import com.zhoubi.graindepot.base.BaseMapper;public interface ReserveScaleMapper extends BaseMapper<ReserveScale> {}
