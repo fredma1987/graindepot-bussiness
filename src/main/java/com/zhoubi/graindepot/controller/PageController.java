@@ -47,6 +47,9 @@ public class PageController extends BaseController {
     private DrugkindBiz drugkindBiz;
     @Autowired
     private DrugBiz drugBiz;
+    @Autowired
+    private  GoodstypeBiz goodstypeBiz;
+
 
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
@@ -623,4 +626,28 @@ public class PageController extends BaseController {
         return path;
     }
 
+    //----------------------------------物料类型---------------------------------------------
+    //物料类型列表
+    @GetMapping("/goodsType")
+    public String toGoodsType(Model model) {
+        String title = "物料类型";
+        model.addAttribute("title", title);
+        String path = "goodsType/list";
+        return path;
+    }
+
+    //物料类型编辑
+    @GetMapping("/goodsType/edit")
+    public String toGoodsType_edit(Model model, Integer id) {
+        String title = "物料类型编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Goodstype item = new Goodstype();
+        if (id != null) {
+            item = goodstypeBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "goodsType/edit";
+        return path;
+    }
 }
