@@ -1,5 +1,6 @@
 package com.zhoubi.graindepot.controller;
 
+import com.netflix.discovery.converters.Auto;
 import com.zhoubi.graindepot.bean.*;
 import com.zhoubi.graindepot.biz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,10 @@ public class PageController extends BaseController {
     private EquiptypeBiz equiptypeBiz;
     @Autowired
     private EquipBiz equipBiz;
+    @Autowired
+    private DrugkindBiz drugkindBiz;
+    @Autowired
+    private DrugBiz drugBiz;
 
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
@@ -541,6 +546,80 @@ public class PageController extends BaseController {
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "equip/detail";
+        return path;
+    }
+
+
+    //----------------------------------药剂种类---------------------------------------------
+    //药剂种类主页
+    @GetMapping("/drugkind")
+    public String to_drugkind(Model model) {
+        String title = "药剂种类";
+        model.addAttribute("title", title);
+        String path = "drugkind/list";
+        return path;
+    }
+
+    //药剂种类编辑
+    @GetMapping("/drugkind/edit")
+    public String to_drugkind_edit(Model model, Integer id) {
+        String title = "药剂种类";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Drugkind item = new Drugkind();
+        if (id != null) {
+            item = drugkindBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "drugkind/edit";
+        return path;
+    }
+
+    //药剂种类详情页
+    @GetMapping("/drugkind/detail/{id}")
+    public String to_drugkind_detail(Model model, @PathVariable int id) {
+        String title = "药剂种类详情";
+        Drugkind item = drugkindBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "drugkind/detail";
+        return path;
+    }
+
+
+    //----------------------------------药剂---------------------------------------------
+    //药剂主页
+    @GetMapping("/drug")
+    public String to_drug(Model model) {
+        String title = "药剂";
+        model.addAttribute("title", title);
+        String path = "drug/list";
+        return path;
+    }
+
+    //药剂编辑
+    @GetMapping("/drug/edit")
+    public String to_drug_edit(Model model, Integer id) {
+        String title = "药剂";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Drug item = new Drug();
+        if (id != null) {
+            item = drugBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "drug/edit";
+        return path;
+    }
+
+    //药剂详情页
+    @GetMapping("/drug/detail/{id}")
+    public String to_drug_detail(Model model, @PathVariable int id) {
+        String title = "药剂详情";
+        Drug item = drugBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "drug/detail";
         return path;
     }
 
