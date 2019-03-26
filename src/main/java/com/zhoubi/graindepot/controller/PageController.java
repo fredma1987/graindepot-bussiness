@@ -49,6 +49,8 @@ public class PageController extends BaseController {
     private DrugBiz drugBiz;
     @Autowired
     private  GoodstypeBiz goodstypeBiz;
+    @Autowired
+    private GoodsBiz goodsBiz;
 
 
     //----------------------------------计划信息---------------------------------------------
@@ -648,6 +650,42 @@ public class PageController extends BaseController {
         }
         model.addAttribute("item", item);
         String path = "goodsType/edit";
+        return path;
+    }
+
+    //----------------------------------物料---------------------------------------------
+    //物料列表
+    @GetMapping("/goods")
+    public String toGoods(Model model) {
+        String title = "物料";
+        model.addAttribute("title", title);
+        String path = "goods/list";
+        return path;
+    }
+
+    //物料编辑
+    @GetMapping("/goods/edit")
+    public String toGoods_edit(Model model, Integer id) {
+        String title = "物料编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Goods item = new Goods();
+        if (id != null) {
+            item = goodsBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "goods/edit";
+        return path;
+    }
+
+    //物料详情页
+    @GetMapping("/goods/detail/{id}")
+    public String toGoods_detail(Model model, @PathVariable int id) {
+        String title = "物料详情";
+        Goods item = goodsBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "goods/detail";
         return path;
     }
 }

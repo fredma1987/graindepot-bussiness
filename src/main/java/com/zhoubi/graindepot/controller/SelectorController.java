@@ -80,5 +80,16 @@ public class SelectorController extends BaseController {
 
     }
 
+    //物料类型下拉框
+    @GetMapping("goodstypeList")
+    public List<Goodstype> goodstypeList(HttpServletRequest request) {
+        UserAddress ua=getUserAddress();
+        Map param = new HashMap();
+        param.put("graindepotid",ua.getGraindepotid());
+        List<Goodstype> resultList = selectorBiz.goodstypeList(param);
+        return resultList;
+
+    }
+
 
 }

@@ -41,4 +41,8 @@ public class SelectorBiz {
     public List<Contracttype> contracttypeList(Map param){
         return mapper.contracttypeList(param);
     }
+
+    public List<Goodstype> goodstypeList(Map param){
+        return mapper.goodstypeList(param);
+    }
 }
