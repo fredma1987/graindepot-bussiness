@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.Drugkind;import com.zhoubi.graindepot.mapper.DrugkindMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class DrugkindBiz extends BaseService<Drugkind>  {	@Autowired	private DrugkindMapper DrugkindMapper;	@Override
+	protected BaseMapper<Drugkind> getMapper() {		return DrugkindMapper;	}}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">集团</td>
+                <td class="infoCheck-content" th:text="${item.groupname}">集团</td>
+                <td class="infoCheck-name">企业</td>
+                <td class="infoCheck-content" th:text="${item.companyname}">企业</td>
+                <td class="infoCheck-name">粮库</td>
+                <td class="infoCheck-content" th:text="${item.graindepotname}">粮库</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">药剂种类</td>
+                <td class="infoCheck-content" th:text="${item.drugkindname}">药剂种类</td>
+                <td class="infoCheck-name">药剂品牌</td>
+                <td class="infoCheck-content" th:text="${item.brand}">药剂品牌</td>
+                <td class="infoCheck-name">药剂规格</td>
+                <td class="infoCheck-content" th:text="${item.drugspec}">药剂规格</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">包装单位</td>
+                <td class="infoCheck-content" th:text="${item.packunit}">包装单位</td>
+                <td class="infoCheck-name">单包数量</td>
+                <td class="infoCheck-content" th:text="${item.unitqty}">单包数量</td>
+                <td class="infoCheck-name">条码</td>
+                <td class="infoCheck-content" th:text="${item.barcode}">条码</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">空瓶回收标志</td>
+                <td class="infoCheck-content" th:text="${item.recycleflagstr}">空瓶回收标志</td>
+               <!-- <td class="infoCheck-name">药剂照片</td>
+                <td class="infoCheck-content" th:text="${item.picpath}">药剂照片</td>-->
+                <td class="infoCheck-name">备注</td>
+                <td class="infoCheck-content" th:text="${item.remark}">备注</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>
