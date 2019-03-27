@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="drugid">
+            药剂资料:
+        </label>
+        <div class="col-sm-4">
+            <select id="drugid" name="drugid" class="form-control"
+                    th:value="${item.drugid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="inqty">
+            入库数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="inqty" id="inqty" class="form-control"
+                   th:value="${item.inqty}"
+                   placeholder="入库数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="price">
+            单价:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="price" id="price" class="form-control"
+                   th:value="${item.price}"
+                   placeholder="单价"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="amount">
+            金额:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="amount" id="amount" class="form-control"
+                   th:value="${item.amount}"
+                   placeholder="金额"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="unitqty">
+            单包数量:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="unitqty" id="unitqty" class="form-control"
+                   th:value="${item.unitqty}"
+                   placeholder="单包数量"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="inmeasqty">
+            入库计量数量（计）:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="inmeasqty" id="inmeasqty" class="form-control"
+                   th:value="${item.inmeasqty}"
+                   placeholder="入库计量数量（计）"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="prodfac">
+            生产厂家:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="prodfac" id="prodfac" class="form-control"
+                   th:value="${item.prodfac}"
+                   placeholder="生产厂家"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="proddatestr">
+            生产日期:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="proddatestr" id="proddatestr"
+                   th:value="${item.proddatestr}"
+                   readonly class="form_date form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="batchcode">
+            生产批号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="batchcode" id="batchcode" class="form-control"
+                   th:value="${item.batchcode}"
+                   placeholder="生产批号"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="remark">
+            摘要:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="remark" id="remark" class="form-control"
+                   th:value="${item.remark}"
+                   placeholder="摘要"/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-11 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var g_billid = [[${billid}]];
+    var param={};
+    $(function () {
+        //初始化时间框
+        $(".form_date").bootstrapDate();
+        $("#inqty").bootstrapNumber({precision:2});
+        $("#price").bootstrapNumber({precision:2});
+        $("#amount").bootstrapNumber({precision:2});
+        $("#unitqty").bootstrapNumber({precision:2});
+        $("#inmeasqty").bootstrapNumber({precision:2});
+
+        //初始化form验证
+        initForm();
+        initDrug();
+    });
+
+    function initDrug() {
+        $("#drugid").bootstrapSelect({
+            url: '/graindepot-base/selector/drugList',
+            type: 'GET',
+            valueField: 'drugid',
+            textField: 'brand'
+        })
+    }
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            param.billid=g_billid;
+            if (g_id) {
+                param.keyid = g_id
+            }
+            $.post(urlPrefix + "/druginstoreDetail/edit", param, function (result) {
+                parent.window.druginstoreDetail.toSave(result)
+            })
+        });
+    }
+
+
+</script>

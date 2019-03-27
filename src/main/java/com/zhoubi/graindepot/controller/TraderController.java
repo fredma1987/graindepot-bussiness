@@ -72,9 +72,11 @@ public class TraderController extends BaseController {
 
     @PostMapping("/checkRepeat")
     public String checkRepeat(String tradername, Integer traderid) {
+        UserAddress ua=getUserAddress();
         Map map = new HashMap();
         map.put("tradername", tradername);
         map.put("traderid", traderid);
+        map.put("graindepotid", ua.getGraindepotid());
         int result = traderBiz.checkRepeat(map);
         if (result == 0) {
             return "{\"valid\":true}";

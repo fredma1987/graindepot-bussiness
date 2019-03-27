@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="billcode">
+            单据号:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="billcode" id="billcode" class="form-control"
+                   th:value="${item.billcode}" readonly
+                   placeholder="单据号"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="storageid">
+            <span class="red">*</span>仓房:
+        </label>
+        <div class="col-sm-4">
+            <select id="storageid" name="storageid" class="form-control"
+                    data-bv-notempty th:value="${item.storageid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="grainid">
+            <span class="red">*</span>粮食品种:
+        </label>
+        <div class="col-sm-4">
+            <select id="grainid" name="grainid" class="form-control"
+                    data-bv-notempty th:value="${item.grainid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="producingyear">
+            收获年度:
+        </label>
+        <div class="col-sm-4">
+            <input size="16" type="text" name="producingyear" id="producingyear"
+                   th:value="${item.producingyear}"
+                   readonly class="form_year form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="oldgrainattrid">
+            原粮食性质:
+        </label>
+        <div class="col-sm-4">
+            <select id="oldgrainattrid" name="oldgrainattrid" class="form-control"
+                    th:value="${item.oldgrainattrid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="newgrainattrid">
+            现粮食性质:
+        </label>
+        <div class="col-sm-4">
+            <select id="newgrainattrid" name="newgrainattrid" class="form-control"
+                    th:value="${item.newgrainattrid}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="updateqty">
+            粮食性质变更数:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="updateqty" id="updateqty" class="form-control"
+                   th:value="${item.updateqty}"
+                   placeholder="粮食性质变更数"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix="/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var param={};
+    $(function () {
+        //初始化时间框
+        $(".form_year").bootstrapYear();
+        $("#updateqty").bootstrapNumber();
+        //初始化form验证
+        initForm();
+        initStorage();
+        initGrain();
+        initOldGrainattr();
+        initNewGrainattr();
+    });
+
+    function initStorage() {
+        $("#storageid").bootstrapSelect({
+            url: '/graindepot-base/selector/storageList',
+            type: 'GET',
+            valueField: 'storageid',
+            textField: 'storagename'
+        })
+    }
+
+    function initGrain() {
+        $("#grainid").bootstrapSelect({
+            url: '/graindepot-base/selector/grainList',
+            type: 'GET',
+            valueField: 'grainid',
+            textField: 'grainname'
+        });
+    }
+
+    function initOldGrainattr() {
+        $("#oldgrainattrid").bootstrapSelect({
+            url: '/graindepot-base/selector/grainattrList',
+            type: 'GET',
+            valueField: 'grainattrid',
+            textField: 'grainattrname'
+        });
+    }
+    function initNewGrainattr() {
+        $("#newgrainattrid").bootstrapSelect({
+            url: '/graindepot-base/selector/grainattrList',
+            type: 'GET',
+            valueField: 'grainattrid',
+            textField: 'grainattrname'
+        });
+    }
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.keyid = g_id
+            }
+            $.post(urlPrefix + "/grainattrUpdate/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+
+</script>

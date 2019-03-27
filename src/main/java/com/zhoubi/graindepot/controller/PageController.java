@@ -47,6 +47,18 @@ public class PageController extends BaseController {
     private DrugkindBiz drugkindBiz;
     @Autowired
     private DrugBiz drugBiz;
+    @Autowired
+    private GrainattrUpdateBiz grainattrUpdateBiz;
+    @Autowired
+    private OutstorelossBiz outstorelossBiz;
+    @Autowired
+    private DruginstoreBiz druginstoreBiz;
+    @Autowired
+    private DruginstoreDetailBiz druginstoreDetailBiz;
+    @Autowired
+    private DrugoutstoreBiz drugoutstoreBiz;
+    @Autowired
+    private DrugoutstoreDetailBiz drugoutstoreDetailBiz;
 
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
@@ -620,6 +632,232 @@ public class PageController extends BaseController {
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "drug/detail";
+        return path;
+    }
+
+
+
+    //----------------------------------定性管理---------------------------------------------
+    //定性管理主页
+    @GetMapping("/grainattrUpdate")
+    public String to_grainattrUpdate(Model model) {
+        String title = "定性管理";
+        model.addAttribute("title", title);
+        String path = "grainattrUpdate/list";
+        return path;
+    }
+
+    //定性管理编辑
+    @GetMapping("/grainattrUpdate/edit")
+    public String to_grainattrUpdate_edit(Model model, Integer id) {
+        String title = "定性管理";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        GrainattrUpdate item = new GrainattrUpdate();
+        if (id != null) {
+            item = grainattrUpdateBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "grainattrUpdate/edit";
+        return path;
+    }
+
+    //定性管理详情页
+    @GetMapping("/grainattrUpdate/detail/{id}")
+    public String to_grainattrUpdate_detail(Model model, @PathVariable int id) {
+        String title = "定性管理详情";
+        GrainattrUpdate item = grainattrUpdateBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "grainattrUpdate/detail";
+        return path;
+    }
+
+    //----------------------------------出库保管耗---------------------------------------------
+    //出库保管耗主页
+    @GetMapping("/outstoreloss")
+    public String to_outstoreloss(Model model) {
+        String title = "出库保管耗";
+        model.addAttribute("title", title);
+        String path = "outstoreloss/list";
+        return path;
+    }
+
+    //出库保管耗编辑
+    @GetMapping("/outstoreloss/edit")
+    public String to_outstoreloss_edit(Model model, Integer id) {
+        String title = "出库保管耗";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Outstoreloss item = new Outstoreloss();
+        if (id != null) {
+            item = outstorelossBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "outstoreloss/edit";
+        return path;
+    }
+
+    //出库保管耗详情页
+    @GetMapping("/outstoreloss/detail/{id}")
+    public String to_outstoreloss_detail(Model model, @PathVariable int id) {
+        String title = "出库保管耗详情";
+        Outstoreloss item = outstorelossBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "outstoreloss/detail";
+        return path;
+    }
+
+
+    //----------------------------------药剂验收入库---------------------------------------------
+    //药剂验收入库主页
+    @GetMapping("/druginstore")
+    public String to_druginstore(Model model) {
+        String title = "药剂验收入库";
+        model.addAttribute("title", title);
+        String path = "druginstore/list";
+        return path;
+    }
+
+    //药剂验收入库编辑
+    @GetMapping("/druginstore/edit")
+    public String to_druginstore_edit(Model model, Integer id) {
+        String title = "药剂验收入库";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Druginstore item = new Druginstore();
+        if (id != null) {
+            item = druginstoreBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "druginstore/edit";
+        return path;
+    }
+
+    //药剂验收入库详情页
+    @GetMapping("/druginstore/detail/{id}")
+    public String to_druginstore_detail(Model model, @PathVariable int id) {
+        String title = "药剂验收入库详情";
+        Druginstore item = druginstoreBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "druginstore/detail";
+        return path;
+    }
+
+
+    //----------------------------------药剂验收入库明细---------------------------------------------
+    //药剂验收入库明细主页
+    @GetMapping("/druginstoreDetail")
+    public String to_druginstoreDetail(Model model,Integer billid) {
+        String title = "药剂验收入库明细";
+        model.addAttribute("title", title);
+        model.addAttribute("billid", billid);
+        String path = "druginstore/druginstoreDetail/list";
+        return path;
+    }
+
+    //药剂验收入库明细编辑
+    @GetMapping("/druginstoreDetail/edit")
+    public String to_druginstoreDetail_edit(Model model, Integer id,Integer billid) {
+        String title = "修改药剂验收入库明细";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        model.addAttribute("billid", billid);
+        DruginstoreDetail item = new DruginstoreDetail();
+        if (id != null) {
+            item = druginstoreDetailBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "druginstore/druginstoreDetail/edit";
+        return path;
+    }
+
+    //药剂验收入库明细详情页
+    @GetMapping("/druginstoreDetail/detail/{id}")
+    public String to_druginstoreDetail_detail(Model model, @PathVariable int id) {
+        String title = "药剂验收入库明细详情";
+        DruginstoreDetail item = druginstoreDetailBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "druginstore/druginstoreDetail/detail";
+        return path;
+    }
+
+
+    //----------------------------------药剂验收出库---------------------------------------------
+    //药剂验收出库主页
+    @GetMapping("/drugoutstore")
+    public String to_drugoutstore(Model model) {
+        String title = "药剂验收出库";
+        model.addAttribute("title", title);
+        String path = "drugoutstore/list";
+        return path;
+    }
+
+    //药剂验收出库编辑
+    @GetMapping("/drugoutstore/edit")
+    public String to_drugoutstore_edit(Model model, Integer id) {
+        String title = "药剂验收出库";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Drugoutstore item = new Drugoutstore();
+        if (id != null) {
+            item = drugoutstoreBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "drugoutstore/edit";
+        return path;
+    }
+
+    //药剂验收出库详情页
+    @GetMapping("/drugoutstore/detail/{id}")
+    public String to_drugoutstore_detail(Model model, @PathVariable int id) {
+        String title = "药剂验收出库详情";
+        Drugoutstore item = drugoutstoreBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "drugoutstore/detail";
+        return path;
+    }
+
+
+    //----------------------------------药剂验收出库明细---------------------------------------------
+    //药剂验收出库明细主页
+    @GetMapping("/drugoutstoreDetail")
+    public String to_drugoutstoreDetail(Model model,Integer billid) {
+        String title = "药剂验收出库明细";
+        model.addAttribute("title", title);
+        model.addAttribute("billid", billid);
+        String path = "drugoutstore/drugoutstoreDetail/list";
+        return path;
+    }
+
+    //药剂验收出库明细编辑
+    @GetMapping("/drugoutstoreDetail/edit")
+    public String to_drugoutstoreDetail_edit(Model model, Integer id,Integer billid) {
+        String title = "修改药剂验收出库明细";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        model.addAttribute("billid", billid);
+        DrugoutstoreDetail item = new DrugoutstoreDetail();
+        if (id != null) {
+            item = drugoutstoreDetailBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "drugoutstore/drugoutstoreDetail/edit";
+        return path;
+    }
+
+    //药剂验收出库明细详情页
+    @GetMapping("/drugoutstoreDetail/detail/{id}")
+    public String to_drugoutstoreDetail_detail(Model model, @PathVariable int id) {
+        String title = "药剂验收出库明细详情";
+        DrugoutstoreDetail item = drugoutstoreDetailBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "drugoutstore/drugoutstoreDetail/detail";
         return path;
     }
 

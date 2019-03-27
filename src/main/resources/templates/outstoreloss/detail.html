@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">集团</td>
+                <td class="infoCheck-content" th:text="${item.groupname}">集团</td>
+                <td class="infoCheck-name">企业</td>
+                <td class="infoCheck-content" th:text="${item.companyname}">企业</td>
+                <td class="infoCheck-name">粮库</td>
+                <td class="infoCheck-content" th:text="${item.graindepotname}">粮库</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">仓房</td>
+                <td class="infoCheck-content" th:text="${item.storageidstr}">仓房</td>
+                <td class="infoCheck-name">单号</td>
+                <td class="infoCheck-content" th:text="${item.billcode}">单号</td>
+                <td class="infoCheck-name">单据日期</td>
+                <td class="infoCheck-content" th:text="${item.billdatestr}">单据日期</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">粮食品种</td>
+                <td class="infoCheck-content" th:text="${item.grainname}">粮食品种</td>
+                <td class="infoCheck-name">粮食性质</td>
+                <td class="infoCheck-content" th:text="${item.grainattrname}">粮食性质</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">收获年度</td>
+                <td class="infoCheck-content" th:text="${item.producingyear}">收获年度</td>
+                <td class="infoCheck-name">入仓日期</td>
+                <td class="infoCheck-content" th:text="${item.instordatestr}">入仓日期</td>
+                <td class="infoCheck-name">出仓日期</td>
+                <td class="infoCheck-content" th:text="${item.outstordatestr}">出仓日期</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">保管月数</td>
+                <td class="infoCheck-content" th:text="${item.keepmonth}">保管月数</td>
+                <td class="infoCheck-name">入库数量</td>
+                <td class="infoCheck-content" th:text="${item.isqty}">入库数量</td>
+                <td class="infoCheck-name">入库水分率</td>
+                <td class="infoCheck-content" th:text="${item.iswaterrate}">入库水分率</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">出库水分率</td>
+                <td class="infoCheck-content" th:text="${item.oswaterrate}">出库水分率</td>
+                <td class="infoCheck-name">水分减量</td>
+                <td class="infoCheck-content" th:text="${item.waterlossqty}">水分减量</td>
+                <td class="infoCheck-name">入库杂质率</td>
+                <td class="infoCheck-content" th:text="${item.isimpurate}">入库杂质率</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">出库杂质率</td>
+                <td class="infoCheck-content" th:text="${item.osimpurate}">出库杂质率</td>
+                <td class="infoCheck-name">杂质减量</td>
+                <td class="infoCheck-content" th:text="${item.impulossqty}">杂质减量</td>
+                <td class="infoCheck-name">出库数量</td>
+                <td class="infoCheck-content" th:text="${item.osqty}">出库数量</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">保管自然损耗量</td>
+                <td class="infoCheck-content" th:text="${item.keeplossqty}">保管自然损耗量</td>
+                <td class="infoCheck-name">保管自然损耗率</td>
+                <td class="infoCheck-content" th:text="${item.keeplossrate}">保管自然损耗率</td>
+                <td class="infoCheck-name">定额耗比率</td>
+                <td class="infoCheck-content" th:text="${item.rationlossrate}">定额耗比率</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">定额耗数量</td>
+                <td class="infoCheck-content" th:text="${item.rationlossqty}">定额耗数量</td>
+                <td class="infoCheck-name">超定额损耗数量</td>
+                <td class="infoCheck-content" th:text="${item.orlossqty}">超定额损耗数量</td>
+                <td class="infoCheck-name">溢余数量</td>
+                <td class="infoCheck-content" th:text="${item.profitqty}">溢余数量</td>
+            </tr>
+            <!--<tr>
+                <td class="infoCheck-name">上级审批状态（0：预报，1：已报）</td>
+                <td class="infoCheck-content" th:text="${item.passstatestr}">上级审批状态（0：预报，1：已报）</td>
+                <td class="infoCheck-name">预报日期</td>
+                <td class="infoCheck-content" th:text="${item.preupdatestr}">预报日期</td>
+                <td class="infoCheck-name">已报日期</td>
+                <td class="infoCheck-content" th:text="${item.updatestr}">已报日期</td>
+            </tr>-->
+            <tr>
+                <td class="infoCheck-name">出库计划安排</td>
+                <td class="infoCheck-content" th:text="${item.outplanid}">出库计划安排主键</td>
+                <td class="infoCheck-name">经办人(业务员)</td>
+                <td class="infoCheck-content" th:text="${item.repuserid}">经办人(业务员)</td>
+                <td class="infoCheck-name">锁定标志（1：锁定）</td>
+                <td class="infoCheck-content" th:text="${item.lockflagstr}">锁定标志（1：锁定）</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">逻辑删除标志（1：删除）</td>
+                <td class="infoCheck-content" th:text="${item.delflagstr}">逻辑删除标志（1：删除）</td>
+                <td class="infoCheck-name">创建时间</td>
+                <td class="infoCheck-content" th:text="${item.createtimestr}">创建时间</td>
+            <tr>
+                <td class="infoCheck-name">更新时间</td>
+                <td class="infoCheck-content" th:text="${item.updatetimestr}">更新时间</td>
+                <td class="infoCheck-name">更新人</td>
+                <td class="infoCheck-content" th:text="${item.updateuserid}">更新人</td>
+                <td class="infoCheck-name">审批人</td>
+                <td class="infoCheck-content" th:text="${item.spuserid}">审批人</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">审批时间</td>
+                <td class="infoCheck-content" th:text="${item.sptimestr}">审批时间</td>
+                <td class="infoCheck-name">备注</td>
+                <td class="infoCheck-content" th:text="${item.remark}">备注</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>

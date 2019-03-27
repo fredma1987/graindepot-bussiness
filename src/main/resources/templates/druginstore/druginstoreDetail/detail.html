@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <table class="infoCheck-three" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">药剂供应商</td>
+                <td class="infoCheck-content" th:text="${item.drgvender}">药剂供应商</td>
+                <td class="infoCheck-name">入库数量</td>
+                <td class="infoCheck-content" th:text="${item.inqty}">入库数量</td>
+                <td class="infoCheck-name">单价</td>
+                <td class="infoCheck-content" th:text="${item.price}">单价</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">金额</td>
+                <td class="infoCheck-content" th:text="${item.amount}">金额</td>
+                <td class="infoCheck-name">单包数量</td>
+                <td class="infoCheck-content" th:text="${item.unitqty}">单包数量</td>
+                <td class="infoCheck-name">入库计量数量（计）</td>
+                <td class="infoCheck-content" th:text="${item.inmeasqty}">入库计量数量（计）</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">生产厂家</td>
+                <td class="infoCheck-content" th:text="${item.prodfac}">生产厂家</td>
+                <td class="infoCheck-name">生产日期</td>
+                <td class="infoCheck-content" th:text="${item.proddatestr}">生产日期</td>
+                <td class="infoCheck-name">生产批号</td>
+                <td class="infoCheck-content" th:text="${item.batchcode}">生产批号</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">摘要</td>
+                <td class="infoCheck-content" th:text="${item.remark}">摘要</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>

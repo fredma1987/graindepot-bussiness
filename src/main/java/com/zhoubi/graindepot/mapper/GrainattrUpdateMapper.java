@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.GrainattrUpdate;import com.zhoubi.graindepot.base.BaseMapper;public interface GrainattrUpdateMapper extends BaseMapper<GrainattrUpdate> {    String getMaxBillcode(Integer graindepotid);}

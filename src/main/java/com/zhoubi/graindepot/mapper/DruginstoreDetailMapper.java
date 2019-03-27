@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.DruginstoreDetail;import com.zhoubi.graindepot.base.BaseMapper;public interface DruginstoreDetailMapper extends BaseMapper<DruginstoreDetail> {}
