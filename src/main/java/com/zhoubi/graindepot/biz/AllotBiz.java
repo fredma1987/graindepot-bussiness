@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.Allot;import com.zhoubi.graindepot.mapper.AllotMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class AllotBiz extends BaseService<Allot>  {	@Autowired	private AllotMapper AllotMapper;	@Override
+	protected BaseMapper<Allot> getMapper() {		return AllotMapper;	}}
