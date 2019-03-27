@@ -1,5 +1,6 @@
 package com.zhoubi.graindepot.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.netflix.discovery.converters.Auto;
 import com.zhoubi.graindepot.bean.*;
 import com.zhoubi.graindepot.biz.*;
@@ -63,6 +64,8 @@ public class PageController extends BaseController {
     private  GoodstypeBiz goodstypeBiz;
     @Autowired
     private GoodsBiz goodsBiz;
+    @Autowired
+    private CommonBiz commonBiz;
 
 
     //----------------------------------计划信息---------------------------------------------
@@ -921,8 +924,10 @@ public class PageController extends BaseController {
     public String toGoods_detail(Model model, @PathVariable int id) {
         String title = "物料详情";
         Goods item = goodsBiz.selectById(id);
+        BaseUser baseUser = getCurrentUser();
         model.addAttribute("title", title);
         model.addAttribute("item", item);
+        model.addAttribute("baseUser", baseUser);
         String path = "goods/detail";
         return path;
     }

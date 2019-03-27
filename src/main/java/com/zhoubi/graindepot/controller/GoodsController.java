@@ -30,7 +30,7 @@ public class GoodsController extends BaseController {
 
 
     @GetMapping("/list/page")
-    public PagerModel goodsPageList(int start, int length, String goodsname) {
+    public PagerModel goodsPageList(int start, int length, String goodsname,Integer goodstypeid) {
         UserAddress ua=getUserAddress();
         PagerModel<Goods> e = new PagerModel();
         e.addOrder("createtime desc");
@@ -38,6 +38,8 @@ public class GoodsController extends BaseController {
         e.setLength(length);
         if (StringUtils.isNotEmpty(goodsname)) {
             e.putWhere("goodsname", "%" + goodsname + "%");
+        }else if(goodstypeid != null ){
+            e.putWhere("goodstypeid",goodstypeid);
         }
 //        e.putWhere("graindepotid",ua.getGraindepotid());
         PagerModel<Goods> result = goodsBiz.selectListByPage(e);
