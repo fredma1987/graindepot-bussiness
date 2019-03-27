@@ -131,7 +131,13 @@
         initForm();
         initDrugkind();
         initRecycleflag();
-        $('#unitqty').bootstrapNumber();
+        $('#unitqty').bootstrapNumber(
+
+
+            {
+                precision:2
+            }
+        );
     });
 
     function initDrugkind() {

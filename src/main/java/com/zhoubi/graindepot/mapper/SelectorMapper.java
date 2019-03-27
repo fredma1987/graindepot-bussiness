@@ -21,4 +21,6 @@ public interface SelectorMapper {
     List<Trader> traderList(Map param);
 
     List<Contracttype> contracttypeList(Map param);
+
+    List<Goodstype> goodstypeList(Map param);
 }
