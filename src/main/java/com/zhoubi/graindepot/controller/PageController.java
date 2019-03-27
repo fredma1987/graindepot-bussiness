@@ -66,6 +66,8 @@ public class PageController extends BaseController {
     private GoodsBiz goodsBiz;
     @Autowired
     private CommonBiz commonBiz;
+    @Autowired
+    private TruckBiz truckBiz;
 
 
     //----------------------------------计划信息---------------------------------------------
@@ -929,6 +931,42 @@ public class PageController extends BaseController {
         model.addAttribute("item", item);
         model.addAttribute("baseUser", baseUser);
         String path = "goods/detail";
+        return path;
+    }
+
+    //----------------------------------内部车辆---------------------------------------------
+    //物料列表
+    @GetMapping("/truck")
+    public String toTruck(Model model) {
+        String title = "内部车辆";
+        model.addAttribute("title", title);
+        String path = "truck/list";
+        return path;
+    }
+
+    //物料编辑
+    @GetMapping("/truck/edit")
+    public String toTruck_edit(Model model, Integer id) {
+        String title = "内部车辆编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Truck item = new Truck();
+        if (id != null) {
+            item = truckBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "truck/edit";
+        return path;
+    }
+
+    //物料详情页
+    @GetMapping("/truck/detail/{id}")
+    public String toTruck_detail(Model model, @PathVariable int id) {
+        String title = "物料详情";
+        Truck item = truckBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "truck/detail";
         return path;
     }
 }
