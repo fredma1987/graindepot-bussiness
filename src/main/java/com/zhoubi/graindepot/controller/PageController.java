@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by zhanghao on 2019/1/2.
  */
@@ -63,6 +68,8 @@ public class PageController extends BaseController {
     private  GoodstypeBiz goodstypeBiz;
     @Autowired
     private GoodsBiz goodsBiz;
+    @Autowired
+    private GraintempBiz graintempBiz;
 
 
     //----------------------------------计划信息---------------------------------------------
@@ -926,4 +933,51 @@ public class PageController extends BaseController {
         String path = "goods/detail";
         return path;
     }
+
+    //三维粮情列表
+    @GetMapping("/graintemp")
+    public String toGraintemp(Model model) {
+        String title = "粮情信息";
+        model.addAttribute("title", title);
+        String path = "graintemp/list";
+        return path;
+    }
+
+    //三维粮情详情
+    @GetMapping("/graintemp/detail/{id}")
+    public String toGraintemp_detail(Model model, @PathVariable int id) {
+        String title = "粮情三维图";
+        Graintemp item = graintempBiz.selectById(id);
+        //计算平均粮温度  最高温  最低温
+        String temperatureset=item.getTemperatureset();
+        List<String> temperaturesetList= Arrays.asList(temperatureset.split(","));
+        Double maxTemp=-100.0;
+        Double minTemp=100.0;
+        Double sum=0.0;
+        Integer count=0;
+        for (String t:temperaturesetList) {
+            Double d=Double.parseDouble(t);
+            if (d<-100 || d >100) {
+                continue;
+            }
+            maxTemp=Math.max(maxTemp,d);
+            minTemp=Math.min(minTemp,d);
+            sum+=d;
+            count+=1;
+        }
+        if (count>0) {
+            DecimalFormat df = new DecimalFormat("#.00");
+            String avg=df.format(sum/count);
+            item.setAveragetemp(avg);
+        }else {
+            item.setAveragetemp("0");
+        }
+        item.setMaxLw(maxTemp);
+        item.setMinLw(minTemp);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "graintemp/grainTemp3D";
+        return path;
+    }
+
 }
