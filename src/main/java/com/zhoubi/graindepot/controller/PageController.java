@@ -1,5 +1,6 @@
 package com.zhoubi.graindepot.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.netflix.discovery.converters.Auto;
 import com.zhoubi.graindepot.bean.*;
 import com.zhoubi.graindepot.biz.*;
@@ -68,6 +69,12 @@ public class PageController extends BaseController {
     private  GoodstypeBiz goodstypeBiz;
     @Autowired
     private GoodsBiz goodsBiz;
+    @Autowired
+    private CommonBiz commonBiz;
+    @Autowired
+    private TruckBiz truckBiz;
+    @Autowired
+    private AllotBiz allotBiz;
     @Autowired
     private GraintempBiz graintempBiz;
 
@@ -928,8 +935,10 @@ public class PageController extends BaseController {
     public String toGoods_detail(Model model, @PathVariable int id) {
         String title = "物料详情";
         Goods item = goodsBiz.selectById(id);
+        BaseUser baseUser = getCurrentUser();
         model.addAttribute("title", title);
         model.addAttribute("item", item);
+        model.addAttribute("baseUser", baseUser);
         String path = "goods/detail";
         return path;
     }
@@ -977,6 +986,79 @@ public class PageController extends BaseController {
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "graintemp/grainTemp3D";
+        return path;
+    }
+
+
+    //----------------------------------内部车辆---------------------------------------------
+    //物料列表
+    @GetMapping("/truck")
+    public String toTruck(Model model) {
+        String title = "内部车辆";
+        model.addAttribute("title", title);
+        String path = "truck/list";
+        return path;
+    }
+
+    //物料编辑
+    @GetMapping("/truck/edit")
+    public String toTruck_edit(Model model, Integer id) {
+        String title = "内部车辆编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Truck item = new Truck();
+        if (id != null) {
+            item = truckBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "truck/edit";
+        return path;
+    }
+
+    //物料详情页
+    @GetMapping("/truck/detail/{id}")
+    public String toTruck_detail(Model model, @PathVariable int id) {
+        String title = "物料详情";
+        Truck item = truckBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "truck/detail";
+        return path;
+    }
+
+    //----------------------------------移库单---------------------------------------------
+    //物料列表
+    @GetMapping("/allot")
+    public String toAllot(Model model) {
+        String title = "移库单";
+        model.addAttribute("title", title);
+        String path = "allot/list";
+        return path;
+    }
+
+    //物料编辑
+    @GetMapping("/allot/edit")
+    public String toAllot_edit(Model model, Integer id) {
+        String title = "移库单编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Allot item = new Allot();
+        if (id != null) {
+            item = allotBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "allot/edit";
+        return path;
+    }
+
+    //物料详情页
+    @GetMapping("/allot/detail/{id}")
+    public String toAllot_detail(Model model, @PathVariable int id) {
+        String title = "移库单详情";
+        Allot item = allotBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "allot/detail";
         return path;
     }
 

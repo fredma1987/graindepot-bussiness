@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,6 +36,15 @@ public class GoodsTypeController extends BaseController {
         PagerModel<Goodstype> result = goodstypeBiz.selectListByPage(e);
         return result;
     }
+
+//    @GetMapping("/findAllByCondition")
+//    public  List findAllByCondition() {
+//        UserAddress ua = getUserAddress();
+//        Map map = new HashMap();
+//        map.put("graindepot",ua.getGraindepotid());
+//        List list = goodstypeBiz.selectList(map);
+//        return  list;
+//    }
 
     @PostMapping("/edit")
     public JsonResult goodsTypeEdit(Goodstype item) throws ParseException {

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/infoCheck.css}"/>
+<body>
+<!-- 信息查看页面 -->
+<!-- infoCheck-three 一行显示三列 -->
+<!-- infoCheck-two 一行显示二列 -->
+<!-- infoCheck-one 一行只显示较宽一列 -->
+<div class="infoCheckDiv">
+    <div class="infoCheckBack">
+        <!-- 一行显示三列 -->
+        <table class="infoCheck-two" border="" cellspacing="" cellpadding="">
+            <tr>
+                <td class="infoCheck-name">企业</td>
+                <td class="infoCheck-content" th:text="${item.companyname}">企业</td>
+                <td class="infoCheck-name">库点</td>
+                <td class="infoCheck-content" th:text="${item.graindepotname}">库点</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">物料/资料类型</td>
+                <td class="infoCheck-content" th:text="${item.goodstypename}">物料/资料类型</td>
+                <td class="infoCheck-name">物料/资料编码</td>
+                <td class="infoCheck-content" th:text="${item.goodscode}">物料/资料编码</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">物料/资料名称</td>
+                <td class="infoCheck-content" th:text="${item.goodsname}">物料/资料名称</td>
+                <td class="infoCheck-name">规格</td>
+                <td class="infoCheck-content" th:text="${item.goodsspec}">规格</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">计量单位</td>
+                <td class="infoCheck-content" th:text="${item.measunit}">计量单位</td>
+                <td class="infoCheck-name">条码</td>
+                <td class="infoCheck-content" th:text="${item.barcode}">条码</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">描述</td>
+                <td class="infoCheck-content" th:text="${item.description}">描述</td>
+                <td class="infoCheck-name">排序号</td>
+                <td class="infoCheck-content" th:text="${item.sequno}">排序号</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">创建人</td>
+                <td class="infoCheck-content" th:text="${baseUser.username}">创建人</td>
+                <td class="infoCheck-name">创建时间</td>
+                <td class="infoCheck-content" th:text="${item.createtimestr}">创建时间</td>
+            </tr>
+            <tr>
+                <td class="infoCheck-name">备注</td>
+                <td class="infoCheck-content" th:text="${item.remark}" colspan="3">备注</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+    });
+
+
+</script>
