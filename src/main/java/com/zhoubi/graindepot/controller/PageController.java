@@ -79,6 +79,7 @@ public class PageController extends BaseController {
     private GraintempBiz graintempBiz;
 
 
+
     //----------------------------------计划信息---------------------------------------------
     //计划信息列表
     @GetMapping("/planfile")
@@ -1051,11 +1052,12 @@ public class PageController extends BaseController {
         return path;
     }
 
-    //物料详情页
+    //移库单详情页
     @GetMapping("/allot/detail/{id}")
     public String toAllot_detail(Model model, @PathVariable int id) {
         String title = "移库单详情";
         Allot item = allotBiz.selectById(id);
+//        Storage storage = storageBiz.selectById();
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "allot/detail";

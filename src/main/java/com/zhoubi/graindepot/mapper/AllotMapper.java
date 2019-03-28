@@ -1,1 +1,1 @@
-package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Allot;import com.zhoubi.graindepot.base.BaseMapper;public interface AllotMapper extends BaseMapper<Allot> {}
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Allot;import com.zhoubi.graindepot.base.BaseMapper;public interface AllotMapper extends BaseMapper<Allot> {    String getMaxBillcode(Integer graindepotid);}
