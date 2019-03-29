@@ -2,11 +2,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="head::head(${title})">
 </head>
-
-
-<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
-<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
-<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
 <link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
 <script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
 
@@ -164,7 +159,7 @@
         initCopAndGd();
 
         //初始化上传头像按钮
-        $("#fileNameList").bootstrapUploadify({
+        $("#filenamelist").bootstrapUploadify({
             showId: "showFileNameList"//上传成功后在那边显示信息
             //fileType: "img"//需要上传的文件类型
         });

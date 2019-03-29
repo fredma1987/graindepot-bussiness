@@ -32,7 +32,7 @@ public class GraintempController extends BaseController {
     public PagerModel graintempPageList(int start, int length, Integer storageid) {
         UserAddress ua=getUserAddress();
         PagerModel<Graintemp> e = new PagerModel();
-        e.addOrder("createtime desc");
+        e.addOrder("testdate desc");
         e.setStart(start);
         e.setLength(length);
         e.putWhere("graindepotid",ua.getGraindepotid());

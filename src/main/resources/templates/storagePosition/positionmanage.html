@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link rel="stylesheet" th:href="@{/jqui/css/smartMenu.css}" type="text/css"/>
+<script th:src="@{/jqui/js/ui/jquery.ui.position.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.core.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.widget.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.mouse.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.draggable.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.droppable.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.resizable.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.dialog.js}"></script>
+<script type="text/javascript" th:src="@{/jqui/js/jquery-smartMenu.js}"></script>
+<style>
+    body {
+        font-size: 12
+    }
+
+    #gallery {
+        height: 40px;
+    }
+
+    #trash {
+        width: 805px;
+        height: 405px;
+        margin-left: 5px;
+    }
+
+    #vimg {
+        width: 805px;
+        height: 405px;
+    }
+
+    .draggable {
+        cursor: pointer;
+    }
+</style>
+<body>
+<div th:replace="navbar::navbar"></div>
+<div class="main-container" id="main-container">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                首页
+            </li>
+            <li>
+                <i class="icon-table home-icon"></i>
+                监控点位设置
+            </li>
+        </ul>
+    </div>
+    <div style="margin-top: 4px;margin-bottom: 4px">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">监控点位</span>
+                    <select id="channels" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-sm btn-success" onclick="newVideoPosition()">
+                    <i class="icon-plus align-top bigger-125"></i>
+                    创建监控点位
+                </button>
+                <button class="btn btn-sm btn-primary" onclick="save()">
+                    <i class="icon-save align-top bigger-125"></i>
+                    保存监控点位
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="gallery"></div>
+    <div id="trash">
+        <img id="vimg" src="/graindepot-bussiness/images/desktop.jpg"/>
+
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    var provinceid;
+    var user = [[${user}]];
+    var draglist = [], datalist = [];
+    var imageMenuData = [
+        [{
+            text: "撤销该点位",
+            func: function () {
+                var id=this.id;
+                $("#" +id).remove();
+                datalist=datalist.filter(function (value) {
+                    return value.videoid+""!=id
+                })
+
+            }
+        }]
+    ];
+    $(function () {
+        initVideo()
+        var $gallery = $("#gallery"),
+            $trash = $("#trash");
+        $trash.droppable({
+            accept: "img",
+            drop: function (event, ui) {
+
+            }
+        });
+        setChannel()
+
+
+    });
+
+    function initVideo() {
+        $("#channels").bootstrapSelect({
+            url: '/graindepot-bussiness/position/videoList',
+            type: 'GET',
+            valueField: 'videoid',
+            textField: 'videoname',
+            attr: {lang: 'videotype'}
+        });
+    }
+
+    function newVideoPosition() {
+        var videoId = $("#channels").bootstrapSelect("getValue");
+        var type = $("#channels").find("option:selected")[0].lang;
+        for (var i = 0; i < draglist.length; i++) {
+            if (datalist.length>0&&datalist[i]&&videoId != undefined && videoId == datalist[i]["videoid"] && (draglist[i].offsetLeft + draglist[i].offsetTop) > 0) {
+                $.bootstrapBox.alert.init({message:"该视频点位已创建"});
+                return;
+            }
+        }
+        var $gallery = $("#gallery"),
+            $trash = $("#trash");
+        var channel = $("#channels").find("option:selected").text();
+
+        var img = "jk2.png";
+        if (type == 1)
+            img = "jk.png";
+        $("<img id='" + videoId + "' src='/graindepot-bussiness/images/" + img + "' class='draggable' style='left:5px;' alt='球机' title='" + channel + "'/>").appendTo($gallery);
+        draglist = $(".draggable").draggable({
+            cancel: "button", // clicking an icon won't initiate dragging
+            revert: "invalid", // when not dropped, the item will revert back to its initial position
+            containment: "document",
+            helper: "original",
+            cursor: "move"
+        });
+        datalist[draglist.length - 1] = {};
+        datalist[draglist.length - 1]["videoid"] = parseInt(videoId);
+        datalist[draglist.length - 1]["videotype"] = type;
+        $("img[class='draggable ui-draggable']").smartMenu(imageMenuData);
+    }
+
+
+    //保存视频点位
+    function save() {
+        var userSetIds=[];
+        var img = $("#vimg");
+        var offsetx = img[0].offsetLeft, offsety = img[0].offsetTop;
+        for (var i = 0; i < draglist.length; i++) {
+            for (var j = 0; j < datalist.length; j++) {
+                if (draglist[i].id == datalist[j].videoid) {
+                    if (draglist[i].offsetLeft != 0 && draglist[i].offsetTop != 0) {
+                        datalist[j]["position_x"] = draglist[i].offsetLeft - offsetx;
+                        datalist[j]["position_y"] = draglist[i].offsetTop - offsety;
+                        userSetIds.push(draglist[i].id)
+                    }
+                    /*else {
+                        datalist[j]["position_x"] = 0;
+                        datalist[j]["position_y"] = 0;
+                    }*/
+                }
+            }
+        }
+        //获取所有视频
+        $.get("/graindepot-bussiness/position/videoList")
+            .then(function (allVideoList) {
+                allVideoList.forEach(function (curr, index) {
+                    if ($.inArray(curr.videoid+"",userSetIds)==-1){
+                        datalist.push({videoid:curr.videoid})
+                    }
+                })
+                $.post("/graindepot-bussiness/position/video/edit", {json: JSON.stringify(datalist)})
+                    .then(function(result){
+                        $.bootstrapBox.alert.init({message: result.message})
+                        datalist=datalist.filter(function (value) {
+                            return value.position_x
+                        })
+                    });
+
+
+            })
+    }
+
+
+    function setChannel() {
+        $("#channels").empty();
+        $(".draggable").draggable("destroy");
+        $(".draggable").remove();
+
+        $.get("/graindepot-bussiness/position/videoList")
+            .then(function (videoList) {
+                $.each(videoList, function (index, d) {
+                    d.positionX=d.position_x;
+                    d.positionY=d.position_y;
+                    var typeimg = "jk2.png";
+                    if (d.videotype == 1)
+                        typeimg = "jk.png";
+                    var $gallery = $("#gallery");
+                    var $trash = $("#trash");
+                    var img = $("#vimg");
+                    var offsetx = img[0].offsetLeft + d.positionX, offsety = img[0].offsetTop + d.positionY;
+
+                    $("#channels").append("<option lang='" + d.videotype + "' value='" + d.videoid + "'>" + d.videoname + "</option>");
+                    if (d.positionX != undefined && d.positionY != undefined && (d.positionX + d.positionY) > 0) {
+                        $("<img id='" + d.videoid + "' src='/graindepot-bussiness/images/" + typeimg + "' class='draggable' style='left:" + offsetx + "px;top:" + offsety + "px;position: absolute;' ondblclick='openVideoPlay(\"播放视频\",\"video_gotoPlay\"," + d.videoid + ")'  title='" + d.videoname + "' />").appendTo($trash);
+                        draglist = $(".draggable").draggable({
+                            cancel: "button", // clicking an icon won't initiate dragging
+                            revert: "invalid", // when not dropped, the item will revert back to its initial position
+                            containment: "document",
+                            helper: "original",
+                            cursor: "move"
+                        });
+
+                        datalist[draglist.length - 1] = {};
+                        datalist[draglist.length - 1]["videoid"] = d.videoid;
+                        datalist[draglist.length - 1]["videotype"] = d.videotype;
+                        $("img[class='draggable ui-draggable']").smartMenu(imageMenuData);
+                    }
+                });
+
+            })
+
+    }
+
+    function setBackGrouandImg(url) {
+        $("#vimg").attr("src", url + '?' + Math.random());
+        var cur = $("#graindepotid").find("option:selected")[0];
+        cur.title = url;
+    }
+
+
+    function selectVideoByText(text) {
+        $("#channels").find("option[text=" + text + "]").attr("selected", true);
+    }
+
+
+</script>

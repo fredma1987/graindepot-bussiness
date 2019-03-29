@@ -1062,4 +1062,22 @@ public class PageController extends BaseController {
         return path;
     }
 
+
+    //仓房点位设置
+    @GetMapping("/storagePosition")
+    public String toStoragePosition(Model model) {
+        String title = "仓房点位设置";
+        model.addAttribute("title", title);
+        String path = "storagePosition/cblycjg";
+        return path;
+    }
+    //视频点位设置
+    @GetMapping("/videoPosition")
+    public String toVideoPosition(Model model) {
+        String title = "视频点位设置";
+        model.addAttribute("title", title);
+        String path = "storagePosition/positionmanage";
+        return path;
+    }
+
 }

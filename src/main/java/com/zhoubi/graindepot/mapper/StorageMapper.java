@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Storage;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.bean.Video;import java.util.List;import java.util.Map;public interface StorageMapper extends BaseMapper<Storage> {    int updateStoragePosition(Storage item);    List<Video> selectVideoList(Map map);}

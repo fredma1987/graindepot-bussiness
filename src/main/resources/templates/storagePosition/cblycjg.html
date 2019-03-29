@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head(${title})">
+</head>
+<link rel="stylesheet" th:href="@{/jqui/css/smartMenu.css}" type="text/css"/>
+<link rel="stylesheet" th:href="@{/jqui/css/public.css}" type="text/css"/>
+<link rel="stylesheet" th:href="@{/jqui/css/move.css}" type="text/css"/>
+<script th:src="@{/jqui/js/ui/jquery.ui.position.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.core.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.widget.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.mouse.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.draggable.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.droppable.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.resizable.js}"></script>
+<script th:src="@{/jqui/js/ui/jquery.ui.dialog.js}"></script>
+<script type="text/javascript" th:src="@{/jqui/js/move.js}"></script>
+<script type="text/javascript" th:src="@{/jqui/js/jquery-smartMenu.js}"></script>
+<style>
+    body {
+        font-size: 12
+    }
+
+    #gallery {
+        height: 40px;
+    }
+
+    #trash {
+        float: left;
+        width: 805px;
+        height: 405px;
+        margin: 10px 30px;
+    }
+
+    #vimg {
+        width: 805px;
+        height: 405px;
+    }
+
+    .draggable {
+        cursor: pointer;
+    }
+
+    .lkt_col {
+        background: rgba(58, 170, 49, 0.1);
+    }
+</style>
+<body>
+<div th:replace="navbar::navbar"></div>
+<div class="main-container" id="main-container">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                首页
+            </li>
+            <li>
+                <i class="icon-table home-icon"></i>
+                仓房点位设置
+            </li>
+        </ul>
+    </div>
+    <div style="margin-top: 4px;margin-bottom: 4px">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">仓房</span>
+                    <select id="storageid" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-sm btn-success" onclick="newCFPosition()">
+                    <i class="icon-plus align-top bigger-125"></i>
+                    创建仓房
+                </button>
+                <button class="btn btn-sm btn-primary" onclick="save()">
+                    <i class="icon-save align-top bigger-125"></i>
+                    保存仓房位置
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="trash" class="lkt_right">
+        <div id="lkt_main" style="position:relative;">
+            <img id="vimg" src="/graindepot-bussiness/images/desktop.jpg"/>
+        </div>
+
+        <div id="gallery">
+            <ul id="lkt_add_ul" class="lkt_add_ul" style="display:none;height: 60px">
+                <li class="lkt_addlist">
+                    <div id="lkt_rectangle" class="add_chart">
+                        <div class="lkt_rectangle lkt_size lkt_col" style="width: 80px;height: 50px">
+                            <div class="lkt_move">
+                                <div class="center lkt_name" style="width: 100%;height: 100%;">一号仓</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="lkt_round" class="add_chart" style="margin-left: 50px">
+                        <div class="lkt_round lkt_size lkt_col" style="width: 50px;height: 50px">
+                            <div class="lkt_move lkt_name"><span class="center">一号仓</span></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    var imageMenuData = [
+        [{
+            text: "撤销",
+            func: function () {
+                $(this).parent().remove();
+            }
+        }]
+    ];
+
+    $(document).ready(function () {
+        initStorage();
+        setStorageList()
+    });
+
+    function initStorage() {
+        $("#storageid").bootstrapSelect({
+            url: '/graindepot-base/selector/storageList',
+            type: 'GET',
+            valueField: 'storageid',
+            textField: 'storagename'
+        });
+    }
+
+    function setStorageList() {
+        $.get("/graindepot-bussiness/position/stoageList")
+            .then(function (result) {
+                var list=result.data;
+                list.forEach(function (d) {
+                    d.width=d.divwidth;
+                    d.height=d.divheight;
+                    var $gallery = $("#gallery");
+                    var $lktmain = $("#lkt_main");
+                    var img = $("#vimg");
+                    var offsetx = img[0].offsetLeft + d.position_x, offsety = img[0].offsetTop + d.position_y;
+                    if (d.position_x != undefined && d.position_y != undefined && (d.position_x + d.position_y) > 0 && d.width != undefined && d.height != undefined) {
+                        var stylestr = "";
+                        if (d.divtype == 1) {
+                            stylestr = " style='width:" + d.width + "px;height:" + d.height + "px;left:" + offsetx + "px;top:" + offsety + "px;position: absolute;'";
+                        } else {
+                            stylestr = " style='width:" + d.width + "px;height:" + d.height + "px;left:" + offsetx + "px;top:" + offsety + "px;position: absolute;border-radius: 50%;'";
+                        }
+                        $("<div id='" + d.storageid + "' lang='" + d.divtype + "'" + stylestr + " class='lkt_div lkt_size'   title='" + d.storagename + "' ><div class='lkt_move'> "+'<div class="center lkt_name" style="width: 100%;height: 100%;">'+d.storagename+'</div>'+"  </div></div>").appendTo($lktmain);
+
+                        $("div[class='lkt_div lkt_size']").smartMenu(imageMenuData);
+                    }
+                })
+
+            })
+
+
+    }
+
+    function changehid() {
+        $("#lkt_add_ul").hide();
+    }
+
+
+    var draglist = [];
+
+
+    function newCFPosition() {
+        var hid = $("#storageid").bootstrapSelect("getValue");
+        var htext = $("#storageid").bootstrapSelect("getText");
+        var houseid;
+        if (hid == "" || hid == null) {
+            $.bootstrapBox.alert.init({message: "请选择仓房"})
+            return false;
+        }
+        if ($("#lkt_main").find(".lkt_size").length > 0) {
+            for (var i = 0; i < $("#lkt_main").find(".lkt_size").length; i++) {
+                houseid = $("#lkt_main").find(".lkt_size").eq(i).attr("id");
+                if (houseid == hid) {
+                    $.bootstrapBox.alert.init({message: "该仓房位置已创建"})
+                    return;
+                }
+
+            }
+        }
+        $("#lkt_add_ul").find(".lkt_name").html(htext)
+        $("#lkt_add_ul").show();
+    }
+
+
+    function save() {
+        var datalist = [];
+        var storageidList = [];
+        var $lkt_main = $("#lkt_main");
+        if ($lkt_main.find(".lkt_size").length > 0) {
+            for (var i = 0; i < $lkt_main.find(".lkt_size").length; i++) {
+                var l = $lkt_main.find(".lkt_size").eq(i).position().left;
+                var t = $lkt_main.find(".lkt_size").eq(i).position().top;
+                var w = $lkt_main.find(".lkt_size").eq(i).width();
+                var h = $lkt_main.find(".lkt_size").eq(i).height();
+                var x = $lkt_main.find(".lkt_size").eq(i).css("transform");
+                var divtype = $lkt_main.find(".lkt_size").eq(i).attr("lang");
+                var storageid = $lkt_main.find(".lkt_size").eq(i).attr("id");
+                var arr = {};
+                arr["storageid"] = storageid;
+                arr["position_x"] = l;
+                arr["position_y"] = t;
+                arr["divwidth"] = w;
+                arr["divheight"] = h;
+                arr["divtype"] = divtype;
+                console.log(arr);
+                datalist.push(arr);
+                storageidList.push(storageid);
+                //$("#"+houseid).css("background","rgba(0,0,0,0.2)");
+            }
+        }
+        //获取所有仓房
+        $.get("/graindepot-base/selector/storageList")
+            .then(function (storageList) {
+                storageList.forEach(function (curr, index) {
+                    if ($.inArray(curr.storageid + "", storageidList) == -1) {
+                        datalist.push({storageid: curr.storageid})
+                    }
+                })
+
+                $.post("/graindepot-bussiness/position/edit", {json: JSON.stringify(datalist)})
+                    .then(function (result) {
+                        $.bootstrapBox.alert.init({message: result.message})
+                    })
+            })
+        console.log(datalist)
+
+    }
+
+
+</script>
