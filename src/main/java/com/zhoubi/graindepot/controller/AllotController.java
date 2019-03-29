@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,15 +31,17 @@ public class AllotController extends BaseController {
     private AllotBiz allotBiz;
 
     @GetMapping("/list/page")
-    public PagerModel allotPageList(int start, int length) {
+    public PagerModel allotPageList(int start, int length, String billcode,Integer billkind) {
         UserAddress ua = getUserAddress();
         PagerModel<Allot> e = new PagerModel();
 //        e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-//        if (StringUtils.isNotEmpty(trucknum)) {
-//            e.putWhere("trucknum", "%" + trucknum + "%");
-//        }
+        if (StringUtils.isNotEmpty(billcode)) {
+            e.putWhere("billcode",billcode );
+        }else if(billkind !=null){
+            e.putWhere("billkind",billkind );
+        }
         PagerModel<Allot> result = allotBiz.selectListByPage(e);
         return result;
     }
@@ -53,14 +56,31 @@ public class AllotController extends BaseController {
 //                Date billdate = DateUtils.parseDate(billdatestr, "yyyy-MM-dd");
 //                item.setBilldate(billdate);
 //            }
-            //新增
-            item.setGroupid(ua.getGroupid());
-            item.setGraindepotid(ua.getGraindepotid());
-            item.setCompanyid(ua.getCompanyid());
-            item.setCreateuserid(baseUser.getUserid());
-            item.setCreatetime(new Date());
-            item.setBilldate(new Date());
-            allotBiz.insert(item);
+
+            synchronized (ua.getGraindepotid() + "") {
+                String maxBillcode = allotBiz.getMaxBillcode(ua.getGraindepotid());
+                if (org.apache.commons.lang3.StringUtils.isNotEmpty(maxBillcode)) {
+                    //能找到当天最大的单据号
+                    String[] maxBillcodes = maxBillcode.split("-");
+                    item.setBillcode(maxBillcodes[0] + "-" + maxBillcodes[1]
+                            + "-" + maxBillcodes[2] + "-" + String.format("%04d", Integer.parseInt(maxBillcodes[3]) + 1));
+                } else {
+                    //不能能找到当天最大的单据号
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String format = sdf.format(new Date());
+                    item.setBillcode(format + "-0001");
+                }
+                //新增
+                item.setGroupid(ua.getGroupid());
+                item.setGraindepotid(ua.getGraindepotid());
+                item.setCompanyid(ua.getCompanyid());
+                if(baseUser != null){
+                    item.setCreateuserid(baseUser.getUserid());
+                }
+                item.setCreatetime(new Date());
+                item.setBilldate(new Date());
+                allotBiz.insert(item);
+            }
             return new JsonResult("添加成功", true);
         } else {
             //修改
