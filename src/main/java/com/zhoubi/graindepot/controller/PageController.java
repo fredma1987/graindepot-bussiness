@@ -965,6 +965,7 @@ public class PageController extends BaseController {
         Double sum=0.0;
         Integer count=0;
         for (String t:temperaturesetList) {
+            //TODO 判断空
             Double d=Double.parseDouble(t);
             if (d<-100 || d >100) {
                 continue;
