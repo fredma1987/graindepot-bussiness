@@ -1028,7 +1028,7 @@ public class PageController extends BaseController {
     }
 
     //----------------------------------移库单---------------------------------------------
-    //物料列表
+    //移库单
     @GetMapping("/allot")
     public String toAllot(Model model) {
         String title = "移库单";
@@ -1037,7 +1037,7 @@ public class PageController extends BaseController {
         return path;
     }
 
-    //物料编辑
+    //移库单编辑
     @GetMapping("/allot/edit")
     public String toAllot_edit(Model model, Integer id) {
         String title = "移库单编辑";
