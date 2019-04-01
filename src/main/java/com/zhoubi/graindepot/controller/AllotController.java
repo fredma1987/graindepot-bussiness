@@ -31,16 +31,16 @@ public class AllotController extends BaseController {
     private AllotBiz allotBiz;
 
     @GetMapping("/list/page")
-    public PagerModel allotPageList(int start, int length, String billcode,Integer billkind) {
+    public PagerModel allotPageList(int start, int length, String billcode, Integer billkind) {
         UserAddress ua = getUserAddress();
         PagerModel<Allot> e = new PagerModel();
         e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
         if (StringUtils.isNotEmpty(billcode)) {
-            e.putWhere("billcode",billcode );
-        }else if(billkind !=null){
-            e.putWhere("billkind",billkind );
+            e.putWhere("billcode", billcode);
+        } else if (billkind != null) {
+            e.putWhere("billkind", billkind);
         }
         PagerModel<Allot> result = allotBiz.selectListByPage(e);
         return result;
@@ -74,7 +74,7 @@ public class AllotController extends BaseController {
                 item.setGroupid(ua.getGroupid());
                 item.setGraindepotid(ua.getGraindepotid());
                 item.setCompanyid(ua.getCompanyid());
-                if(baseUser != null){
+                if (baseUser != null) {
                     item.setCreateuserid(baseUser.getUserid());
                 }
                 item.setCreatetime(new Date());
