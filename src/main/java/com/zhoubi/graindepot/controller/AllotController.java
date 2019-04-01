@@ -34,7 +34,7 @@ public class AllotController extends BaseController {
     public PagerModel allotPageList(int start, int length, String billcode,Integer billkind) {
         UserAddress ua = getUserAddress();
         PagerModel<Allot> e = new PagerModel();
-//        e.addOrder("createtime desc");
+        e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
         if (StringUtils.isNotEmpty(billcode)) {
