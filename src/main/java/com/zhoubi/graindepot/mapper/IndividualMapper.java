@@ -1,1 +1,1 @@
-package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Individual;import com.zhoubi.graindepot.base.BaseMapper;public interface IndividualMapper extends BaseMapper<Individual> {}
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Individual;import com.zhoubi.graindepot.base.BaseMapper;import java.util.List;import java.util.Map;public interface IndividualMapper extends BaseMapper<Individual> {    //获取未申请列入黑名单用户分页    List<Individual> getUnBlankIndividualPageList(Map map);    int getUnBlankIndividualPageCount(Map map);}

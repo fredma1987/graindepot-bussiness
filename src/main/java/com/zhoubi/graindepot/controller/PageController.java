@@ -77,6 +77,8 @@ public class PageController extends BaseController {
     private AllotBiz allotBiz;
     @Autowired
     private GraintempBiz graintempBiz;
+    @Autowired
+    private BlanklistBiz blanklistBiz;
 
 
 
@@ -1083,4 +1085,93 @@ public class PageController extends BaseController {
         return path;
     }
 
+
+    //----------------------------------涉粮人员黑名单---------------------------------------------
+    //涉粮人员黑名单主页
+    @GetMapping("/blanklist")
+    public String to_blanklist(Model model) {
+        String title = "涉粮人员黑名单";
+        model.addAttribute("title", title);
+        String path = "blanklist/individual/list";
+        return path;
+    }
+
+    //涉粮人员未列入黑名单主页
+    @GetMapping("/unBlanklist")
+    public String to_unBlanklist(Model model) {
+        String title = "未列入黑名单涉粮人员";
+        model.addAttribute("title", title);
+        String path = "blanklist/individual/unBlankList";
+        return path;
+    }
+    //涉粮人员黑名单编辑
+    @GetMapping("/blanklist/edit")
+    public String to_blanklist_edit(Model model, Integer id) {
+        String title = "涉粮人员黑名单";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Blanklist item = new Blanklist();
+        if (id != null) {
+            item = blanklistBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "blanklist/individual/edit";
+        return path;
+    }
+
+    //涉粮人员黑名单详情页
+    @GetMapping("/blanklist/detail/{id}")
+    public String to_blanklist_detail(Model model, @PathVariable int id) {
+        String title = "涉粮人员黑名单详情";
+        Blanklist item = blanklistBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "blanklist/individual/detail";
+        return path;
+    }
+
+
+    //----------------------------------往来单位黑名单---------------------------------------------
+    //往来单位黑名单主页
+    @GetMapping("/blanklist/trader")
+    public String to_blanklist_trader(Model model) {
+        String title = "往来单位黑名单";
+        model.addAttribute("title", title);
+        String path = "blanklist//trader/list";
+        return path;
+    }
+
+    //往来单位未列入黑名单主页
+    @GetMapping("/unBlanklist/trader")
+    public String to_unBlanklist_trader(Model model) {
+        String title = "未列入黑名单往来单位";
+        model.addAttribute("title", title);
+        String path = "blanklist/trader/unBlankList";
+        return path;
+    }
+    //往来单位黑名单编辑
+    @GetMapping("/blanklist/trader/edit")
+    public String to_blanklist_trader_edit(Model model, Integer id) {
+        String title = "往来单位黑名单";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Blanklist item = new Blanklist();
+        if (id != null) {
+            item = blanklistBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "blanklist/trader/edit";
+        return path;
+    }
+
+    //往来单位黑名单详情页
+    @GetMapping("/blanklist/trader/detail/{id}")
+    public String to_blanklist_trader_detail(Model model, @PathVariable int id) {
+        String title = "往来单位黑名单详情";
+        Blanklist item = blanklistBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "blanklist/trader/detail";
+        return path;
+    }
 }
