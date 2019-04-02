@@ -79,6 +79,8 @@ public class PageController extends BaseController {
     private GraintempBiz graintempBiz;
     @Autowired
     private BlanklistBiz blanklistBiz;
+    @Autowired
+    private SuffrequBiz suffrequBiz;
 
 
 
@@ -1085,6 +1087,42 @@ public class PageController extends BaseController {
         return path;
     }
 
+    //----------------------------------熏蒸申请---------------------------------------------
+    //熏蒸申请
+    @GetMapping("/suffrequ")
+    public String toSuffrequ(Model model) {
+        String title = "熏蒸申请";
+        model.addAttribute("title", title);
+        String path = "suffrequApply/list";
+        return path;
+    }
+
+    //熏蒸申请编辑
+    @GetMapping("/suffrequ/edit")
+    public String toSuffrequ_edit(Model model, Integer id) {
+        String title = "熏蒸申请编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Suffrequ item = new Suffrequ();
+        if (id != null) {
+            item = suffrequBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "suffrequApply/edit";
+        return path;
+    }
+
+    //熏蒸申请详情页
+    @GetMapping("/suffrequ/detail/{id}")
+    public String toSuffrequ_detail(Model model, @PathVariable int id) {
+        String title = "熏蒸申请详情";
+        Suffrequ item = suffrequBiz.selectById(id);
+//        Storage storage = storageBiz.selectById();
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "suffrequApply/detail";
+        return path;
+    }
 
     //----------------------------------涉粮人员黑名单---------------------------------------------
     //涉粮人员黑名单主页

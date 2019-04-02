@@ -1,1 +1,1 @@
-package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Suffrequ;import com.zhoubi.graindepot.base.BaseMapper;public interface SuffrequMapper extends BaseMapper<Suffrequ> {}
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Suffrequ;import com.zhoubi.graindepot.base.BaseMapper;public interface SuffrequMapper extends BaseMapper<Suffrequ> {    String getMaxBillcode(Integer graindepotid);}

@@ -51,6 +51,26 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="carryuser1">
+            送药人1:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="carryuser1" id="carryuser1" class="form-control"
+                   th:value="${item.carryuser1}"
+                   placeholder="送药人1"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="carryuser2">
+            送药人2:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="carryuser2" id="carryuser2" class="form-control"
+                   th:value="${item.carryuser2}"
+                   placeholder="送药人2"/>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-sm-4 control-label no-padding-right" for="repuser">
             经办人:
         </label>
@@ -58,6 +78,16 @@
             <input type="text" name="repuser" id="repuser" class="form-control"
                    th:value="${item.repuser}"
                    placeholder="经办人"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="unitmanager">
+            单位负责人:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="unitmanager" id="unitmanager" class="form-control"
+                   th:value="${item.unitmanager}"
+                   placeholder="单位负责人"/>
         </div>
     </div>
     <div class="form-group">

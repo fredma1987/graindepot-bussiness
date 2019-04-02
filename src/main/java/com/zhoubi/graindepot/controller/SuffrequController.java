@@ -4,8 +4,10 @@ import com.zhoubi.graindepot.base.JsonResult;
 import com.zhoubi.graindepot.base.PagerModel;
 import com.zhoubi.graindepot.bean.Allot;
 import com.zhoubi.graindepot.bean.BaseUser;
+import com.zhoubi.graindepot.bean.Suffrequ;
 import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.AllotBiz;
+import com.zhoubi.graindepot.biz.SuffrequBiz;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,30 +26,30 @@ import java.util.Map;
  * Created by zhanghao on 2019/1/15.
  */
 @RestController
-@RequestMapping("allot")
-public class AllotController extends BaseController {
+@RequestMapping("suffrequ")
+public class SuffrequController extends BaseController {
 
     @Autowired
-    private AllotBiz allotBiz;
+    private SuffrequBiz suffrequBiz;
 
     @GetMapping("/list/page")
-    public PagerModel allotPageList(int start, int length, String billcode, Integer billkind) {
+    public PagerModel suffrequPageList(int start, int length) {
         UserAddress ua = getUserAddress();
-        PagerModel<Allot> e = new PagerModel();
-        e.addOrder("createtime desc");
+        PagerModel<Suffrequ> e = new PagerModel();
+//        e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-        if (StringUtils.isNotEmpty(billcode)) {
-            e.putWhere("billcode", billcode);
-        } else if (billkind != null) {
-            e.putWhere("billkind", billkind);
-        }
-        PagerModel<Allot> result = allotBiz.selectListByPage(e);
+//        if (StringUtils.isNotEmpty(billcode)) {
+//            e.putWhere("billcode", billcode);
+//        } else if (billkind != null) {
+//            e.putWhere("billkind", billkind);
+//        }
+        PagerModel<Suffrequ> result = suffrequBiz.selectListByPage(e);
         return result;
     }
 
     @PostMapping("/edit")
-    public JsonResult allotEdit(Allot item) throws ParseException {
+    public JsonResult suffrequEdit(Suffrequ item) throws ParseException {
         UserAddress ua = getUserAddress();
         BaseUser baseUser = getCurrentUser();
         if (item.getBillid() == null) {
@@ -58,7 +60,7 @@ public class AllotController extends BaseController {
 //            }
 
             synchronized (ua.getGraindepotid() + "") {
-                String maxBillcode = allotBiz.getMaxBillcode(ua.getGraindepotid());
+                String maxBillcode = suffrequBiz.getMaxBillcode(ua.getGraindepotid());
                 if (org.apache.commons.lang3.StringUtils.isNotEmpty(maxBillcode)) {
                     //能找到当天最大的单据号
                     String[] maxBillcodes = maxBillcode.split("-");
@@ -71,6 +73,17 @@ public class AllotController extends BaseController {
                     item.setBillcode(format + "-0001");
                 }
                 //新增
+                String instordatestr = item.getInstordatestr();
+                String lastsuffdatestr = item.getLastsuffdatestr();
+                if (StringUtils.isNotEmpty(instordatestr)) {
+                    Date  instordate = DateUtils.parseDate(instordatestr, "yyyy-MM-dd");
+                    item.setInstordate(instordate);
+                }
+
+                if (StringUtils.isNotEmpty(lastsuffdatestr)) {
+                    Date lastsuffdate = DateUtils.parseDate(lastsuffdatestr, "yyyy-MM-dd");
+                    item.setLastsuffdate(lastsuffdate);
+                }
                 item.setGroupid(ua.getGroupid());
                 item.setGraindepotid(ua.getGraindepotid());
                 item.setCompanyid(ua.getCompanyid());
@@ -79,41 +92,27 @@ public class AllotController extends BaseController {
                 }
                 item.setCreatetime(new Date());
                 item.setBilldate(new Date());
-                allotBiz.insert(item);
+                suffrequBiz.insert(item);
             }
             return new JsonResult("添加成功", true);
         } else {
             //修改
-            allotBiz.update(item);
+            suffrequBiz.update(item);
             return new JsonResult("修改成功", true);
         }
 
     }
 
     @PostMapping("/del")
-    public JsonResult allotDel(String ids) {
+    public JsonResult suffrequDel(String ids) {
 
         if (StringUtils.isNotEmpty(ids)) {
             Map map = new HashMap();
             map.put("Where_IdsStr", ids);
-            allotBiz.deleteMap(map);
+            suffrequBiz.deleteMap(map);
         }
         return new JsonResult("删除成功", true);
     }
 
-    //校验内部车辆名称是否重复
-//    @PostMapping("/checkRepeat")
-//    public String checkRepeat(String trucknum, Integer truckid) {
-//        Map map = new HashMap();
-//        map.put("trucknum", trucknum);
-//        map.put("truckid", truckid);
-//        int result = allotBiz.checkRepeat(map);
-//        if (result == 0) {
-//            return "{\"valid\":true}";
-//        } else {
-//            return "{\"valid\":false}";
-//        }
-//
-//    }
 
 }
