@@ -76,7 +76,7 @@ public class SuffrequController extends BaseController {
                 String instordatestr = item.getInstordatestr();
                 String lastsuffdatestr = item.getLastsuffdatestr();
                 if (StringUtils.isNotEmpty(instordatestr)) {
-                    Date  instordate = DateUtils.parseDate(instordatestr, "yyyy-MM-dd");
+                    Date instordate = DateUtils.parseDate(instordatestr, "yyyy-MM-dd");
                     item.setInstordate(instordate);
                 }
 
@@ -92,6 +92,8 @@ public class SuffrequController extends BaseController {
                 }
                 item.setCreatetime(new Date());
                 item.setBilldate(new Date());
+                //设置表单审核状态为0：待审核
+                item.setFormstatus(0);
                 suffrequBiz.insert(item);
             }
             return new JsonResult("添加成功", true);
@@ -113,6 +115,5 @@ public class SuffrequController extends BaseController {
         }
         return new JsonResult("删除成功", true);
     }
-
 
 }

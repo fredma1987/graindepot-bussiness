@@ -1121,4 +1121,41 @@ public class PageController extends BaseController {
         String path = "suffrequApply/detail";
         return path;
     }
+
+    //----------------------------------熏蒸审批---------------------------------------------
+    //熏蒸审批
+    @GetMapping("/suffrequAudit")
+    public String toSuffrequAuditList(Model model) {
+        String title = "熏蒸审批列表";
+        model.addAttribute("title", title);
+        String path = "suffrequAudit/list";
+        return path;
+    }
+
+    //熏蒸申请审批
+    @GetMapping("/suffrequAudit/audit")
+    public String toSuffrequAudit_edit(Model model, Integer id) {
+        String title = "熏蒸审批";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Suffrequ item = new Suffrequ();
+        if (id != null) {
+            item = suffrequBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "suffrequAudit/audit";
+        return path;
+    }
+
+    //熏蒸申请详情页
+    @GetMapping("/suffrequAudit/auditDetail/{id}")
+    public String toSuffrequAudit_detail(Model model, @PathVariable int id) {
+        String title = "熏蒸审批查看详情";
+        Suffrequ item = suffrequBiz.selectById(id);
+//        Storage storage = storageBiz.selectById();
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "suffrequAudit/detail";
+        return path;
+    }
 }
