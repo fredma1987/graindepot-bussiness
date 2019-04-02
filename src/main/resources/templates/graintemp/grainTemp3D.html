@@ -53,8 +53,8 @@
             </div>
         </div>
         <div style="margin-top:10px;height: 300px">
-            <div style="float: left;width: 50%;margin-top: -60px;">
-                <embed width='600' height='400' name='Scene1'
+            <div style="float: left;width: 50%;margin-top: -10px;">
+                <embed width='600' height='600' name='Scene1'
                        src='/3D/js/a_scene.svg' wmode='transparent'
                        type='image/svg+xml'/>
             </div>
@@ -166,6 +166,19 @@
     item.y = item.dim2;
     item.z = item.dim3;
     var arraylist = item.temperatureset.split(",");
+    //0 4 8
+    var transferList=[];
+    for (var i=0;i<item.z;i++){
+        for (var j=0;j<item.x*item.y;j++){
+            transferList.push(arraylist[i+j*item.z])
+        }
+
+    }
+    debugger
+    arraylist=transferList
+
+
+
     $(document).ready(function () {
         if (parseFloat(item.maxtemp) > 50) {
             $("#maxLw").html("*");
@@ -223,7 +236,6 @@
 
 
     $(function () {
-        debugger
         xmax = item.x;
         ymax = item.y;
         zmax = parseInt(item.z) + 1;
@@ -281,7 +293,7 @@
 
         var pArray = new Array();
         //pArray=message.split(",");
-        for (h = 0; h < showtemp.length; h++) {
+        /*for (h = 0; h < showtemp.length; h++) {
             var num = 0, max = 0, min = 100, sum = 0;
             try {
                 for (m = 0; m < ymax; m++) {
@@ -325,15 +337,64 @@
                 $("#zuidiwen").append("<span style='color:blue;'>" + min + "</span><p></p>");
             } else
                 $("#zuidiwen").append("<span style='color:blue;'>*</span><p></p>");
+        }*/
+
+        for (h = 0; h <  showtemp.length; h++) {  // h 0 m 0 n 0
+            var num = 0, max = 0, min = 100, sum = 0;
+            try {
+                for (m = 0; m < ymax; m++) {
+                    for (n = 0; n <  xmax; n++) {
+                        //0 0
+                        zPoly[h][n + xmax * m] = new Poly3D(S, "#FF0000", "#FFFFFF", "#000000", 1);
+                        //
+                        zPoly[h][n + xmax * m].AddPoint(n, (m + 1), showtemp[h] + 1);
+                        zPoly[h][n + xmax * m].AddPoint((n + 1), (m + 1), showtemp[h] + 1);
+                        zPoly[h][n + xmax * m].AddPoint((n + 1), m, showtemp[h] + 1);
+                        zPoly[h][n + xmax * m].AddPoint(n, m, showtemp[h] + 1);
+                        //zPoly[h][n + xmax * m].SetEventAction("mouseover",parent.show);
+                        //zPoly[h][n + xmax * m].SetEventAction("mouseout",parent.hid);
+                        zPoly[h][n + xmax * m].Id = arraylist[n + xmax * m];
+                        if (Number(arraylist[(zmax - h - 2) * xmax * ymax + n + xmax * m]) > max)
+                            max = Number(arraylist[(zmax - h - 2) * xmax * ymax + n + xmax * m]);
+                        if (Number(arraylist[(zmax - h - 2) * xmax * ymax + n + xmax * m]) < min)
+                            min = Number(arraylist[(zmax - h - 2) * xmax * ymax + n + xmax * m]);
+                        var tempnumber = Number(arraylist[(zmax - h - 2) * xmax * ymax + n + xmax * m]);
+                        if (tempnumber != undefined && !isNaN(tempnumber)) {
+                            sum += tempnumber;
+                            num++;
+                        }
+                        zPoly[h][n + xmax * m].Update();
+
+                    }
+                }
+            } catch (e) {
+            }
+            if (num > 0 && !isNaN(sum))
+                $("#pingjunwen").append("<span>" + (sum / num).toFixed(2) + "</span><p></p>");
+            else
+                $("#pingjunwen").append("<span style='color:black;'>*</span><p></p>");
+            if (max > 50) {
+                $("#zuigaowen").append("<span style='color: red;' class='floor'>*</span><p></p>");
+            } else if (50 > max && max > 0)
+                $("#zuigaowen").append("<span style='color:#FF7F24;'>" + max + "</span><p></p>");
+            else
+                $("#zuigaowen").append("<span style='color: red;' class='floor'>*</span><p></p>");
+            if ( min >- 100&&min < 0) {
+                $("#zuidiwen").append("<span style='color:blue;'>" + min + "</span><p></p>");
+            } else if (0 < min && min < 100) {
+                $("#zuidiwen").append("<span style='color:blue;'>" + min + "</span><p></p>");
+            } else
+                $("#zuidiwen").append("<span style='color:blue;'>*</span><p></p>");
         }
+
         S.AutoCenter();
         B.SetBorder(xmin, ymin, zmin, xmax, ymax, zmax);
         S.ChangeViewer(-50, -270);
         S.ChangeLight(-30, 30);
         S.OrderWeight.z = 0.01;
         S.Sort();
+        S.ZoomAll*=1.3;
         S.Draw();
-
 
     }
 

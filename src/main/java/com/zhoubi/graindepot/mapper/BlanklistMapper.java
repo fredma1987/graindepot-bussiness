@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Blanklist;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.bean.Individual;import java.util.List;import java.util.Map;public interface BlanklistMapper extends BaseMapper<Blanklist> {}

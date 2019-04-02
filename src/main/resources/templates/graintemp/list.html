@@ -127,10 +127,42 @@
                 {data: "dim3"},
                 {data: "testdatestr"},
                 {data: "testuser"},
-                {data: "intemprature"},
-                {data: "outtemprature"},
-                {data: "inhumidity"},
-                {data: "outhumidity"},
+                {data: "intemprature",
+                    render: function (data, type, row) {
+                        if (data<-100||data>100){
+                            return "备用"
+                        }else {
+                            return data
+                        }
+
+                    }},
+                {data: "outtemprature",
+                    render: function (data, type, row) {
+                        if (data<-100||data>100){
+                            return "备用"
+                        }else {
+                            return data
+                        }
+
+                    }},
+                {data: "inhumidity",
+                    render: function (data, type, row) {
+                        if (data<-100||data>100){
+                            return "备用"
+                        }else {
+                            return data
+                        }
+
+                    }},
+                {data: "outhumidity",
+                    render: function (data, type, row) {
+                        if (data<-100||data>100){
+                            return "备用"
+                        }else {
+                            return data
+                        }
+
+                    }},
                 {
                     data: "keyid",
                     render: function (data, type, row) {

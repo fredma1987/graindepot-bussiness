@@ -2,11 +2,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="head::head(${title})">
 </head>
-<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
-<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
-<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
-<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
-<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+<link rel="stylesheet" th:href="@{/assets/css/jquery-ui-1.10.3.full.min.css}" />
+<script th:src="@{/assets/js/jquery-ui-1.10.3.full.min.js}"></script>
+<script th:src="@{/assets/js/jquery.ui.touch-punch.min.js}"></script>
 
 
 <body style="overflow-x: hidden">
@@ -220,7 +218,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+   <!-- <div class="row">
         <div class="form-group col-sm-3">
             <label class="col-sm-6 control-label no-padding-right" for="zhpdhgflag">
                 是否综合判断合格:
@@ -261,9 +259,9 @@
                 </select>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="row">
-        <div class="form-group col-sm-3">
+        <!--<div class="form-group col-sm-3">
             <label class="col-sm-6 control-label no-padding-right" for="pzhgflag">
                 是否品质合格:
             </label>
@@ -282,7 +280,7 @@
                         th:value="${item.djhgflag}">
                 </select>
             </div>
-        </div>
+        </div>-->
         <div class="form-group col-sm-3">
             <label class="col-sm-6 control-label no-padding-right" for="managerunit">
                 主管单位:
@@ -303,8 +301,6 @@
                 </select>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="form-group col-sm-3">
             <label class="col-sm-6 control-label no-padding-right" for="representqty">
                 代表数量:
@@ -328,6 +324,441 @@
     </div>
     <div id="inspect">
         请选择粮食品种生成检验标准
+    </div>
+    <div class="col-sm-12">
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="#tabs-1">合格判定</a>
+                </li>
+
+                <li>
+                    <a href="#tabs-2">卫生指标(1)</a>
+                </li>
+
+                <li>
+                    <a href="#tabs-3">卫生指标(2)</a>
+                </li>
+                <li>
+                    <a href="#tabs-4">卫生指标(3)</a>
+                </li>
+                <li>
+                    <a href="#tabs-5">其他指标项</a>
+                </li>
+            </ul>
+
+            <div id="tabs-1">
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="zhpdhgflag">
+                            是否综合判定合格:
+                        </label>
+                        <div class="col-sm-6">
+                            <select id="zhpdhgflag" name="zhpdhgflag" class="form-control"
+                                     th:value="${item.zhpdhgflag}">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="qxmhgflag">
+                            是否全项目合格:
+                        </label>
+                        <div class="col-sm-6">
+                            <select id="qxmhgflag" name="qxmhgflag" class="form-control"
+                                    th:value="${item.qxmhgflag}">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="wszbhgflag">
+                            是否卫生指标合格:
+                        </label>
+                        <div class="col-sm-6">
+                            <select id="wszbhgflag" name="wszbhgflag" class="form-control"
+                                     th:value="${item.wszbhgflag}">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="pzhgflag">
+                            是否品质合格:
+                        </label>
+                        <div class="col-sm-6">
+                            <select id="pzhgflag" name="pzhgflag" class="form-control"
+                                    th:value="${item.pzhgflag}">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="djhgflag">
+                            是否等级合格:
+                        </label>
+                        <div class="col-sm-6">
+                            <select id="djhgflag" name="djhgflag" class="form-control"
+                                    th:value="${item.djhgflag}">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="dxmyzcbflag">
+                            是否单项严重超标:
+                        </label>
+                        <div class="col-sm-6">
+                            <select id="dxmyzcbflag" name="dxmyzcbflag" class="form-control"
+                                    th:value="${item.dxmyzcbflag}">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tabs-2">
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="tyxfldjxc">
+                            呕吐毒素(ug/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="tyxfldjxc" id="tyxfldjxc" class="form-control"
+                                   th:value="${item.tyxfldjxc}"
+                                   placeholder="呕吐毒素(ug/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="qian">
+                            铅(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="qian" id="qian" class="form-control"
+                                   th:value="${item.qian}"
+                                   placeholder="铅(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="ge1">
+                            镉(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="ge1" id="ge1" class="form-control"
+                                   th:value="${item.ge1}"
+                                   placeholder="镉(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="gong">
+                            汞(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="gong" id="gong" class="form-control"
+                                   th:value="${item.gong}"
+                                   placeholder="汞(mg/kg)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="tyxfldjxc">
+                            铬(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="tyxfldjxc" id="tyxfldjxc" class="form-control"
+                                   th:value="${item.tyxfldjxc}"
+                                   placeholder="铬(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="mlll">
+                            马拉硫磷（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="mlll" id="mlll" class="form-control"
+                                   th:value="${item.mlll}"
+                                   placeholder="马拉硫磷（mg/kg）"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="linhuawu">
+                            磷化物（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="linhuawu" id="linhuawu" class="form-control"
+                                   th:value="${item.linhuawu}"
+                                   placeholder="磷化物（mg/kg）"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="lvhuaku">
+                            氯化苦（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="lvhuaku" id="lvhuaku" class="form-control"
+                                   th:value="${item.lvhuaku}"
+                                   placeholder="氯化苦（mg/kg）"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="hqmsb1">
+                            黄曲霉毒素B1:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="hqmsb1" id="hqmsb1" class="form-control"
+                                   th:value="${item.hqmsb1}"
+                                   placeholder="黄曲霉毒素B1"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="zongshen">
+                            总砷（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="zongshen" id="zongshen" class="form-control"
+                                   th:value="${item.zongshen}"
+                                   placeholder="总砷（mg/kg）"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tabs-3">
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="resuanshang">
+                            热损伤粒(%):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="resuanshang" id="resuanshang" class="form-control"
+                                   th:value="${item.resuanshang}"
+                                   placeholder="热损伤粒(%)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="meibianrate">
+                            霉变率(%):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="meibianrate" id="meibianrate" class="form-control"
+                                   th:value="${item.meibianrate}"
+                                   placeholder="霉变率(%)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="maijiao">
+                            麦角(%):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="maijiao" id="maijiao" class="form-control"
+                                   th:value="${item.maijiao}"
+                                   placeholder="麦角(%)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="meimai">
+                            毒麦(%):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="meimai" id="meimai" class="form-control"
+                                   th:value="${item.meimai}"
+                                   placeholder="毒麦(%)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="ymcmxt">
+                            玉米赤霉烯酮:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="ymcmxt" id="ymcmxt" class="form-control"
+                                   th:value="${item.ymcmxt}"
+                                   placeholder="玉米赤霉烯酮"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="hqmdsa">
+                            赫曲霉毒素A:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="hqmdsa" id="hqmdsa" class="form-control"
+                                   th:value="${item.hqmdsa}"
+                                   placeholder="赫曲霉毒素A"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="xiujiawan">
+                            溴甲烷:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="xiujiawan" id="xiujiawan" class="form-control"
+                                   th:value="${item.xiujiawan}"
+                                   placeholder="溴甲烷"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="jjmdl">
+                            甲基嘧啶磷:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="jjmdl" id="jjmdl" class="form-control"
+                                   th:value="${item.jjmdl}"
+                                   placeholder="甲基嘧啶磷"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="rongjicanliu">
+                            溶剂残留量(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="rongjicanliu" id="rongjicanliu" class="form-control"
+                                   th:value="${item.rongjicanliu}"
+                                   placeholder="溶剂残留量(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="scl">
+                            三唑磷（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="scl" id="scl" class="form-control"
+                                   th:value="${item.scl}"
+                                   placeholder="三唑磷（mg/kg）"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tabs-4">
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="xiuqingjuzhi">
+                            溴氰菊酯(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="xiuqingjuzhi" id="xiuqingjuzhi" class="form-control"
+                                   th:value="${item.xiuqingjuzhi}"
+                                   placeholder="溴氰菊酯(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="liuliulilu">
+                            六六六(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="liuliulilu" id="liuliulilu" class="form-control"
+                                   th:value="${item.liuliulilu}"
+                                   placeholder="六六六(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="lindan">
+                            林丹(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="lindan" id="lindan" class="form-control"
+                                   th:value="${item.lindan}"
+                                   placeholder="林丹(mg/kg)"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="diditi">
+                            滴滴涕(mg/kg):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="diditi" id="diditi" class="form-control"
+                                   th:value="${item.diditi}"
+                                   placeholder="滴滴涕(mg/kg)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="szll">
+                            水胺硫磷（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="szll" id="szll" class="form-control"
+                                   th:value="${item.szll}"
+                                   placeholder="水胺硫磷（mg/kg）"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="qilv">
+                            七氯（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="qilv" id="qilv" class="form-control"
+                                   th:value="${item.qilv}"
+                                   placeholder="七氯（mg/kg）"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="aishiji">
+                            艾氏剂（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="aishiji" id="aishiji" class="form-control"
+                                   th:value="${item.aishiji}"
+                                   placeholder="艾氏剂（mg/kg）"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="dishiji">
+                            狄氏剂（mg/kg）:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="dishiji" id="dishiji" class="form-control"
+                                   th:value="${item.dishiji}"
+                                   placeholder="狄氏剂（mg/kg）"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="ydzwzz">
+                            有毒植物种子(%):
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="ydzwzz" id="ydzwzz" class="form-control"
+                                   th:value="${item.ydzwzz}"
+                                   placeholder="有毒植物种子(%)"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="tabs-5">
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="ypslrate">
+                            原破碎粒:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="ypslrate" id="ypslrate" class="form-control"
+                                   th:value="${item.ypslrate}"
+                                   placeholder="原破碎粒"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label class="col-sm-6 control-label no-padding-right" for="ypslzjzrate">
+                            破碎粒增加值:
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="ypslzjzrate" id="ypslzjzrate" class="form-control"
+                                   th:value="${item.ypslzjzrate}"
+                                   placeholder="破碎粒增加值"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
     <div class="row">
@@ -381,8 +812,10 @@
         initStacktype();
         //设置升扣规则默认值
         setInspect();
+        $( "#tabs" ).tabs();
 
     });
+
 
     function initStorage() {
         $("#storageid").bootstrapSelect({
@@ -453,37 +886,37 @@
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.zhpdhgflag
+            all:false
         });
         $("#qxmhgflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.qxmhgflag
+            all:false
         });
         $("#dxmyzcbflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.dxmyzcbflag
+            all:false
         });
         $("#wszbhgflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.wszbhgflag
+            all:false
         });
         $("#pzhgflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.pzhgflag
+            all:false
         });
         $("#djhgflag").bootstrapSelect({
             data: data,
             valueField: 'value',
             textField: 'text',
-            defaultValue: g_item.djhgflag
+            all:false
         });
 
     }
