@@ -9,6 +9,7 @@ import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.AllotBiz;
 import com.zhoubi.graindepot.biz.SuffrequBiz;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,6 +73,17 @@ public class SuffrequController extends BaseController {
                     item.setBillcode(format + "-0001");
                 }
                 //新增
+                String instordatestr = item.getInstordatestr();
+                String lastsuffdatestr = item.getLastsuffdatestr();
+                if (StringUtils.isNotEmpty(instordatestr)) {
+                    Date  instordate = DateUtils.parseDate(instordatestr, "yyyy-MM-dd");
+                    item.setInstordate(instordate);
+                }
+
+                if (StringUtils.isNotEmpty(lastsuffdatestr)) {
+                    Date lastsuffdate = DateUtils.parseDate(lastsuffdatestr, "yyyy-MM-dd");
+                    item.setLastsuffdate(lastsuffdate);
+                }
                 item.setGroupid(ua.getGroupid());
                 item.setGraindepotid(ua.getGraindepotid());
                 item.setCompanyid(ua.getCompanyid());
