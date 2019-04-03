@@ -66,7 +66,7 @@ public class PageController extends BaseController {
     @Autowired
     private DrugoutstoreDetailBiz drugoutstoreDetailBiz;
     @Autowired
-    private  GoodstypeBiz goodstypeBiz;
+    private GoodstypeBiz goodstypeBiz;
     @Autowired
     private GoodsBiz goodsBiz;
     @Autowired
@@ -81,7 +81,18 @@ public class PageController extends BaseController {
     private BlanklistBiz blanklistBiz;
     @Autowired
     private SuffrequBiz suffrequBiz;
-
+    @Autowired
+    private SafeActivityBiz safeActivityBiz;
+    @Autowired
+    private CasualtiesBiz casualtiesBiz;
+    @Autowired
+    private SafeInspBiz safeInspBiz;
+    @Autowired
+    private StolenfireBiz stolenfireBiz;
+    @Autowired
+    private EquipaccBiz equipaccBiz;
+    @Autowired
+    private SafeleaderBiz safeleaderBiz;
 
 
     //----------------------------------计划信息---------------------------------------------
@@ -403,7 +414,6 @@ public class PageController extends BaseController {
     }
 
 
-
     //----------------------------------涉粮人员---------------------------------------------
     //涉粮人员主页
     @GetMapping("/individual")
@@ -660,7 +670,6 @@ public class PageController extends BaseController {
     }
 
 
-
     //----------------------------------定性管理---------------------------------------------
     //定性管理主页
     @GetMapping("/grainattrUpdate")
@@ -774,7 +783,7 @@ public class PageController extends BaseController {
     //----------------------------------药剂验收入库明细---------------------------------------------
     //药剂验收入库明细主页
     @GetMapping("/druginstoreDetail")
-    public String to_druginstoreDetail(Model model,Integer billid) {
+    public String to_druginstoreDetail(Model model, Integer billid) {
         String title = "药剂验收入库明细";
         model.addAttribute("title", title);
         model.addAttribute("billid", billid);
@@ -784,7 +793,7 @@ public class PageController extends BaseController {
 
     //药剂验收入库明细编辑
     @GetMapping("/druginstoreDetail/edit")
-    public String to_druginstoreDetail_edit(Model model, Integer id,Integer billid) {
+    public String to_druginstoreDetail_edit(Model model, Integer id, Integer billid) {
         String title = "修改药剂验收入库明细";
         model.addAttribute("title", title);
         model.addAttribute("id", id);
@@ -850,7 +859,7 @@ public class PageController extends BaseController {
     //----------------------------------药剂验收出库明细---------------------------------------------
     //药剂验收出库明细主页
     @GetMapping("/drugoutstoreDetail")
-    public String to_drugoutstoreDetail(Model model,Integer billid) {
+    public String to_drugoutstoreDetail(Model model, Integer billid) {
         String title = "药剂验收出库明细";
         model.addAttribute("title", title);
         model.addAttribute("billid", billid);
@@ -860,7 +869,7 @@ public class PageController extends BaseController {
 
     //药剂验收出库明细编辑
     @GetMapping("/drugoutstoreDetail/edit")
-    public String to_drugoutstoreDetail_edit(Model model, Integer id,Integer billid) {
+    public String to_drugoutstoreDetail_edit(Model model, Integer id, Integer billid) {
         String title = "修改药剂验收出库明细";
         model.addAttribute("title", title);
         model.addAttribute("id", id);
@@ -963,28 +972,28 @@ public class PageController extends BaseController {
         String title = "粮情三维图";
         Graintemp item = graintempBiz.selectById(id);
         //计算平均粮温度  最高温  最低温
-        String temperatureset=item.getTemperatureset();
-        List<String> temperaturesetList= Arrays.asList(temperatureset.split(","));
-        Double maxTemp=-100.0;
-        Double minTemp=100.0;
-        Double sum=0.0;
-        Integer count=0;
-        for (String t:temperaturesetList) {
+        String temperatureset = item.getTemperatureset();
+        List<String> temperaturesetList = Arrays.asList(temperatureset.split(","));
+        Double maxTemp = -100.0;
+        Double minTemp = 100.0;
+        Double sum = 0.0;
+        Integer count = 0;
+        for (String t : temperaturesetList) {
             //TODO 判断空
-            Double d=Double.parseDouble(t);
-            if (d<-100 || d >100) {
+            Double d = Double.parseDouble(t);
+            if (d < -100 || d > 100) {
                 continue;
             }
-            maxTemp=Math.max(maxTemp,d);
-            minTemp=Math.min(minTemp,d);
-            sum+=d;
-            count+=1;
+            maxTemp = Math.max(maxTemp, d);
+            minTemp = Math.min(minTemp, d);
+            sum += d;
+            count += 1;
         }
-        if (count>0) {
+        if (count > 0) {
             DecimalFormat df = new DecimalFormat("#.00");
-            String avg=df.format(sum/count);
+            String avg = df.format(sum / count);
             item.setAveragetemp(avg);
-        }else {
+        } else {
             item.setAveragetemp("0");
         }
         item.setMaxLw(maxTemp);
@@ -997,7 +1006,7 @@ public class PageController extends BaseController {
 
 
     //----------------------------------内部车辆---------------------------------------------
-    //物料列表
+    //内部车辆列表
     @GetMapping("/truck")
     public String toTruck(Model model) {
         String title = "内部车辆";
@@ -1006,7 +1015,7 @@ public class PageController extends BaseController {
         return path;
     }
 
-    //物料编辑
+    //内部车辆编辑
     @GetMapping("/truck/edit")
     public String toTruck_edit(Model model, Integer id) {
         String title = "内部车辆编辑";
@@ -1021,10 +1030,10 @@ public class PageController extends BaseController {
         return path;
     }
 
-    //物料详情页
+    //内部车辆详情页
     @GetMapping("/truck/detail/{id}")
     public String toTruck_detail(Model model, @PathVariable int id) {
-        String title = "物料详情";
+        String title = "内部车辆";
         Truck item = truckBiz.selectById(id);
         model.addAttribute("title", title);
         model.addAttribute("item", item);
@@ -1078,6 +1087,7 @@ public class PageController extends BaseController {
         String path = "storagePosition/cblycjg";
         return path;
     }
+
     //视频点位设置
     @GetMapping("/videoPosition")
     public String toVideoPosition(Model model) {
@@ -1149,17 +1159,6 @@ public class PageController extends BaseController {
         return path;
     }
 
-    //熏蒸申请详情页
-    @GetMapping("/suffrequAudit/auditDetail/{id}")
-    public String toSuffrequAudit_detail(Model model, @PathVariable int id) {
-        String title = "熏蒸审批查看详情";
-        Suffrequ item = suffrequBiz.selectById(id);
-//        Storage storage = storageBiz.selectById();
-        model.addAttribute("title", title);
-        model.addAttribute("item", item);
-        String path = "suffrequAudit/detail";
-        return path;
-    }
 
     //----------------------------------涉粮人员黑名单---------------------------------------------
     //涉粮人员黑名单主页
@@ -1179,6 +1178,7 @@ public class PageController extends BaseController {
         String path = "blanklist/individual/unBlankList";
         return path;
     }
+
     //涉粮人员黑名单编辑
     @GetMapping("/blanklist/edit")
     public String to_blanklist_edit(Model model, Integer id) {
@@ -1224,6 +1224,7 @@ public class PageController extends BaseController {
         String path = "blanklist/trader/unBlankList";
         return path;
     }
+
     //往来单位黑名单编辑
     @GetMapping("/blanklist/trader/edit")
     public String to_blanklist_trader_edit(Model model, Integer id) {
@@ -1249,4 +1250,224 @@ public class PageController extends BaseController {
         String path = "blanklist/trader/detail";
         return path;
     }
+
+    //----------------------------------重大安全生产活动---------------------------------------------
+    //重大安全生产活动列表
+    @GetMapping("/safeActivity")
+    public String toSafeActivity(Model model) {
+        String title = "重大安全生产活动";
+        model.addAttribute("title", title);
+        String path = "safeActivity/list";
+        return path;
+    }
+
+    //重大安全生产活动编辑
+    @GetMapping("/safeActivity/edit")
+    public String toSafeActivity_edit(Model model, Integer id) {
+        String title = "重大安全生产活动编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        SafeActivity item = new SafeActivity();
+        if (id != null) {
+            item = safeActivityBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "safeActivity/edit";
+        return path;
+    }
+
+    //重大安全生产活动详情页
+    @GetMapping("/safeActivity/detail/{id}")
+    public String toSafeActivity_detail(Model model, @PathVariable int id) {
+        String title = "重大安全生产活动详情";
+        SafeActivity item = safeActivityBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "safeActivity/detail";
+        return path;
+    }
+
+    //----------------------------------伤亡事故---------------------------------------------
+    //伤亡事故列表
+    @GetMapping("/casualties")
+    public String toCasualties(Model model) {
+        String title = "伤亡事故";
+        model.addAttribute("title", title);
+        String path = "casualties/list";
+        return path;
+    }
+
+    //伤亡事故编辑
+    @GetMapping("/casualties/edit")
+    public String toCasualties_edit(Model model, Integer id) {
+        String title = "伤亡事故编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Casualties item = new Casualties();
+        if (id != null) {
+            item = casualtiesBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "casualties/edit";
+        return path;
+    }
+
+    //伤亡事故详情页
+    @GetMapping("/casualties/detail/{id}")
+    public String toCasualties_detail(Model model, @PathVariable int id) {
+        String title = "伤亡事故详情";
+        Casualties item = casualtiesBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "casualties/detail";
+        return path;
+    }
+
+
+    //----------------------------------安全检查记录---------------------------------------------
+    //安全检查记录列表
+    @GetMapping("/safeinsp")
+    public String toSafeinsp(Model model) {
+        String title = "安全检查记录";
+        model.addAttribute("title", title);
+        String path = "safeinsp/list";
+        return path;
+    }
+
+    //安全检查记录编辑
+    @GetMapping("/safeinsp/edit")
+    public String toSafeinsp_edit(Model model, Integer id) {
+        String title = "安全检查记录编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        SafeInsp item = new SafeInsp();
+        if (id != null) {
+            item = safeInspBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "safeinsp/edit";
+        return path;
+    }
+
+    //安全检查记录详情页
+    @GetMapping("/safeinsp/detail/{id}")
+    public String toSafeinsp_detail(Model model, @PathVariable int id) {
+        String title = "安全检查记录详情";
+        SafeInsp item = safeInspBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "safeinsp/detail";
+        return path;
+    }
+
+
+    //----------------------------------粮库失窃、火灾事故---------------------------------------------
+    //粮库失窃、火灾事故列表
+    @GetMapping("/stolenfire")
+    public String toStolenfire(Model model) {
+        String title = "粮库失窃、火灾事故";
+        model.addAttribute("title", title);
+        String path = "stolenfire/list";
+        return path;
+    }
+
+    //粮库失窃、火灾事故编辑
+    @GetMapping("/stolenfire/edit")
+    public String toStolenfire_edit(Model model, Integer id) {
+        String title = "粮库失窃、火灾事故编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Stolenfire item = new Stolenfire();
+        if (id != null) {
+            item = stolenfireBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "stolenfire/edit";
+        return path;
+    }
+
+    //粮库失窃、火灾事故详情页
+    @GetMapping("/stolenfire/detail/{id}")
+    public String toStolenfire_detail(Model model, @PathVariable int id) {
+        String title = "粮库失窃、火灾事故详情";
+        Stolenfire item = stolenfireBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "stolenfire/detail";
+        return path;
+    }
+
+
+    //----------------------------------粮库机械设备事故---------------------------------------------
+    //粮库机械设备事故列表
+    @GetMapping("/equipacc")
+    public String toEquipacc(Model model) {
+        String title = "粮库机械设备事故";
+        model.addAttribute("title", title);
+        String path = "equipacc/list";
+        return path;
+    }
+
+    //粮库机械设备事故编辑
+    @GetMapping("/equipacc/edit")
+    public String toEquipacc_edit(Model model, Integer id) {
+        String title = "粮库机械设备事故编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Equipacc item = new Equipacc();
+        if (id != null) {
+            item = equipaccBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "equipacc/edit";
+        return path;
+    }
+
+    //粮库机械设备事故详情页
+    @GetMapping("/equipacc/detail/{id}")
+    public String toEquipacc_detail(Model model, @PathVariable int id) {
+        String title = "粮库机械设备事故详情";
+        Equipacc item = equipaccBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "equipacc/detail";
+        return path;
+    }
+
+    //----------------------------------粮库安全生产领导小组---------------------------------------------
+    //粮库安全生产领导小组列表
+    @GetMapping("/safeleader")
+    public String toSafeleader(Model model) {
+        String title = "粮库安全生产领导小组";
+        model.addAttribute("title", title);
+        String path = "safeleader/list";
+        return path;
+    }
+
+    //粮库安全生产领导小组编辑
+    @GetMapping("/safeleader/edit")
+    public String toSafeleader_edit(Model model, Integer id) {
+        String title = "粮库安全生产领导小组编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Safeleader item = new Safeleader();
+        if (id != null) {
+            item = safeleaderBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "safeleader/edit";
+        return path;
+    }
+
+    //粮库安全生产领导小组详情页
+    @GetMapping("/safeleader/detail/{id}")
+    public String toSafeleader_detail(Model model, @PathVariable int id) {
+        String title = "粮库安全生产领导小组详情";
+        Safeleader item = safeleaderBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "safeleader/detail";
+        return path;
+    }
+
 }

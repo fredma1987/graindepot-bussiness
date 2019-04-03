@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.CasualtiesDetail;import com.zhoubi.graindepot.base.BaseMapper;public interface CasualtiesDetailMapper extends BaseMapper<CasualtiesDetail> {}
