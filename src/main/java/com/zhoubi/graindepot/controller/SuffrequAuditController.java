@@ -66,57 +66,88 @@ public class SuffrequAuditController extends BaseController {
                 suffrequ.setAudistate1( 1);
                 suffrequ.setFormstatus(1);
                 suffrequ.setAudiopinion1(audiopinion);
+                suffrequ.setAuditime1(new Date());
             }else if(suffrequ.getFormstatus() == 1){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate2( 1);
                 suffrequ.setFormstatus(2);
                 suffrequ.setAudiopinion2(audiopinion);
-
+                suffrequ.setAuditime2(new Date());
             }else if(suffrequ.getFormstatus() == 2){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate3( 1);
                 suffrequ.setFormstatus(3);
                 suffrequ.setAudiopinion3(audiopinion);
+                suffrequ.setAuditime3(new Date());
             }else if(suffrequ.getFormstatus() == 3){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate4( 1);
                 suffrequ.setFormstatus(4);
                 suffrequ.setAudiopinion4(audiopinion);
+                suffrequ.setAuditime4(new Date());
             }else if(suffrequ.getFormstatus() == 4){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate5( 1);
                 suffrequ.setFormstatus(5);
                 suffrequ.setAudiopinion5(audiopinion);
+                suffrequ.setAuditime5(new Date());
             }
             suffrequBiz.update(suffrequ);
             return new JsonResult("修改成功", true);
         }else if(item.getBillid() != null && audistate == -1){
+            //审核不通过
             if(suffrequ.getFormstatus() == 0){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate1(  -1);
-                suffrequ.setFormstatus(1);
+                suffrequ.setFormstatus(-1);
                 suffrequ.setAudiopinion1(audiopinion);
             }else if(suffrequ.getFormstatus() == 1){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate2( -1);
-                suffrequ.setFormstatus(2);
+                suffrequ.setFormstatus(-2);
                 suffrequ.setAudiopinion2(audiopinion);
             }else if(suffrequ.getFormstatus() == 2){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate3( -1);
-                suffrequ.setFormstatus(3);
+                suffrequ.setFormstatus(-3);
                 suffrequ.setAudiopinion3(audiopinion);
             }else if(suffrequ.getFormstatus() == 3){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate4( -1);
-                suffrequ.setFormstatus(4);
+                suffrequ.setFormstatus(-4);
                 suffrequ.setAudiopinion4(audiopinion);
             }else if(suffrequ.getFormstatus() == 4){
                 suffrequ.setBillid(item.getBillid());
                 suffrequ.setAudistate5( -1);
-                suffrequ.setFormstatus(5);
+                suffrequ.setFormstatus(-5);
                 suffrequ.setAudiopinion5(audiopinion);
             }
+//            if(suffrequ.getFormstatus() == 0){
+//                suffrequ.setBillid(item.getBillid());
+//                suffrequ.setAudistate1(  -1);
+//                suffrequ.setFormstatus(1);
+//                suffrequ.setAudiopinion1(audiopinion);
+//            }else if(suffrequ.getFormstatus() == 1){
+//                suffrequ.setBillid(item.getBillid());
+//                suffrequ.setAudistate2( -1);
+//                suffrequ.setFormstatus(2);
+//                suffrequ.setAudiopinion2(audiopinion);
+//            }else if(suffrequ.getFormstatus() == 2){
+//                suffrequ.setBillid(item.getBillid());
+//                suffrequ.setAudistate3( -1);
+//                suffrequ.setFormstatus(3);
+//                suffrequ.setAudiopinion3(audiopinion);
+//            }else if(suffrequ.getFormstatus() == 3){
+//                suffrequ.setBillid(item.getBillid());
+//                suffrequ.setAudistate4( -1);
+//                suffrequ.setFormstatus(4);
+//                suffrequ.setAudiopinion4(audiopinion);
+//            }else if(suffrequ.getFormstatus() == 4){
+//                suffrequ.setBillid(item.getBillid());
+//                suffrequ.setAudistate5( -1);
+//                suffrequ.setFormstatus(5);
+//                suffrequ.setAudiopinion5(audiopinion);
+//            }
             suffrequBiz.update(suffrequ);
         }
 
