@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.SafeInspPtc;import com.zhoubi.graindepot.mapper.SafeInspPtcMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class SafeInspPtcBiz extends BaseService<SafeInspPtc>  {	@Autowired	private SafeInspPtcMapper SafeInspPtcMapper;	@Override
+	protected BaseMapper<SafeInspPtc> getMapper() {		return SafeInspPtcMapper;	}}

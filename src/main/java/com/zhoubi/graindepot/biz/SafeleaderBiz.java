@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.Safeleader;import com.zhoubi.graindepot.mapper.SafeleaderMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class SafeleaderBiz extends BaseService<Safeleader>  {	@Autowired	private SafeleaderMapper SafeleaderMapper;	@Override
+	protected BaseMapper<Safeleader> getMapper() {		return SafeleaderMapper;	}}

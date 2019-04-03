@@ -1,0 +1,2 @@
+package com.zhoubi.graindepot.biz;import com.zhoubi.graindepot.bean.Hazardtype;import com.zhoubi.graindepot.mapper.HazardtypeMapper;import com.zhoubi.graindepot.base.BaseMapper;import com.zhoubi.graindepot.base.BaseService;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;@Servicepublic class HazardtypeBiz extends BaseService<Hazardtype>  {	@Autowired	private HazardtypeMapper HazardtypeMapper;	@Override
+	protected BaseMapper<Hazardtype> getMapper() {		return HazardtypeMapper;	}}

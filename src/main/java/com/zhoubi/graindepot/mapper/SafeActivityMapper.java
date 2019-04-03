@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.SafeActivity;import com.zhoubi.graindepot.base.BaseMapper;public interface SafeActivityMapper extends BaseMapper<SafeActivity> {}
