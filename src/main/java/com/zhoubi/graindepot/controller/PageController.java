@@ -95,6 +95,8 @@ public class PageController extends BaseController {
     private SafeleaderBiz safeleaderBiz;
     @Autowired
     private MechventlogBiz mechventlogBiz;
+    @Autowired
+    private NoticeBiz noticeBiz;
 
 
 
@@ -1510,4 +1512,73 @@ public class PageController extends BaseController {
         String path = "mechventlog/detail";
         return path;
     }
+
+    //----------------------------------通告---------------------------------------------
+    //通告列表
+    @GetMapping("/notice")
+    public String toNotice(Model model) {
+        String title = "通告";
+        model.addAttribute("title", title);
+        String path = "notice/list";
+        return path;
+    }
+
+    //通告编辑
+    @GetMapping("/notice/edit")
+    public String toNotice_edit(Model model, Integer id) {
+        String title = "通告编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Notice item = new Notice();
+        if (id != null) {
+            item = noticeBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "notice/edit";
+        return path;
+    }
+
+    //通告详情页
+    @GetMapping("/notice/detail/{id}")
+    public String toNotice_detail(Model model, @PathVariable int id) {
+        String title = "通告详情";
+        Notice item = noticeBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "notice/detail";
+        return path;
+    }
+
+    //通告审核列表
+    @GetMapping("/notice/approve")
+    public String toNotice_approve(Model model) {
+        String title = "通告审核";
+        model.addAttribute("title", title);
+        String path = "notice/approve/list";
+        return path;
+    }
+    //通告审核发布
+    @GetMapping("/notice/release")
+    public String toNotice_release(Model model) {
+        String title = "通告发布";
+        model.addAttribute("title", title);
+        String path = "notice/release/list";
+        return path;
+    }
+
+    //通告发布编辑
+    @GetMapping("/notice/release/edit")
+    public String toNotice_release(Model model, Integer id) {
+        String title = "通告发布";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Notice item = new Notice();
+        if (id != null) {
+            item = noticeBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "notice/release/edit";
+        return path;
+    }
+
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:href="@{/assets/css/select/bootstrap-select.min.css}" rel="stylesheet" media="screen">
+<script th:src="@{/assets/js/select/bootstrap-select.js}"></script>
+<script th:src="@{/assets/js/select/defaults-zh_CN.js}"></script>
+<link th:href="@{/assets/js/uploadify/uploadify.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/assets/js/uploadify/jquery.uploadify.js}"></script>
+
+
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="fbflag">
+            <span class="red">*</span>发布状态:
+        </label>
+        <div class="col-sm-4">
+            <select id="fbflag" name="fbflag" class="form-control"
+                    data-bv-notempty th:value="${item.fbflag}">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="noticebgtimestr">
+            <span class="red">*</span>通告发布开始时间:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="noticebgtimestr" id="noticebgtimestr"
+                   class="form-control form_datetime" readonly
+                   data-bv-notempty  th:value="${item.noticebgtimestr}"
+                   placeholder="通告发布开始时间"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="noticeendtimestr">
+            通告发布结束时间:
+        </label>
+        <div class="col-sm-4">
+            <input type="text" name="noticeendtimestr" id="noticeendtimestr"
+                   class="form-control form_datetime" readonly
+                   th:value="${item.noticeendtimestr}"
+                   placeholder="通告发布结束时间"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label no-padding-right" for="upflag">
+            是否置顶:
+        </label>
+        <div class="col-sm-4">
+            <select id="upflag" name="upflag" class="form-control"
+                     th:value="${item.upflag}">
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-11 center">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" onclick="toBack()">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix = "/graindepot-bussiness";
+    //var urlPrefix = "";
+    var g_id = [[${id}]];
+    var g_item = [[${item}]];
+    var param = {};
+    $(function () {
+        //初始化时间框
+        $(".form_datetime").bootstrapDatetime();
+        //初始化form验证
+        initForm();
+        initFbflag();
+        initUpflag();
+    });
+
+    function initFbflag() {
+        var data = [{value: 1, text: "发布"}, {value: 0, text: "待发布"}
+            , {value: -1, text: "不发布"}];
+        $("#fbflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text'
+        });
+
+    }
+    function initUpflag() {
+        var data = [{value: 1, text: "是"}, {value: 0, text: "否"}];
+        $("#upflag").bootstrapSelect({
+            data: data,
+            valueField: 'value',
+            textField: 'text'
+        });
+
+    }
+
+
+    function toBack() {
+        parent.$.bootstrapBox.dialog.close();
+    }
+
+    function initForm() {
+        $('#validation-form').bootstrapValidator().on('success.form.bv', function (e) {
+            // 组织表单提交改为ajax提交
+            e.preventDefault();
+            var param = turnArrayToJson($('form').serializeArray());
+            if (g_id) {
+                param.noticeid = g_id
+            }
+            $.post(urlPrefix + "/notice/release/edit", param, function (result) {
+                parent.toSave(result)
+            })
+        });
+    }
+
+
+</script>

@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Notice;import com.zhoubi.graindepot.base.BaseMapper;public interface NoticeMapper extends BaseMapper<Notice> {    int updateApply(Notice item);    int updateRelease(Notice item);}
