@@ -9,6 +9,7 @@ import com.zhoubi.graindepot.bean.UserAddress;
 import com.zhoubi.graindepot.biz.EquipaccBiz;
 import com.zhoubi.graindepot.biz.StolenfireBiz;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,15 +32,15 @@ public class EquipaccController extends BaseController {
     private EquipaccBiz equipaccBiz;
 
     @GetMapping("/list/page")
-    public PagerModel equipaccPageList(int start, int length) {
+    public PagerModel equipaccPageList(int start, int length,String position) {
         UserAddress ua = getUserAddress();
         PagerModel<Equipacc> e = new PagerModel();
-//        e.addOrder("createtime desc");
+        e.addOrder("createtime desc");
         e.setStart(start);
         e.setLength(length);
-//        if (StringUtils.isNotEmpty(activityname)) {
-//            e.putWhere("activityname", activityname);
-//        }
+        if (StringUtils.isNotEmpty(position)) {
+            e.putWhere("position", position);
+        }
         PagerModel<Equipacc> result = equipaccBiz.selectListByPage(e);
         return result;
     }
@@ -49,11 +50,11 @@ public class EquipaccController extends BaseController {
         UserAddress ua = getUserAddress();
         BaseUser baseUser = getCurrentUser();
         if (item.getEquipaccid() == null) {
-//            String billdatestr = item.getBilldatestr();
-//            if (StringUtils.isNotEmpty(billdatestr)) {
-//                Date billdate = DateUtils.parseDate(billdatestr, "yyyy-MM-dd");
-//                item.setBilldate(billdate);
-//            }
+            String occurtimestr = item.getOccurtimestr();
+            if (StringUtils.isNotEmpty(occurtimestr)) {
+                Date occurtime = DateUtils.parseDate(occurtimestr, "yyyy-MM-dd");
+                item.setOccurtime(occurtime);
+            }
 
 
                 //新增

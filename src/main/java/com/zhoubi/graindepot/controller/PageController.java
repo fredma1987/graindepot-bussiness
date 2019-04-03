@@ -97,6 +97,8 @@ public class PageController extends BaseController {
     private MechventlogBiz mechventlogBiz;
     @Autowired
     private NoticeBiz noticeBiz;
+    @Autowired
+    private  EquipaccDetailBiz equipaccDetailBiz;
 
 
 
@@ -1512,6 +1514,33 @@ public class PageController extends BaseController {
         String path = "mechventlog/detail";
         return path;
     }
+
+    //----------------------------------粮库机械设备事故详情---------------------------------------------
+    //粮库机械设备事故详情列表
+    @GetMapping("/equipaccDetail")
+    public String toEquipaccDetail(Model model) {
+        String title = "粮库机械设备事故详情";
+        model.addAttribute("title", title);
+        String path = "equipaccDetail/list";
+        return path;
+    }
+
+    //粮库机械设备事故详情编辑
+    @GetMapping("/equipaccDetail/edit")
+    public String toEquipaccDetail_edit(Model model, Integer id) {
+        String title = "粮库机械设备事故详情编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        EquipaccDetail item = new EquipaccDetail();
+        if (id != null) {
+            item = equipaccDetailBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "equipaccDetail/edit";
+        return path;
+    }
+
+
 
     //----------------------------------通告---------------------------------------------
     //通告列表

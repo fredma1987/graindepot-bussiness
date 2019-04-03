@@ -92,6 +92,8 @@ public class SuffrequController extends BaseController {
                 }
                 item.setCreatetime(new Date());
                 item.setBilldate(new Date());
+                //设置一级审核状态为0：待审核
+                item.setAudistate1(0);
                 //设置表单审核状态为0：待审核
                 item.setFormstatus(0);
                 suffrequBiz.insert(item);
