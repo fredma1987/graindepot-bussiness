@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head::head(${title})">
+</head>
+<link th:rel="stylesheet" type="text/css" th:href="@{/assets/css/comm/editCheck.css}"/>
+<body style="overflow-x: hidden">
+<form class="form-horizontal" role="form" id="validation-form" method="get">
+    <div class="editCheckDiv">
+        <div class="editCheckBack">
+            <table class="editCheckTable" border="" cellspacing="" cellpadding="">
+                <tr>
+                    <td class="editCheck">仓房</td>
+                    <td class="editCheck" th:text="${item.storagename}"></td>
+                    <td class="editCheck"></td>
+                    <td class="editCheck"></td>
+                    <td class="editCheck"></td>
+                    <td class="editCheck"></td>
+                    <td class="editCheck"></td>
+                    <td class="editCheck"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">品种</td>
+                    <td class="editCheck" th:text="${item.grainname}"></td>
+                    <td class="editCheck">风网类型</td>
+                    <td class="editCheck" th:text="${item.ventnettype}"></td>
+                    <td class="editCheck">风机型号</td>
+                    <td class="editCheck" th:text="${item.fantype}"></td>
+                    <td class="editCheck">风网总阻力(pa)</td>
+                    <td class="editCheck" th:text="${item.fanresistance}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">数量(吨)</td>
+                    <td class="editCheck" th:text="${item.grainqty}"></td>
+                    <td class="editCheck">通风目的</td>
+                    <td class="editCheck" th:text="${item.ventpurpose}"></td>
+                    <td class="editCheck">风机功率(kw)</td>
+                    <td class="editCheck" th:text="${item.fanpower}"></td>
+                    <td class="editCheck">总风量(m³/h)</td>
+                    <td class="editCheck" th:text="${item.hourairvolume}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">粮堆高度</td>
+                    <td class="editCheck" th:text="${item.ghheight}"></td>
+                    <td class="editCheck">送风方式(吸/压)</td>
+                    <td class="editCheck" th:text="${item.ventmethod}"></td>
+                    <td class="editCheck">风机数量（台）</td>
+                    <td class="editCheck" th:text="${item.fancount}"></td>
+                    <td class="editCheck">单位通风量(m³/h.t)</td>
+                    <td class="editCheck" th:text="${item.unithourairvol}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">通风时间</td>
+                    <td class="editCheck" colspan="5">
+                        <div class="col-sm-4" th:text="'开始：'+${item.begintimestr}"></div>
+                        <div class="col-sm-4" th:text="'结束：'+${item.endtimestr}"></div>
+                    </td>
+                    <td class="editCheck">累计通风时间(h)</td>
+                    <td class="editCheck" th:text="${item.totalhour}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck" colspan="2">通风期间参数</td>
+                    <td class="editCheck" colspan="2">最高值</td>
+                    <td class="editCheck" colspan="2">最低值</td>
+                    <td class="editCheck" colspan="2">平均值</td>
+                </tr>
+                <tr>
+                    <td class="editCheck" colspan="2">大气温度(℃)</td>
+                    <td class="editCheck" colspan="2" th:text="${item.outmaxtemp}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.outmintemp}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.outavgtemp}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck" colspan="2">大气湿度(%)</td>
+                    <td class="editCheck" colspan="2" th:text="${item.outmaxhumi}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.outminhumi}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.outavghumi}"></td>
+                </tr>
+
+                <tr>
+                    <td class="editCheck" rowspan="2">粮食温度(℃)</td>
+                    <td class="editCheck">
+                        通风前
+                    </td>
+                    <td class="editCheck" colspan="2" th:text="${item.bmaxgraintemp}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.bmingraintemp}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.bavggraintemp}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">
+                        通风后
+                    </td>
+                    <td class="editCheck" colspan="2" th:text="${item.amaxgraintemp}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.amingraintemp}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.aavggraintemp}"></td>
+                </tr>
+
+                <tr>
+                    <td class="editCheck" rowspan="2">粮食水分(%)</td>
+                    <td class="editCheck">
+                        通风前
+                    </td>
+                    <td class="editCheck" colspan="2" th:text="${item.bmaxwaterrate}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.bminwaterrate}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.bavgwaterrate}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">
+                        通风后
+                    </td>
+                    <td class="editCheck" colspan="2" th:text="${item.amaxwaterrate}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.aminwaterrate}"></td>
+                    <td class="editCheck" colspan="2" th:text="${item.aavgwaterrate}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck">通风前粮温最大梯度值</td>
+                    <td class="editCheck" th:text="${item.bmaxgraintempgrad}"></td>
+                    <td class="editCheck">通风后粮温最大梯度值</td>
+                    <td class="editCheck" th:text="${item.amaxgraintempgrad}"></td>
+                    <td class="editCheck">通风前水分最大梯度值</td>
+                    <td class="editCheck" th:text="${item.bmaxwaterrategrad}"></td>
+                    <td class="editCheck">通风后水分最大梯度值</td>
+                    <td class="editCheck" th:text="${item.amaxwaterrategrad}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck" colspan="2">总电耗(kw.h)</td>
+                    <td class="editCheck" colspan="2" th:text="${item.totalpowercons}"></td>
+                    <td class="editCheck" colspan="2">降温降水单位电耗(kw.h/(t.℃)或kw.h/(1%水分.t))</td>
+                    <td class="editCheck" colspan="2" th:text="${item.unitpowercons}"></td>
+                </tr>
+                <tr>
+                    <td class="editCheck" colspan="2">通风期间发现异常情况描述</td>
+                    <td class="editCheck" colspan="6" th:text="${item.remark}"></td>
+                </tr>
+
+                <tr>
+                    <td class="editCheck" colspan="2">负责人</td>
+                    <td class="editCheck" colspan="2" th:text="${item.chargeusers}"></td>
+                    <td class="editCheck" colspan="2">操作人</td>
+                    <td class="editCheck" colspan="2" th:text="${item.optusers}"></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
+<script th:inline="javascript">
+    var urlPrefix = "/graindepot-bussiness";
+    $(function () {
+
+    });
+
+
+</script>
+
+
+
+
+
+
+

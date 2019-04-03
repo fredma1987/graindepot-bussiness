@@ -8,7 +8,6 @@
 
 <body style="overflow-x: hidden">
 <form class="form-horizontal" role="form" id="validation-form" method="get">
-
     <div class="form-group">
         <label class="col-sm-4 control-label no-padding-right" for="plantypeid"> 计划类型: </label>
 
@@ -107,8 +106,8 @@
         <div class="col-sm-4">
             <input type="file" name="filenamelist" id="filenamelist" class="form-control"
                    th:value="${item.filenamelist}" placeholder="附件"/>
-
-            <div id="showFileNameList"></div>
+            <div id="showFileNameList">
+            </div>
         </div>
     </div>
 
@@ -141,7 +140,7 @@
 </body>
 </html>
 <script th:inline="javascript">
-    var urlPrefix="/graindepot-bussiness";
+    var urlPrefix = "/graindepot-bussiness";
     //var urlPrefix = "";
     var g_id = [[${id}]];
     var g_item = [[${item}]];
@@ -160,8 +159,9 @@
 
         //初始化上传头像按钮
         $("#filenamelist").bootstrapUploadify({
-            showId: "showFileNameList"//上传成功后在那边显示信息
+            showId: "showFileNameList",//上传成功后在那边显示信息
             //fileType: "img"//需要上传的文件类型
+           // uploadLimit:0,//默认1
         });
 
     });
@@ -180,7 +180,7 @@
 
     function initCopAndGd() {
         $("#companyid").bootstrapSelect({
-            url:  '/graindepot-base/selector/companyList',
+            url: '/graindepot-base/selector/companyList',
             type: 'GET',
             valueField: 'companyid',
             textField: 'companyname',
@@ -204,17 +204,19 @@
 
     function initForm() {
         $('#validation-form').bootstrapValidator()
-                .on('success.form.bv', function (e) {
-                    // Prevent form submission
-                    e.preventDefault();
-                    var param = turnArrayToJson($('form').serializeArray());
-                    if (g_id) {
-                        param.planfileid = g_id
-                    }
-                    $.post(urlPrefix + "/planfile/edit", param, function (result) {
-                        parent.toSave(result)
-                    })
-                });
+            .on('success.form.bv', function (e) {
+                // Prevent form submission
+                e.preventDefault();
+                var param = turnArrayToJson($('form').serializeArray());
+                var fileList=$("#filenamelist").bootstrapUploadify("getValue")
+                param.filenamelist=fileList.join(",");
+                if (g_id) {
+                    param.planfileid = g_id
+                }
+                $.post(urlPrefix + "/planfile/edit", param, function (result) {
+                    parent.toSave(result)
+                })
+            });
     }
 
 </script>

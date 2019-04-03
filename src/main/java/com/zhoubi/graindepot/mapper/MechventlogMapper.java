@@ -1,0 +1,1 @@
+package com.zhoubi.graindepot.mapper;import com.zhoubi.graindepot.bean.Mechventlog;import com.zhoubi.graindepot.base.BaseMapper;public interface MechventlogMapper extends BaseMapper<Mechventlog> {    String getMaxBillcode(Integer graindepotid);}

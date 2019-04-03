@@ -81,6 +81,8 @@ public class PageController extends BaseController {
     private BlanklistBiz blanklistBiz;
     @Autowired
     private SuffrequBiz suffrequBiz;
+    @Autowired
+    private MechventlogBiz mechventlogBiz;
 
 
 
@@ -1210,6 +1212,43 @@ public class PageController extends BaseController {
         model.addAttribute("title", title);
         model.addAttribute("item", item);
         String path = "blanklist/trader/detail";
+        return path;
+    }
+
+
+    //----------------------------------机械通风---------------------------------------------
+    //通风作业列表
+    @GetMapping("/mechventlog")
+    public String toMechventlog(Model model) {
+        String title = "通风作业";
+        model.addAttribute("title", title);
+        String path = "mechventlog/list";
+        return path;
+    }
+
+    //通风作业编辑
+    @GetMapping("/mechventlog/edit")
+    public String toMechventlog_edit(Model model, Integer id) {
+        String title = "通风作业编辑";
+        model.addAttribute("title", title);
+        model.addAttribute("id", id);
+        Mechventlog item = new Mechventlog();
+        if (id != null) {
+            item = mechventlogBiz.selectById(id);
+        }
+        model.addAttribute("item", item);
+        String path = "mechventlog/edit";
+        return path;
+    }
+
+    //通风作业详情页
+    @GetMapping("/mechventlog/detail/{id}")
+    public String toMechventlog_detail(Model model, @PathVariable int id) {
+        String title = "通风作业详情";
+        Mechventlog item = mechventlogBiz.selectById(id);
+        model.addAttribute("title", title);
+        model.addAttribute("item", item);
+        String path = "mechventlog/detail";
         return path;
     }
 }
